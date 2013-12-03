@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C64BAEB8184DD72E00902C8A /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64BAEB7184DD72E00902C8A /* opencv2.framework */; };
+		C64BAEBA184DDBB900902C8A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64BAEB9184DDBB900902C8A /* AVFoundation.framework */; };
 		C6A63960184DD65A00C4241C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A6395F184DD65A00C4241C /* Foundation.framework */; };
 		C6A63962184DD65A00C4241C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A63961184DD65A00C4241C /* CoreGraphics.framework */; };
 		C6A63964184DD65A00C4241C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A63963184DD65A00C4241C /* UIKit.framework */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		C64BAEB7184DD72E00902C8A /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		C64BAEB9184DDBB900902C8A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C6A6395C184DD65A00C4241C /* IsItGreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IsItGreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A6395F184DD65A00C4241C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C6A63961184DD65A00C4241C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -62,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C64BAEBA184DDBB900902C8A /* AVFoundation.framework in Frameworks */,
 				C6A63962184DD65A00C4241C /* CoreGraphics.framework in Frameworks */,
 				C6A63964184DD65A00C4241C /* UIKit.framework in Frameworks */,
 				C64BAEB8184DD72E00902C8A /* opencv2.framework in Frameworks */,
@@ -104,6 +107,7 @@
 		C6A6395E184DD65A00C4241C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C64BAEB9184DDBB900902C8A /* AVFoundation.framework */,
 				C64BAEB7184DD72E00902C8A /* opencv2.framework */,
 				C6A6395F184DD65A00C4241C /* Foundation.framework */,
 				C6A63961184DD65A00C4241C /* CoreGraphics.framework */,
@@ -381,6 +385,7 @@
 		C6A6398F184DD65A00C4241C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -390,7 +395,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IsItGreen/IsItGreen-Prefix.pch";
 				INFOPLIST_FILE = "IsItGreen/IsItGreen-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos6.1;
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -398,6 +406,7 @@
 		C6A63990184DD65A00C4241C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -407,7 +416,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IsItGreen/IsItGreen-Prefix.pch";
 				INFOPLIST_FILE = "IsItGreen/IsItGreen-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos6.1;
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -429,8 +441,11 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "IsItGreenTests/IsItGreenTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos6.1;
 				TEST_HOST = "$(BUNDLE_LOADER)";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -448,8 +463,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IsItGreen/IsItGreen-Prefix.pch";
 				INFOPLIST_FILE = "IsItGreenTests/IsItGreenTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos6.1;
 				TEST_HOST = "$(BUNDLE_LOADER)";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
