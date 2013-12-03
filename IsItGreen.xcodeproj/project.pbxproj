@@ -1,0 +1,476 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C6A63960184DD65A00C4241C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A6395F184DD65A00C4241C /* Foundation.framework */; };
+		C6A63962184DD65A00C4241C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A63961184DD65A00C4241C /* CoreGraphics.framework */; };
+		C6A63964184DD65A00C4241C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A63963184DD65A00C4241C /* UIKit.framework */; };
+		C6A6396A184DD65A00C4241C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C6A63968184DD65A00C4241C /* InfoPlist.strings */; };
+		C6A6396C184DD65A00C4241C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C6A6396B184DD65A00C4241C /* main.m */; };
+		C6A63970184DD65A00C4241C /* IsItGreenAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C6A6396F184DD65A00C4241C /* IsItGreenAppDelegate.m */; };
+		C6A63973184DD65A00C4241C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6A63971184DD65A00C4241C /* Main.storyboard */; };
+		C6A63976184DD65A00C4241C /* IsItGreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6A63975184DD65A00C4241C /* IsItGreenViewController.m */; };
+		C6A63978184DD65A00C4241C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6A63977184DD65A00C4241C /* Images.xcassets */; };
+		C6A6397F184DD65A00C4241C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A6397E184DD65A00C4241C /* XCTest.framework */; };
+		C6A63980184DD65A00C4241C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A6395F184DD65A00C4241C /* Foundation.framework */; };
+		C6A63981184DD65A00C4241C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A63963184DD65A00C4241C /* UIKit.framework */; };
+		C6A63989184DD65A00C4241C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C6A63987184DD65A00C4241C /* InfoPlist.strings */; };
+		C6A6398B184DD65A00C4241C /* IsItGreenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C6A6398A184DD65A00C4241C /* IsItGreenTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C6A63982184DD65A00C4241C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6A63954184DD65A00C4241C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C6A6395B184DD65A00C4241C;
+			remoteInfo = IsItGreen;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C6A6395C184DD65A00C4241C /* IsItGreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IsItGreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6A6395F184DD65A00C4241C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C6A63961184DD65A00C4241C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C6A63963184DD65A00C4241C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C6A63967184DD65A00C4241C /* IsItGreen-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IsItGreen-Info.plist"; sourceTree = "<group>"; };
+		C6A63969184DD65A00C4241C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C6A6396B184DD65A00C4241C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C6A6396D184DD65A00C4241C /* IsItGreen-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IsItGreen-Prefix.pch"; sourceTree = "<group>"; };
+		C6A6396E184DD65A00C4241C /* IsItGreenAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IsItGreenAppDelegate.h; sourceTree = "<group>"; };
+		C6A6396F184DD65A00C4241C /* IsItGreenAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IsItGreenAppDelegate.m; sourceTree = "<group>"; };
+		C6A63972184DD65A00C4241C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C6A63974184DD65A00C4241C /* IsItGreenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IsItGreenViewController.h; sourceTree = "<group>"; };
+		C6A63975184DD65A00C4241C /* IsItGreenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IsItGreenViewController.m; sourceTree = "<group>"; };
+		C6A63977184DD65A00C4241C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C6A6397D184DD65A00C4241C /* IsItGreenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IsItGreenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6A6397E184DD65A00C4241C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		C6A63986184DD65A00C4241C /* IsItGreenTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IsItGreenTests-Info.plist"; sourceTree = "<group>"; };
+		C6A63988184DD65A00C4241C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C6A6398A184DD65A00C4241C /* IsItGreenTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IsItGreenTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C6A63959184DD65A00C4241C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6A63962184DD65A00C4241C /* CoreGraphics.framework in Frameworks */,
+				C6A63964184DD65A00C4241C /* UIKit.framework in Frameworks */,
+				C6A63960184DD65A00C4241C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C6A6397A184DD65A00C4241C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6A6397F184DD65A00C4241C /* XCTest.framework in Frameworks */,
+				C6A63981184DD65A00C4241C /* UIKit.framework in Frameworks */,
+				C6A63980184DD65A00C4241C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C6A63953184DD65A00C4241C = {
+			isa = PBXGroup;
+			children = (
+				C6A63965184DD65A00C4241C /* IsItGreen */,
+				C6A63984184DD65A00C4241C /* IsItGreenTests */,
+				C6A6395E184DD65A00C4241C /* Frameworks */,
+				C6A6395D184DD65A00C4241C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C6A6395D184DD65A00C4241C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C6A6395C184DD65A00C4241C /* IsItGreen.app */,
+				C6A6397D184DD65A00C4241C /* IsItGreenTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C6A6395E184DD65A00C4241C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C6A6395F184DD65A00C4241C /* Foundation.framework */,
+				C6A63961184DD65A00C4241C /* CoreGraphics.framework */,
+				C6A63963184DD65A00C4241C /* UIKit.framework */,
+				C6A6397E184DD65A00C4241C /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C6A63965184DD65A00C4241C /* IsItGreen */ = {
+			isa = PBXGroup;
+			children = (
+				C6A6396E184DD65A00C4241C /* IsItGreenAppDelegate.h */,
+				C6A6396F184DD65A00C4241C /* IsItGreenAppDelegate.m */,
+				C6A63971184DD65A00C4241C /* Main.storyboard */,
+				C6A63974184DD65A00C4241C /* IsItGreenViewController.h */,
+				C6A63975184DD65A00C4241C /* IsItGreenViewController.m */,
+				C6A63977184DD65A00C4241C /* Images.xcassets */,
+				C6A63966184DD65A00C4241C /* Supporting Files */,
+			);
+			path = IsItGreen;
+			sourceTree = "<group>";
+		};
+		C6A63966184DD65A00C4241C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C6A63967184DD65A00C4241C /* IsItGreen-Info.plist */,
+				C6A63968184DD65A00C4241C /* InfoPlist.strings */,
+				C6A6396B184DD65A00C4241C /* main.m */,
+				C6A6396D184DD65A00C4241C /* IsItGreen-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C6A63984184DD65A00C4241C /* IsItGreenTests */ = {
+			isa = PBXGroup;
+			children = (
+				C6A6398A184DD65A00C4241C /* IsItGreenTests.m */,
+				C6A63985184DD65A00C4241C /* Supporting Files */,
+			);
+			path = IsItGreenTests;
+			sourceTree = "<group>";
+		};
+		C6A63985184DD65A00C4241C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C6A63986184DD65A00C4241C /* IsItGreenTests-Info.plist */,
+				C6A63987184DD65A00C4241C /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C6A6395B184DD65A00C4241C /* IsItGreen */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C6A6398E184DD65A00C4241C /* Build configuration list for PBXNativeTarget "IsItGreen" */;
+			buildPhases = (
+				C6A63958184DD65A00C4241C /* Sources */,
+				C6A63959184DD65A00C4241C /* Frameworks */,
+				C6A6395A184DD65A00C4241C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IsItGreen;
+			productName = IsItGreen;
+			productReference = C6A6395C184DD65A00C4241C /* IsItGreen.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C6A6397C184DD65A00C4241C /* IsItGreenTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C6A63991184DD65A00C4241C /* Build configuration list for PBXNativeTarget "IsItGreenTests" */;
+			buildPhases = (
+				C6A63979184DD65A00C4241C /* Sources */,
+				C6A6397A184DD65A00C4241C /* Frameworks */,
+				C6A6397B184DD65A00C4241C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C6A63983184DD65A00C4241C /* PBXTargetDependency */,
+			);
+			name = IsItGreenTests;
+			productName = IsItGreenTests;
+			productReference = C6A6397D184DD65A00C4241C /* IsItGreenTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C6A63954184DD65A00C4241C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = IsItGreen;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Brendan Hinman";
+				TargetAttributes = {
+					C6A6397C184DD65A00C4241C = {
+						TestTargetID = C6A6395B184DD65A00C4241C;
+					};
+				};
+			};
+			buildConfigurationList = C6A63957184DD65A00C4241C /* Build configuration list for PBXProject "IsItGreen" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C6A63953184DD65A00C4241C;
+			productRefGroup = C6A6395D184DD65A00C4241C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C6A6395B184DD65A00C4241C /* IsItGreen */,
+				C6A6397C184DD65A00C4241C /* IsItGreenTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C6A6395A184DD65A00C4241C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6A63978184DD65A00C4241C /* Images.xcassets in Resources */,
+				C6A6396A184DD65A00C4241C /* InfoPlist.strings in Resources */,
+				C6A63973184DD65A00C4241C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C6A6397B184DD65A00C4241C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6A63989184DD65A00C4241C /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C6A63958184DD65A00C4241C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6A63976184DD65A00C4241C /* IsItGreenViewController.m in Sources */,
+				C6A6396C184DD65A00C4241C /* main.m in Sources */,
+				C6A63970184DD65A00C4241C /* IsItGreenAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C6A63979184DD65A00C4241C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6A6398B184DD65A00C4241C /* IsItGreenTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C6A63983184DD65A00C4241C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C6A6395B184DD65A00C4241C /* IsItGreen */;
+			targetProxy = C6A63982184DD65A00C4241C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C6A63968184DD65A00C4241C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C6A63969184DD65A00C4241C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C6A63971184DD65A00C4241C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C6A63972184DD65A00C4241C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		C6A63987184DD65A00C4241C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C6A63988184DD65A00C4241C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C6A6398C184DD65A00C4241C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		C6A6398D184DD65A00C4241C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C6A6398F184DD65A00C4241C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "IsItGreen/IsItGreen-Prefix.pch";
+				INFOPLIST_FILE = "IsItGreen/IsItGreen-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C6A63990184DD65A00C4241C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "IsItGreen/IsItGreen-Prefix.pch";
+				INFOPLIST_FILE = "IsItGreen/IsItGreen-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C6A63992184DD65A00C4241C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/IsItGreen.app/IsItGreen";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "IsItGreen/IsItGreen-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "IsItGreenTests/IsItGreenTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		C6A63993184DD65A00C4241C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/IsItGreen.app/IsItGreen";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "IsItGreen/IsItGreen-Prefix.pch";
+				INFOPLIST_FILE = "IsItGreenTests/IsItGreenTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C6A63957184DD65A00C4241C /* Build configuration list for PBXProject "IsItGreen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C6A6398C184DD65A00C4241C /* Debug */,
+				C6A6398D184DD65A00C4241C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C6A6398E184DD65A00C4241C /* Build configuration list for PBXNativeTarget "IsItGreen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C6A6398F184DD65A00C4241C /* Debug */,
+				C6A63990184DD65A00C4241C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		C6A63991184DD65A00C4241C /* Build configuration list for PBXNativeTarget "IsItGreenTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C6A63992184DD65A00C4241C /* Debug */,
+				C6A63993184DD65A00C4241C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C6A63954184DD65A00C4241C /* Project object */;
+}
