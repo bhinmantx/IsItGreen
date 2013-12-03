@@ -18,7 +18,7 @@
 @synthesize cameraFeed;
 
 ///For still image capture
-@synthesize stillImageOutput, captureImage;
+@synthesize stillImageOutput, captureImage, CrossHairAndResult;
 
 - (void)viewDidLoad
 {
@@ -35,15 +35,9 @@
     captureVideoPreviewLayer.position=CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
  
 
-  captureVideoPreviewLayer.frame = viewLayer.bounds;
-    
-    
-    
-    
-    
-    
-    
-	[self.cameraFeed.layer addSublayer:captureVideoPreviewLayer];
+    captureVideoPreviewLayer.frame = viewLayer.bounds;
+ 
+    [self.cameraFeed.layer addSublayer:captureVideoPreviewLayer];
     
     
 
@@ -96,44 +90,40 @@
     NSError *error = nil;
     AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:backCamera error:&error];
     [session addInput:input];
-    
-   // NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, nil];
 
-    
-    //[session addOutput:stillImageOutput];
-    
-    
     
     stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
     NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, nil];
     [stillImageOutput setOutputSettings:outputSettings];
     
     [session addOutput:stillImageOutput];
-    
-    
-    
+
 	[session startRunning];
 
-    
-
-    
-    
-    /*
-    NSError *error = nil;
-    
-	AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
-	if (!input) {
-		// Handle the error appropriately.
-		NSLog(@"ERROR: trying to open camera: %@", error);
-	}
-    
-    [session startRunning];
-	
-    [session addInput:input];
-*/
 ///Let's see about that cross hair image
     [self CrossHairAndResult].layer.zPosition = 5;
+    
+    //CGPoint frameCenter = [self cameraFeed].center;
+    
+    //CGPoint * frameCenter = CGPoint*([self cameraFeed].frame.size.height, [self cameraFeed].frame.size.width) ;
+    CGPoint frameCenter = CGPointMake([self cameraFeed].frame.size.height / 2, [self cameraFeed].frame.size.width / 2);
+    
+    NSLog(@"CameraFeed height and width are %f and %f", [self cameraFeed].frame.size.height, [self cameraFeed].frame.size.width);
+    
+    ////Now we position our resized result frame thing based on the image view center.
+    /////We're setting it to 40 by 40 so we're going to subtract 20 from the x and y of the center.
+    
+//    [self CrossHairAndResult].frame = CGRectMake(frameCenter.x - 20, frameCenter.y - 20, 10,10);
+     [self CrossHairAndResult].bounds = CGRectMake(frameCenter.x - 20, frameCenter.y - 20, 10,10);
+   // [self CrossHairAndResult].image = [UIImage imageNamed:@"IsItGreen512.png"];
+    //[self CrossHairAndResult].frame = CGRectMake(20, 20, 50,50);
+   // [self CrossHairAndResult].bounds = CGRectMake(20, 20, 50,50);
+
+   
+    
+    
     [self cameraFeed].layer.zPosition = 0;
+    
 }
 
 - (void)didReceiveMemoryWarning

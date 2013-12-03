@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		C64BAEB8184DD72E00902C8A /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64BAEB7184DD72E00902C8A /* opencv2.framework */; };
 		C64BAEBA184DDBB900902C8A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64BAEB9184DDBB900902C8A /* AVFoundation.framework */; };
+		C6500BE5184E5C7000C42BAA /* crosshairs.png in Resources */ = {isa = PBXBuildFile; fileRef = C6500BE4184E5C6F00C42BAA /* crosshairs.png */; };
+		C6500BE7184E616800C42BAA /* IsItGreen512.png in Resources */ = {isa = PBXBuildFile; fileRef = C6500BE6184E616800C42BAA /* IsItGreen512.png */; };
 		C6A63960184DD65A00C4241C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A6395F184DD65A00C4241C /* Foundation.framework */; };
 		C6A63962184DD65A00C4241C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A63961184DD65A00C4241C /* CoreGraphics.framework */; };
 		C6A63964184DD65A00C4241C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A63963184DD65A00C4241C /* UIKit.framework */; };
@@ -38,6 +40,8 @@
 /* Begin PBXFileReference section */
 		C64BAEB7184DD72E00902C8A /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		C64BAEB9184DDBB900902C8A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		C6500BE4184E5C6F00C42BAA /* crosshairs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crosshairs.png; sourceTree = "<group>"; };
+		C6500BE6184E616800C42BAA /* IsItGreen512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IsItGreen512.png; sourceTree = "<group>"; };
 		C6A6395C184DD65A00C4241C /* IsItGreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IsItGreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A6395F184DD65A00C4241C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C6A63961184DD65A00C4241C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -134,6 +138,8 @@
 		C6A63966184DD65A00C4241C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C6500BE6184E616800C42BAA /* IsItGreen512.png */,
+				C6500BE4184E5C6F00C42BAA /* crosshairs.png */,
 				C6A63967184DD65A00C4241C /* IsItGreen-Info.plist */,
 				C6A63968184DD65A00C4241C /* InfoPlist.strings */,
 				C6A6396B184DD65A00C4241C /* main.m */,
@@ -238,7 +244,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6A63978184DD65A00C4241C /* Images.xcassets in Resources */,
+				C6500BE7184E616800C42BAA /* IsItGreen512.png in Resources */,
 				C6A6396A184DD65A00C4241C /* InfoPlist.strings in Resources */,
+				C6500BE5184E5C7000C42BAA /* crosshairs.png in Resources */,
 				C6A63973184DD65A00C4241C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

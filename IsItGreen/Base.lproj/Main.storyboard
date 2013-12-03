@@ -13,16 +13,16 @@
                         <viewControllerLayoutGuide type="top" id="0c6-7B-fLc"/>
                         <viewControllerLayoutGuide type="bottom" id="WSi-8X-kOc"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                    <view key="view" autoresizesSubviews="NO" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SaO-cc-YIB">
+                            <view autoresizesSubviews="NO" contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SaO-cc-YIB">
                                 <rect key="frame" x="20" y="25" width="280" height="320"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qer-Yi-obX">
-                                        <rect key="frame" x="95" y="115" width="90" height="90"/>
+                                    <imageView autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="crosshairs.png" translatesAutoresizingMaskIntoConstraints="NO" id="Qer-Yi-obX">
+                                        <rect key="frame" x="115" y="135" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" red="0.24313727020000001" green="0.96078437569999997" blue="0.02745098248" alpha="1" colorSpace="deviceRGB"/>
                                     </imageView>
@@ -41,6 +41,9 @@
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="crosshairs.png" width="25" height="25"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
