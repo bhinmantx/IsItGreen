@@ -7,14 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C64BAEB8184DD72E00902C8A /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64BAEB7184DD72E00902C8A /* opencv2.framework */; };
 		C6A63960184DD65A00C4241C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A6395F184DD65A00C4241C /* Foundation.framework */; };
 		C6A63962184DD65A00C4241C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A63961184DD65A00C4241C /* CoreGraphics.framework */; };
 		C6A63964184DD65A00C4241C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A63963184DD65A00C4241C /* UIKit.framework */; };
 		C6A6396A184DD65A00C4241C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C6A63968184DD65A00C4241C /* InfoPlist.strings */; };
 		C6A6396C184DD65A00C4241C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C6A6396B184DD65A00C4241C /* main.m */; };
-		C6A63970184DD65A00C4241C /* IsItGreenAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C6A6396F184DD65A00C4241C /* IsItGreenAppDelegate.m */; };
+		C6A63970184DD65A00C4241C /* IsItGreenAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6A6396F184DD65A00C4241C /* IsItGreenAppDelegate.mm */; };
 		C6A63973184DD65A00C4241C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C6A63971184DD65A00C4241C /* Main.storyboard */; };
-		C6A63976184DD65A00C4241C /* IsItGreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6A63975184DD65A00C4241C /* IsItGreenViewController.m */; };
+		C6A63976184DD65A00C4241C /* IsItGreenViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6A63975184DD65A00C4241C /* IsItGreenViewController.mm */; };
 		C6A63978184DD65A00C4241C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6A63977184DD65A00C4241C /* Images.xcassets */; };
 		C6A6397F184DD65A00C4241C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A6397E184DD65A00C4241C /* XCTest.framework */; };
 		C6A63980184DD65A00C4241C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A6395F184DD65A00C4241C /* Foundation.framework */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C64BAEB7184DD72E00902C8A /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		C6A6395C184DD65A00C4241C /* IsItGreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IsItGreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A6395F184DD65A00C4241C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C6A63961184DD65A00C4241C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -43,10 +45,10 @@
 		C6A6396B184DD65A00C4241C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C6A6396D184DD65A00C4241C /* IsItGreen-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IsItGreen-Prefix.pch"; sourceTree = "<group>"; };
 		C6A6396E184DD65A00C4241C /* IsItGreenAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IsItGreenAppDelegate.h; sourceTree = "<group>"; };
-		C6A6396F184DD65A00C4241C /* IsItGreenAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IsItGreenAppDelegate.m; sourceTree = "<group>"; };
+		C6A6396F184DD65A00C4241C /* IsItGreenAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = IsItGreenAppDelegate.mm; sourceTree = "<group>"; };
 		C6A63972184DD65A00C4241C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C6A63974184DD65A00C4241C /* IsItGreenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IsItGreenViewController.h; sourceTree = "<group>"; };
-		C6A63975184DD65A00C4241C /* IsItGreenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IsItGreenViewController.m; sourceTree = "<group>"; };
+		C6A63975184DD65A00C4241C /* IsItGreenViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = IsItGreenViewController.mm; sourceTree = "<group>"; };
 		C6A63977184DD65A00C4241C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C6A6397D184DD65A00C4241C /* IsItGreenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IsItGreenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A6397E184DD65A00C4241C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -62,6 +64,7 @@
 			files = (
 				C6A63962184DD65A00C4241C /* CoreGraphics.framework in Frameworks */,
 				C6A63964184DD65A00C4241C /* UIKit.framework in Frameworks */,
+				C64BAEB8184DD72E00902C8A /* opencv2.framework in Frameworks */,
 				C6A63960184DD65A00C4241C /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -101,6 +104,7 @@
 		C6A6395E184DD65A00C4241C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C64BAEB7184DD72E00902C8A /* opencv2.framework */,
 				C6A6395F184DD65A00C4241C /* Foundation.framework */,
 				C6A63961184DD65A00C4241C /* CoreGraphics.framework */,
 				C6A63963184DD65A00C4241C /* UIKit.framework */,
@@ -113,10 +117,10 @@
 			isa = PBXGroup;
 			children = (
 				C6A6396E184DD65A00C4241C /* IsItGreenAppDelegate.h */,
-				C6A6396F184DD65A00C4241C /* IsItGreenAppDelegate.m */,
+				C6A6396F184DD65A00C4241C /* IsItGreenAppDelegate.mm */,
 				C6A63971184DD65A00C4241C /* Main.storyboard */,
 				C6A63974184DD65A00C4241C /* IsItGreenViewController.h */,
-				C6A63975184DD65A00C4241C /* IsItGreenViewController.m */,
+				C6A63975184DD65A00C4241C /* IsItGreenViewController.mm */,
 				C6A63977184DD65A00C4241C /* Images.xcassets */,
 				C6A63966184DD65A00C4241C /* Supporting Files */,
 			);
@@ -250,9 +254,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6A63976184DD65A00C4241C /* IsItGreenViewController.m in Sources */,
+				C6A63976184DD65A00C4241C /* IsItGreenViewController.mm in Sources */,
 				C6A6396C184DD65A00C4241C /* main.m in Sources */,
-				C6A63970184DD65A00C4241C /* IsItGreenAppDelegate.m in Sources */,
+				C6A63970184DD65A00C4241C /* IsItGreenAppDelegate.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +383,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/Brendan/Documents/IsItGreen,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IsItGreen/IsItGreen-Prefix.pch";
 				INFOPLIST_FILE = "IsItGreen/IsItGreen-Info.plist";
@@ -392,6 +400,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/Brendan/Documents/IsItGreen,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IsItGreen/IsItGreen-Prefix.pch";
 				INFOPLIST_FILE = "IsItGreen/IsItGreen-Info.plist";
@@ -461,6 +473,7 @@
 				C6A63990184DD65A00C4241C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C6A63991184DD65A00C4241C /* Build configuration list for PBXNativeTarget "IsItGreenTests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +482,7 @@
 				C6A63993184DD65A00C4241C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
