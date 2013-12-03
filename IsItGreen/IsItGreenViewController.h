@@ -29,5 +29,6 @@
 /////below is for still image capture
 @property(nonatomic, retain) AVCaptureStillImageOutput *stillImageOutput;
 @property (weak, nonatomic) IBOutlet UIImageView *captureImage;
+@property (strong, nonatomic) IBOutlet UIImageView *CrossHairAndResult;
 
 @end

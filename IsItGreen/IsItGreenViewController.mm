@@ -115,20 +115,7 @@
 	[session startRunning];
 
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     
     /*
@@ -144,8 +131,9 @@
 	
     [session addInput:input];
 */
-
-    
+///Let's see about that cross hair image
+    [self CrossHairAndResult].layer.zPosition = 5;
+    [self cameraFeed].layer.zPosition = 0;
 }
 
 - (void)didReceiveMemoryWarning
