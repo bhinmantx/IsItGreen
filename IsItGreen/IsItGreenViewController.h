@@ -15,11 +15,14 @@
 #import <AVFoundation/AVFoundation.h>
 
 
-@interface IsItGreenViewController : UIViewController
+@interface IsItGreenViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate>
 {
     IBOutlet UIView *cameraFeed;
     
-    
+    ////Image utility. Very expensive!
+
+    BOOL processVideoFrame;
+   // dispatch_queue_t captureQueue;
   
 }
 
@@ -29,6 +32,12 @@
 /////below is for still image capture
 @property(nonatomic, retain) AVCaptureStillImageOutput *stillImageOutput;
 @property (weak, nonatomic) IBOutlet UIImageView *captureImage;
-@property (strong, nonatomic) IBOutlet UIImageView *CrossHairAndResult;
+@property (strong, nonatomic) IBOutlet UIImageView *subImage;
+//@property (strong,nonatomic)dispatch_queue_t captureQueue;
+
+-(UIImage *)imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer;
+-(void)prepVidCapture;
+
+@property (strong, nonatomic) IBOutlet UIButton *TriggerButton;
 
 @end

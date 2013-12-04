@@ -11,6 +11,10 @@
 		C64BAEBA184DDBB900902C8A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64BAEB9184DDBB900902C8A /* AVFoundation.framework */; };
 		C6500BE5184E5C7000C42BAA /* crosshairs.png in Resources */ = {isa = PBXBuildFile; fileRef = C6500BE4184E5C6F00C42BAA /* crosshairs.png */; };
 		C6500BE7184E616800C42BAA /* IsItGreen512.png in Resources */ = {isa = PBXBuildFile; fileRef = C6500BE6184E616800C42BAA /* IsItGreen512.png */; };
+		C6500BEA184E7BEF00C42BAA /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6500BE8184E7BEF00C42BAA /* CoreImage.framework */; };
+		C6500BEB184E7BEF00C42BAA /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6500BE9184E7BEF00C42BAA /* ImageIO.framework */; };
+		C6500BED184E7BFF00C42BAA /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6500BEC184E7BFF00C42BAA /* CoreVideo.framework */; };
+		C6500BEF184E7C2500C42BAA /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6500BEE184E7C2500C42BAA /* CoreMedia.framework */; };
 		C6A63960184DD65A00C4241C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A6395F184DD65A00C4241C /* Foundation.framework */; };
 		C6A63962184DD65A00C4241C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A63961184DD65A00C4241C /* CoreGraphics.framework */; };
 		C6A63964184DD65A00C4241C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A63963184DD65A00C4241C /* UIKit.framework */; };
@@ -42,6 +46,10 @@
 		C64BAEB9184DDBB900902C8A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C6500BE4184E5C6F00C42BAA /* crosshairs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crosshairs.png; sourceTree = "<group>"; };
 		C6500BE6184E616800C42BAA /* IsItGreen512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IsItGreen512.png; sourceTree = "<group>"; };
+		C6500BE8184E7BEF00C42BAA /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
+		C6500BE9184E7BEF00C42BAA /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/ImageIO.framework; sourceTree = DEVELOPER_DIR; };
+		C6500BEC184E7BFF00C42BAA /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
+		C6500BEE184E7C2500C42BAA /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
 		C6A6395C184DD65A00C4241C /* IsItGreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IsItGreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A6395F184DD65A00C4241C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C6A63961184DD65A00C4241C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -68,6 +76,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6500BEF184E7C2500C42BAA /* CoreMedia.framework in Frameworks */,
+				C6500BED184E7BFF00C42BAA /* CoreVideo.framework in Frameworks */,
+				C6500BEA184E7BEF00C42BAA /* CoreImage.framework in Frameworks */,
+				C6500BEB184E7BEF00C42BAA /* ImageIO.framework in Frameworks */,
 				C64BAEBA184DDBB900902C8A /* AVFoundation.framework in Frameworks */,
 				C6A63962184DD65A00C4241C /* CoreGraphics.framework in Frameworks */,
 				C6A63964184DD65A00C4241C /* UIKit.framework in Frameworks */,
@@ -111,6 +123,10 @@
 		C6A6395E184DD65A00C4241C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C6500BEE184E7C2500C42BAA /* CoreMedia.framework */,
+				C6500BEC184E7BFF00C42BAA /* CoreVideo.framework */,
+				C6500BE8184E7BEF00C42BAA /* CoreImage.framework */,
+				C6500BE9184E7BEF00C42BAA /* ImageIO.framework */,
 				C64BAEB9184DDBB900902C8A /* AVFoundation.framework */,
 				C64BAEB7184DD72E00902C8A /* opencv2.framework */,
 				C6A6395F184DD65A00C4241C /* Foundation.framework */,
