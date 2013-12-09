@@ -15,7 +15,6 @@
 		C6500BEB184E7BEF00C42BAA /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6500BE9184E7BEF00C42BAA /* ImageIO.framework */; };
 		C6500BED184E7BFF00C42BAA /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6500BEC184E7BFF00C42BAA /* CoreVideo.framework */; };
 		C6500BEF184E7C2500C42BAA /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6500BEE184E7C2500C42BAA /* CoreMedia.framework */; };
-		C6500BF218503D0900C42BAA /* ImageUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C6500BF118503D0900C42BAA /* ImageUtils.m */; };
 		C6A63960184DD65A00C4241C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A6395F184DD65A00C4241C /* Foundation.framework */; };
 		C6A63962184DD65A00C4241C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A63961184DD65A00C4241C /* CoreGraphics.framework */; };
 		C6A63964184DD65A00C4241C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A63963184DD65A00C4241C /* UIKit.framework */; };
@@ -51,8 +50,6 @@
 		C6500BE9184E7BEF00C42BAA /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/ImageIO.framework; sourceTree = DEVELOPER_DIR; };
 		C6500BEC184E7BFF00C42BAA /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
 		C6500BEE184E7C2500C42BAA /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
-		C6500BF018503D0900C42BAA /* ImageUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUtils.h; sourceTree = "<group>"; };
-		C6500BF118503D0900C42BAA /* ImageUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageUtils.m; sourceTree = "<group>"; };
 		C6A6395C184DD65A00C4241C /* IsItGreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IsItGreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A6395F184DD65A00C4241C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C6A63961184DD65A00C4241C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -143,8 +140,6 @@
 		C6A63965184DD65A00C4241C /* IsItGreen */ = {
 			isa = PBXGroup;
 			children = (
-				C6500BF018503D0900C42BAA /* ImageUtils.h */,
-				C6500BF118503D0900C42BAA /* ImageUtils.m */,
 				C6A6396E184DD65A00C4241C /* IsItGreenAppDelegate.h */,
 				C6A6396F184DD65A00C4241C /* IsItGreenAppDelegate.mm */,
 				C6A63971184DD65A00C4241C /* Main.storyboard */,
@@ -290,7 +285,6 @@
 				C6A63976184DD65A00C4241C /* IsItGreenViewController.mm in Sources */,
 				C6A6396C184DD65A00C4241C /* main.m in Sources */,
 				C6A63970184DD65A00C4241C /* IsItGreenAppDelegate.mm in Sources */,
-				C6500BF218503D0900C42BAA /* ImageUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

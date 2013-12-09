@@ -8,7 +8,7 @@
 
 #import "IsItGreenViewController.h"
 #import "AVFoundation/AVCaptureOutput.h"
-#import "ImageUtils.h"
+//#import "ImageUtils.h"
 
 @interface IsItGreenViewController ()
 
@@ -16,7 +16,7 @@
 
 @implementation IsItGreenViewController
 
-@synthesize cameraFeed, subImage;
+@synthesize cameraFeed, subImage, thumbNail;
 ///For still image capture
 @synthesize captureImage;
 
@@ -97,93 +97,6 @@
 	[session startRunning];	
 
 
-
-
-
-
-   /* AVCaptureSession *session = [[AVCaptureSession alloc] init];
-    
-    CALayer *viewLayer = self.cameraFeed.layer;
-    AVCaptureVideoPreviewLayer *captureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
-    
-    ///This should properly size and fill the preview layer
-    CGRect bounds=self.cameraFeed.layer.bounds;
-    captureVideoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    captureVideoPreviewLayer.bounds=bounds;
-    captureVideoPreviewLayer.position=CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
-    
-    
-    captureVideoPreviewLayer.frame = viewLayer.bounds;
-    
-    [self.cameraFeed.layer addSublayer:captureVideoPreviewLayer];
-    
-    
-    
-    // AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:@"AVMediaTypeVideo"];
-
-    NSArray *devices = [AVCaptureDevice devices];
-    AVCaptureDevice *frontCamera;
-    AVCaptureDevice *backCamera;
-    
-    for (AVCaptureDevice *device in devices) {
-        
-        NSLog(@"Device name: %@", [device localizedName]);
-        
-        if ([device hasMediaType:AVMediaTypeVideo]) {
-            
-            if ([device position] == AVCaptureDevicePositionBack) {
-                NSLog(@"Device position : back");
-                backCamera = device;
-            }
-            else {
-                NSLog(@"Device position : front");
-                frontCamera = device;
-            }
-        }
-    }
-
-    
-    NSError *error = nil;
-    AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:backCamera error:&error];
-
-    session.sessionPreset = AVCaptureSessionPresetMedium;
-
-    [session addInput:input];
-    
-    
-    
-    ///Trying to create outputs
-    ///According to Apple this is how we go about grabbing a still image.
-    */
-    /*
-     https://developer.apple.com/library/ios/documentation/AudioVideo/Conceptual/AVFoundationPG/AVFoundationPG.pdf
-     */
-     /*
-    AVCaptureVideoDataOutput  *output = [[AVCaptureVideoDataOutput alloc]  init];
-    
-    output.videoSettings = @{ (NSString *)kCVPixelBufferPixelFormatTypeKey : @(kCVPixelFormatType_32BGRA) };
-    
-    // output.minFrameDuration = CMTimeMake(1, 15);
-    
-    ///For our "Augemented Reality" aspects we need a Queue, whatever that is.
-    ///TODO: LOOK UP QUEUES
-    dispatch_queue_t captureQueue=dispatch_queue_create("MyQueue", NULL);
-
-    
-    [output setSampleBufferDelegate:self queue:captureQueue];
-    
-    
-   // stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
-  //  NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, nil];
-   // [stillImageOutput setOutputSettings:outputSettings];
-    
-
-   // [session addOutput:stillImageOutput];
-    [session addOutput:output];
-    
-	[session startRunning];
-    
-    */
 }
 
 
@@ -202,11 +115,9 @@
         NSLog(@"The process image system was called");
          //  thumbNail = [self imageFromSampleBuffer:sampleBuffer];
         
-    processVideoFrame =false;
-            
-            
-            
-            
+        processVideoFrame =false;
+            /*
+             ///His AR code
             CVImageBufferRef cvimgRef = CMSampleBufferGetImageBuffer(sampleBuffer);
             // Lock the image buffer
             CVPixelBufferLockBaseAddress(cvimgRef,0);
@@ -218,11 +129,19 @@
             size_t bprow=CVPixelBufferGetBytesPerRow(cvimgRef);
             // turn it into something useful
             thumbNail=createImage(buf, bprow, width, height);
-    
+             */
+            thumbNail = [self imageFromSampleBuffer:sampleBuffer];
             
-            [self performSelectorOnMainThread:@selector(updateThumbnail) withObject:nil waitUntilDone:NO];
-//        [self updateThumbnail];
+          //  [self performSelectorOnMainThread:@selector(updateThumbnail) withObject:nil waitUntilDone:NO];
             
+ /*
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                 NSLog(@"block async dispatch");
+                [subImage setImage:thumbNail];
+            
+            });
+  */
         }
     }
 	
@@ -259,65 +178,96 @@
 
 
 
--(UIImage *)imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer{
-    // This example assumes the sample buffer came from an AVCaptureOutput,
-    //so its image buffer is known to be  a pixel buffer.
-    NSLog(@"Image from sample buffer");
-/*
-    CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
-    //Lock the base address of the pixel buffer.
-    CVPixelBufferLockBaseAddress(imageBuffer,0);
+
+-(UIImage*)imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer {
     
-    
-    //Get the number of bytes per row for the pixel buffer.
-    size_t bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
-    //Get the pixel  buffer width and height.
-    
-    size_t width = CVPixelBufferGetWidth(imageBuffer);
-    
-    size_t height = CVPixelBufferGetHeight(imageBuffer);
-    //Create a device-dependent RGB color space.
-  NSLog(@"Image size: width %zx height: %zx", width, height);
-    static CGColorSpaceRef colorSpace = NULL;
-    
-    if (colorSpace == NULL) {
-        colorSpace = CGColorSpaceCreateDeviceRGB();
-        if (colorSpace == NULL){
-            // Handle the error appropriately.
-            
-            return nil;
+        // This example assumes the sample buffer came from an AVCaptureOutput,
+        //so its image buffer is known to be  a pixel buffer.
+        NSLog(@"Image from sample buffer");
+        CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+        //Lock the base address of the pixel buffer.
+        CVPixelBufferLockBaseAddress(imageBuffer,0);
+        
+        
+        //Get the number of bytes per row for the pixel buffer.
+        size_t bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
+        //Get the pixel  buffer width and height.
+        
+        size_t width = CVPixelBufferGetWidth(imageBuffer);
+        
+        size_t height = CVPixelBufferGetHeight(imageBuffer);
+        //Create a device-dependent RGB color space.
+        
+        static CGColorSpaceRef colorSpace = NULL;
+        
+        if (colorSpace == NULL) {
+            colorSpace = CGColorSpaceCreateDeviceRGB();
+            if (colorSpace == NULL){
+                // Handle the error appropriately.
+                
+                return nil;
+            }
         }
-    }
-    */
-    /* *//*
-    Get the base address of the pixel buffer.
-    void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
-    // Get the data size for contiguous planes of the pixel buffer.
-    size_t bufferSize = CVPixelBufferGetDataSize(imageBuffer);
+        
+        
+        // Get the base address of the pixel buffer.
+        void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
+        // Get the data size for contiguous planes of the pixel buffer.
+        size_t bufferSize = CVPixelBufferGetDataSize(imageBuffer);
+        
+        // Create a Quartz direct-access data provider that uses data we supply.
+        
+        CGDataProviderRef dataProvider = CGDataProviderCreateWithData(NULL,baseAddress, bufferSize, NULL);
+        // Create a bitmap image from data supplied by the data provider.
+        CGImageRef cgImage = CGImageCreate(width, height, 8, 32, bytesPerRow, colorSpace, kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Little, dataProvider, NULL, true, kCGRenderingIntentDefault);
+        
+        CGDataProviderRelease(dataProvider);
+        // Create and return an image object to represent the Quartz image.
+        UIImage *image = [UIImage imageWithCGImage:cgImage];
+        
+        
+       CGImageRelease(cgImage);
+        CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
     
-    // Create a Quartz direct-access data provider that uses data we supply.
+    NSLog(@"Width %zx height %zx", width, height);
     
-    CGDataProviderRef dataProvider = CGDataProviderCreateWithData(NULL,baseAddress, bufferSize, NULL);
-    // Create a bitmap image from data supplied by the data provider.
+    ////We need to run UI updates on the main thread. I still think this *might* be some kind of image
+    ////size issue, there's just no good way to tell for me.
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog(@"block async dispatch");
+//
+        CGSize newSize = CGSizeMake(384, 192);  //whatever size
+        UIGraphicsBeginImageContext(newSize);
+        //UIImage* image = thumbNail;
+        [thumbNail drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+        UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        [subImage setImage:newImage];
     
-    CGImageRef cgImage = CGImageCreate(width, height, 8, 32, bytesPerRow, colorSpace, kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Little, dataProvider, NULL, true, kCGRenderingIntentDefault);
+    });
+
     
-    CGDataProviderRelease(dataProvider);
-    // Create and return an image object to represent the Quartz image.
-    UIImage *image = [UIImage imageWithCGImage:cgImage];
+        return image;
     
     
-    CGImageRelease(cgImage); 
-    CVPixelBufferUnlockBaseAddress(imageBuffer, 0); 
-    return image;
-    */
-    
+    //return [UIImage imageNamed:@"IsItGreen512.png"];
 }
+
+    
+
 
 -(void)updateThumbnail{
     
     NSLog(@"thumbNail is %f wide", thumbNail.size.width);
-    [self subImage].image = [self thumbNail];
+    
+    CGSize newSize = CGSizeMake(384, 192);  //whatever size
+    UIGraphicsBeginImageContext(newSize);
+    //UIImage* image = thumbNail;
+    [thumbNail drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+      [self subImage].image = newImage;
+//    [self subImage].image = [self thumbNail];
     //[[self subImage] setNeedsDisplay];
 //    subImage.image = [UIImage imageNamed:@"IsItGreen512.png"];
 }
