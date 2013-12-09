@@ -216,8 +216,13 @@
         size_t bufferSize = CVPixelBufferGetDataSize(imageBuffer);
         
         // Create a Quartz direct-access data provider that uses data we supply.
-        
-        CGDataProviderRef dataProvider = CGDataProviderCreateWithData(NULL,baseAddress, bufferSize, NULL);
+        //a solution to that bad access from
+    //// http://stackoverflow.com/questions/10774392/cgcontextdrawimage-crashes
+    NSData *data = [NSData dataWithBytes:baseAddress length:bufferSize];
+   
+    CGDataProviderRef dataProvider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
+    ///Original line below
+///        CGDataProviderRef dataProvider = CGDataProviderCreateWithData(NULL,baseAddress, bufferSize, NULL);
         // Create a bitmap image from data supplied by the data provider.
         CGImageRef cgImage = CGImageCreate(width, height, 8, 32, bytesPerRow, colorSpace, kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Little, dataProvider, NULL, true, kCGRenderingIntentDefault);
         
@@ -236,13 +241,9 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         NSLog(@"block async dispatch");
 //
-        CGSize newSize = CGSizeMake(384, 192);  //whatever size
-        UIGraphicsBeginImageContext(newSize);
-        //UIImage* image = thumbNail;
-        [thumbNail drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-        UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        [subImage setImage:newImage];
+        
+        UIImage* smallImage = [image scaleToSize:CGSizeMake(100.0f,100.0f)];
+        [subImage setImage:smallImage];
     
     });
 

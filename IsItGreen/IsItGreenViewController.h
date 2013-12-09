@@ -14,6 +14,7 @@
 #import <AVFoundation/AVCaptureVideoPreviewLayer.h>
 #import <AVFoundation/AVFoundation.h>
 //#import "ImageUtils.h"
+#import "UIImageResizing.h"
 
 
 @interface IsItGreenViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate>

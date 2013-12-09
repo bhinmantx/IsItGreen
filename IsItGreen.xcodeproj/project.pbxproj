@@ -29,6 +29,7 @@
 		C6A63981184DD65A00C4241C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A63963184DD65A00C4241C /* UIKit.framework */; };
 		C6A63989184DD65A00C4241C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C6A63987184DD65A00C4241C /* InfoPlist.strings */; };
 		C6A6398B184DD65A00C4241C /* IsItGreenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C6A6398A184DD65A00C4241C /* IsItGreenTests.m */; };
+		C6B487E51855D42500E5A0F9 /* UIImageResizing.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B487E41855D42500E5A0F9 /* UIImageResizing.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,8 @@
 		C6A63986184DD65A00C4241C /* IsItGreenTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IsItGreenTests-Info.plist"; sourceTree = "<group>"; };
 		C6A63988184DD65A00C4241C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C6A6398A184DD65A00C4241C /* IsItGreenTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IsItGreenTests.m; sourceTree = "<group>"; };
+		C6B487E31855D3F500E5A0F9 /* UIImageResizing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageResizing.h; sourceTree = "<group>"; };
+		C6B487E41855D42500E5A0F9 /* UIImageResizing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageResizing.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +143,8 @@
 		C6A63965184DD65A00C4241C /* IsItGreen */ = {
 			isa = PBXGroup;
 			children = (
+				C6B487E31855D3F500E5A0F9 /* UIImageResizing.h */,
+				C6B487E41855D42500E5A0F9 /* UIImageResizing.m */,
 				C6A6396E184DD65A00C4241C /* IsItGreenAppDelegate.h */,
 				C6A6396F184DD65A00C4241C /* IsItGreenAppDelegate.mm */,
 				C6A63971184DD65A00C4241C /* Main.storyboard */,
@@ -282,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6B487E51855D42500E5A0F9 /* UIImageResizing.m in Sources */,
 				C6A63976184DD65A00C4241C /* IsItGreenViewController.mm in Sources */,
 				C6A6396C184DD65A00C4241C /* main.m in Sources */,
 				C6A63970184DD65A00C4241C /* IsItGreenAppDelegate.mm in Sources */,
