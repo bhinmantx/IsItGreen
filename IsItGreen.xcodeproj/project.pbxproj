@@ -31,6 +31,7 @@
 		C6A6398B184DD65A00C4241C /* IsItGreenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C6A6398A184DD65A00C4241C /* IsItGreenTests.m */; };
 		C6B487E51855D42500E5A0F9 /* UIImageResizing.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B487E41855D42500E5A0F9 /* UIImageResizing.m */; };
 		C6B487E81856F09E00E5A0F9 /* ColorMatcher.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6B487E61856F09E00E5A0F9 /* ColorMatcher.mm */; };
+		C6B487EB1856F7D400E5A0F9 /* colordata2.js in Resources */ = {isa = PBXBuildFile; fileRef = C6B487E91856F7BB00E5A0F9 /* colordata2.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		C6B487E41855D42500E5A0F9 /* UIImageResizing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageResizing.m; sourceTree = "<group>"; };
 		C6B487E61856F09E00E5A0F9 /* ColorMatcher.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ColorMatcher.mm; sourceTree = "<group>"; };
 		C6B487E71856F09E00E5A0F9 /* ColorMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorMatcher.h; sourceTree = "<group>"; };
+		C6B487E91856F7BB00E5A0F9 /* colordata2.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = colordata2.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 		C6A63966184DD65A00C4241C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C6B487E91856F7BB00E5A0F9 /* colordata2.js */,
 				C6500BE6184E616800C42BAA /* IsItGreen512.png */,
 				C6500BE4184E5C6F00C42BAA /* crosshairs.png */,
 				C6A63967184DD65A00C4241C /* IsItGreen-Info.plist */,
@@ -269,6 +272,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6B487EB1856F7D400E5A0F9 /* colordata2.js in Resources */,
 				C6A63978184DD65A00C4241C /* Images.xcassets in Resources */,
 				C6500BE7184E616800C42BAA /* IsItGreen512.png in Resources */,
 				C6A6396A184DD65A00C4241C /* InfoPlist.strings in Resources */,

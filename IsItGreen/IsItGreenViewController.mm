@@ -8,7 +8,7 @@
 
 #import "IsItGreenViewController.h"
 #import "AVFoundation/AVCaptureOutput.h"
-//#import "ImageUtils.h"
+#import "ColorMatcher.h"
 
 @interface IsItGreenViewController ()
 
@@ -17,6 +17,7 @@
 @implementation IsItGreenViewController
 
 @synthesize cameraFeed, subImage, thumbNail;
+@synthesize matcher = _matcher;
 ///For still image capture
 
 
@@ -32,6 +33,8 @@
     
     ///Load up our color data
     [self processJSON];
+    ///create our matcher
+    _matcher = [[ColorMatcher alloc]initWithJSON:_json];
   
 }
 
@@ -111,6 +114,13 @@
         processVideoFrame =false;
         thumbNail = [self imageFromSampleBuffer:sampleBuffer];
          //  [self performSelectorOnMainThread:@selector(updateThumbnail) withObject:nil waitUntilDone:NO];
+            
+            ////Right now ColorReplacer takes a MAT and a color (and a useless UIImageView) and
+            ////Returns a MAT with the colors swapped.
+            ////For testing we're going to crop the image here, conver to a MAT, pass it to the matcher
+            ////Take the result and change it BACK to a UIImage and send it to the funcs below.
+            ////This is really gross. Let's not do it that way. 
+            
             
             ////In order to reliably update the UI I have to run such updates from the main thread
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -275,11 +285,6 @@
     _json = [NSJSONSerialization JSONObjectWithData:jsFile options:0 error:&noError];
     
     NSLog(@"JSON count: %i", _json.count);
-    
-    ///We're going to see if the data loaded correctly.
-    //   for(int i = 0; i< _json.count; i++){
-    //       NSLog(@"%@ %@ %@ %@", [[_json objectAtIndex:i] objectForKey:@"name"],[[_json objectAtIndex:i] objectForKey:@"r"],[[_json objectAtIndex:i] objectForKey:@"g"],[[_json objectAtIndex:i] objectForKey:@"b"]);
-    //    }
     
 }
 

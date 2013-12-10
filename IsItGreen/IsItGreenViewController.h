@@ -13,7 +13,7 @@
 #import <AVFoundation/AVCaptureOutput.h>
 #import <AVFoundation/AVCaptureVideoPreviewLayer.h>
 #import <AVFoundation/AVFoundation.h>
-//#import "ImageUtils.h"
+#import "ColorMatcher.h"
 #import "UIImageResizing.h"
 
 
@@ -29,7 +29,7 @@
     BOOL processVideoFrame;
 
     UIImage *thumbNail;
-
+    ColorMatcher *_matcher;
     
     NSArray *_json;
     
@@ -44,6 +44,7 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *subImage;
 @property (strong, nonatomic) UIImage *thumbNail;
+@property (strong, nonatomic) ColorMatcher * matcher;
 
 //@property (strong,nonatomic)dispatch_queue_t captureQueue;
 
