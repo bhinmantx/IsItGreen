@@ -21,15 +21,18 @@
 {
     IBOutlet UIView *cameraFeed;
     
-    ////Image utility. Very expensive!
+
     
     
     AVCaptureSession *session;
     
     BOOL processVideoFrame;
-   // dispatch_queue_t captureQueue;
+
     UIImage *thumbNail;
-    //Image *thumbNail;
+
+    
+    NSArray *_json;
+    
   
 }
 
@@ -38,13 +41,17 @@
 
 /////below is for still image capture
 //@property(nonatomic, retain) AVCaptureStillImageOutput *stillImageOutput;
-@property (weak, nonatomic) IBOutlet UIImageView *captureImage;
+
 @property (strong, nonatomic) IBOutlet UIImageView *subImage;
 @property (strong, nonatomic) UIImage *thumbNail;
 
 //@property (strong,nonatomic)dispatch_queue_t captureQueue;
 
+///image manipulation funcs
 -(UIImage *)imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer;
+-(UIImage *)imageWithCVMat:(const cv::Mat&)cvMat;
+-(cv::Mat)cvMatFromUIImage:(UIImage *)image;
+
 -(void)prepVidCapture;
 -(void)updateThumbnail;
 

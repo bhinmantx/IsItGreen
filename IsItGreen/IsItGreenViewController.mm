@@ -18,7 +18,7 @@
 
 @synthesize cameraFeed, subImage, thumbNail;
 ///For still image capture
-@synthesize captureImage;
+
 
 - (void)viewDidLoad
 {
@@ -26,19 +26,18 @@
       processVideoFrame = false;
     [self prepVidCapture];
 	// Do any additional setup after loading the view, typically from a nib.
-
+///make sure ui elements are in the right position
+    subImage.layer.zPosition = 10;
+    cameraFeed.layer.zPosition = 1;
+    
+    ///Load up our color data
+    [self processJSON];
   
 }
 
 
 ///Creates all the preview layers, adds inputs/outputs, registers the queue
 -(void)prepVidCapture{
-
-
-
-///Below is all of my broken code.  Example code being pasted in until I can figure out what's going on.
-
-
 
     session = [[AVCaptureSession alloc] init];
 	
@@ -56,13 +55,7 @@
     captureVideoPreviewLayer.frame = viewLayer.bounds;
     
     [self.cameraFeed.layer addSublayer:captureVideoPreviewLayer];
-    
-    
-	// create a preview layer to show the output from the camera
-	//AVCaptureVideoPreviewLayer *previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:session];
-	//previewLayer.frame = cameraFeed.frame;
-	//[cameraFeed.layer addSublayer:previewLayer];
-	
+
 	// Get the default camera device
 	AVCaptureDevice* camera = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
 	
@@ -116,32 +109,19 @@
          //  thumbNail = [self imageFromSampleBuffer:sampleBuffer];
         
         processVideoFrame =false;
-            /*
-             ///His AR code
-            CVImageBufferRef cvimgRef = CMSampleBufferGetImageBuffer(sampleBuffer);
-            // Lock the image buffer
-            CVPixelBufferLockBaseAddress(cvimgRef,0);
-            // access the data
-            int width=CVPixelBufferGetWidth(cvimgRef);
-            int height=CVPixelBufferGetHeight(cvimgRef);
-            // get the raw image bytes
-            uint8_t *buf=(uint8_t *) CVPixelBufferGetBaseAddress(cvimgRef);
-            size_t bprow=CVPixelBufferGetBytesPerRow(cvimgRef);
-            // turn it into something useful
-            thumbNail=createImage(buf, bprow, width, height);
-             */
-            thumbNail = [self imageFromSampleBuffer:sampleBuffer];
+        thumbNail = [self imageFromSampleBuffer:sampleBuffer];
+         //  [self performSelectorOnMainThread:@selector(updateThumbnail) withObject:nil waitUntilDone:NO];
             
-          //  [self performSelectorOnMainThread:@selector(updateThumbnail) withObject:nil waitUntilDone:NO];
-            
- /*
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                 NSLog(@"block async dispatch");
-                [subImage setImage:thumbNail];
-            
+            ////In order to reliably update the UI I have to run such updates from the main thread
+                dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"block async dispatch");
+                //
+                
+                UIImage* smallImage = [thumbNail scaleToSize:CGSizeMake(100.0f,100.0f)];
+                [subImage setImage:smallImage];
+                
             });
-  */
+
         }
     }
 	
@@ -149,26 +129,7 @@
 
 
 
-//So the following func worked for a bit and then stopped. I don't know why. Typo?
-/*
--(void)captureOutput:(AVCaptureOutput *)captureOutput didDropSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection{
-   
 
-    
-    ////Again, from APPLE
-    if(processVideoFrame) {
-    /// They want you to implement this!
- ////    https://developer.apple.com/library/ios/documentation/AudioVideo/Conceptual/AVFoundationPG/AVFoundationPG.pdf
-     ///
-        processVideoFrame =false;
-        NSLog(@"The process image system was called");
- UIImage *image = [self imageFromSampleBuffer:sampleBuffer];
-
-        //processVideoFrame =false;
-   // [self subImage].image = image;
-    }
-}
-*/
 
 
 - (IBAction)testTriggerButton:(id)sender {
@@ -217,12 +178,10 @@
         
         // Create a Quartz direct-access data provider that uses data we supply.
         //a solution to that bad access from
-    //// http://stackoverflow.com/questions/10774392/cgcontextdrawimage-crashes
-    NSData *data = [NSData dataWithBytes:baseAddress length:bufferSize];
+        //// http://stackoverflow.com/questions/10774392/cgcontextdrawimage-crashes
+        NSData *data = [NSData dataWithBytes:baseAddress length:bufferSize];
    
-    CGDataProviderRef dataProvider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
-    ///Original line below
-///        CGDataProviderRef dataProvider = CGDataProviderCreateWithData(NULL,baseAddress, bufferSize, NULL);
+        CGDataProviderRef dataProvider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
         // Create a bitmap image from data supplied by the data provider.
         CGImageRef cgImage = CGImageCreate(width, height, 8, 32, bytesPerRow, colorSpace, kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Little, dataProvider, NULL, true, kCGRenderingIntentDefault);
         
@@ -231,36 +190,103 @@
         UIImage *image = [UIImage imageWithCGImage:cgImage];
         
         
-       CGImageRelease(cgImage);
+        CGImageRelease(cgImage);
         CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
-    
-    NSLog(@"Width %zx height %zx", width, height);
-    
-    ////We need to run UI updates on the main thread. I still think this *might* be some kind of image
-    ////size issue, there's just no good way to tell for me.
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"block async dispatch");
-//
-        
-        UIImage* smallImage = [image scaleToSize:CGSizeMake(100.0f,100.0f)];
-        [subImage setImage:smallImage];
-    
-    });
 
-    
         return image;
-    
-    
-    //return [UIImage imageNamed:@"IsItGreen512.png"];
+
 }
 
+
+
+/**
+ For conversion of foundation images to OpenCV mats
+ */
+- (cv::Mat)cvMatFromUIImage:(UIImage *)image
+{
+    CGColorSpaceRef colorSpace = CGImageGetColorSpace(image.CGImage);
+    CGFloat cols = image.size.width;
+    CGFloat rows = image.size.height;
     
+    cv::Mat cvMat(rows, cols, CV_8UC4); // 8 bits per component, 4 channels
+    
+    CGContextRef contextRef = CGBitmapContextCreate(cvMat.data,                 // Pointer to  data
+                                                    cols,                       // Width of bitmap
+                                                    rows,                       // Height of bitmap
+                                                    8,                          // Bits per component
+                                                    cvMat.step[0],              // Bytes per row
+                                                    colorSpace,                 // Colorspace
+                                                    kCGImageAlphaNoneSkipLast |
+                                                    kCGBitmapByteOrderDefault); // Bitmap info flags
+    
+    CGContextDrawImage(contextRef, CGRectMake(0, 0, cols, rows), image.CGImage);
+    CGContextRelease(contextRef);
+    CGColorSpaceRelease(colorSpace);
+    
+    return cvMat;
+}
+
+
+/**
+ Convert mat to uiimage
+ */
+- (UIImage *)imageWithCVMat:(const cv::Mat&)cvMat
+{
+    NSData *data = [NSData dataWithBytes:cvMat.data length:cvMat.elemSize() * cvMat.total()];
+    
+    CGColorSpaceRef colorSpace;
+    
+    if (cvMat.elemSize() == 1) {
+        colorSpace = CGColorSpaceCreateDeviceGray();
+    } else {
+        colorSpace = CGColorSpaceCreateDeviceRGB();
+    }
+    
+    CGDataProviderRef provider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
+    
+    CGImageRef imageRef = CGImageCreate(cvMat.cols,                                     // Width
+                                        cvMat.rows,                                     // Height
+                                        8,                                              // Bits per component
+                                        8 * cvMat.elemSize(),                           // Bits per pixel
+                                        cvMat.step[0],                                  // Bytes per row
+                                        colorSpace,                                     // Colorspace
+                                        kCGImageAlphaNone | kCGBitmapByteOrderDefault,  // Bitmap info flags
+                                        provider,                                       // CGDataProviderRef
+                                        NULL,                                           // Decode
+                                        false,                                          // Should interpolate
+                                        kCGRenderingIntentDefault);                     // Intent
+    
+    UIImage *image = [[UIImage alloc] initWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    CGDataProviderRelease(provider);
+    CGColorSpaceRelease(colorSpace);
+    
+    return image;
+}
+
+-(void)processJSON{
+    
+    ///First we pull the data from the file
+    
+    NSError* noError;
+    
+    NSData *jsFile = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"colordata2" ofType:@"js"]];
+    
+    _json = [NSJSONSerialization JSONObjectWithData:jsFile options:0 error:&noError];
+    
+    NSLog(@"JSON count: %i", _json.count);
+    
+    ///We're going to see if the data loaded correctly.
+    //   for(int i = 0; i< _json.count; i++){
+    //       NSLog(@"%@ %@ %@ %@", [[_json objectAtIndex:i] objectForKey:@"name"],[[_json objectAtIndex:i] objectForKey:@"r"],[[_json objectAtIndex:i] objectForKey:@"g"],[[_json objectAtIndex:i] objectForKey:@"b"]);
+    //    }
+    
+}
+
 
 
 -(void)updateThumbnail{
-    
-    NSLog(@"thumbNail is %f wide", thumbNail.size.width);
-    
+  
     CGSize newSize = CGSizeMake(384, 192);  //whatever size
     UIGraphicsBeginImageContext(newSize);
     //UIImage* image = thumbNail;
@@ -268,9 +294,6 @@
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
       [self subImage].image = newImage;
-//    [self subImage].image = [self thumbNail];
-    //[[self subImage] setNeedsDisplay];
-//    subImage.image = [UIImage imageNamed:@"IsItGreen512.png"];
 }
 
 
