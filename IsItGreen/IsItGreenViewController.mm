@@ -10,6 +10,34 @@
 #import "AVFoundation/AVCaptureOutput.h"
 #import "ColorMatcher.h"
 
+////Memory profiling code
+#import <mach/mach.h>
+#import <mach/mach_host.h>
+
+void print_free_memory ()
+{
+    mach_port_t host_port;
+    mach_msg_type_number_t host_size;
+    vm_size_t pagesize;
+    
+    host_port = mach_host_self();
+    host_size = sizeof(vm_statistics_data_t) / sizeof(integer_t);
+    host_page_size(host_port, &pagesize);
+    
+    vm_statistics_data_t vm_stat;
+    
+    if (host_statistics(host_port, HOST_VM_INFO, (host_info_t)&vm_stat, &host_size) != KERN_SUCCESS)
+        NSLog(@"Failed to fetch vm statistics");
+    
+    /* Stats in bytes */
+    natural_t mem_used = (vm_stat.active_count +
+                          vm_stat.inactive_count +
+                          vm_stat.wire_count) * pagesize;
+    natural_t mem_free = vm_stat.free_count * pagesize;
+    natural_t mem_total = mem_used + mem_free;
+    NSLog(@"used: %u free: %u total: %u", mem_used, mem_free, mem_total);
+}
+
 @interface IsItGreenViewController ()
 
 @end
@@ -35,7 +63,7 @@
     cameraFeed.layer.zPosition = 1;
     
     ///Setup our timer
-        _timer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(TimerCallback) userInfo:nil repeats:YES];
+      _timer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(TimerCallback) userInfo:nil repeats:YES];
     
     ///Load up our color data
     [self processJSON];
@@ -123,11 +151,11 @@
         ////    https://developer.apple.com/library/ios/documentation/AudioVideo/Conceptual/AVFoundationPG/AVFoundationPG.pdf
         ///
         if(processVideoFrame){
-        NSLog(@"The process image system was called");
+   //     NSLog(@"The process image system was called");
          //  thumbNail = [self imageFromSampleBuffer:sampleBuffer];
  
 
-            
+            //////////////////////////REMEMBER TO CHANGE THIS BACK ////////////////////
         processVideoFrame =false;
         thumbNail = [self imageFromSampleBuffer:sampleBuffer];
             ///Crop the image to the center and 50 by 50
@@ -150,16 +178,18 @@
             
             UIImage * smallImage = [UIImage imageWithCGImage:imageRef scale:thumbNail.scale orientation:thumbNail.imageOrientation];
             
+            //
+            //what if we turned off scaling
+            //  UIImage* smallImage = [thumbNail scaleToSize:CGSizeMake(200.0f,200.0f)];
+            //   subImage.frame = CGRectMake(subImage.frame.origin.x, subImage.frame.origin.y, thumbNail.size.width/2, thumbNail.size.height/2);
+            
+            subImage.frame = CGRectMake(subImage.frame.origin.x, subImage.frame.origin.y, cameraFeed.frame.size.width / 2, cameraFeed.frame.size.height / 2);
+            // UIImage* smallImage = [thumbNail scaleToSize:CGSizeMake(thumbNail.size.width/2,thumbNail.size.height/2)];
+
+            
             ////In order to reliably update the UI I have to run such updates from the main thread
                 dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"block async dispatch");
-                //
-                //what if we turned off scaling
-                  //  UIImage* smallImage = [thumbNail scaleToSize:CGSizeMake(200.0f,200.0f)];
-                 //   subImage.frame = CGRectMake(subImage.frame.origin.x, subImage.frame.origin.y, thumbNail.size.width/2, thumbNail.size.height/2);
-
-                    subImage.frame = CGRectMake(subImage.frame.origin.x, subImage.frame.origin.y, cameraFeed.frame.size.width / 2, cameraFeed.frame.size.height / 2);
-                   // UIImage* smallImage = [thumbNail scaleToSize:CGSizeMake(thumbNail.size.width/2,thumbNail.size.height/2)];
                     [subImage setImage:smallImage];
                     [self subImage].hidden = false;
                    // [subImage setImage:thumbNail];
@@ -168,7 +198,7 @@
 
         
     }
-	
+
 }
 
 
@@ -178,7 +208,7 @@
 
 - (IBAction)testTriggerButton:(id)sender {
     processVideoFrame = !processVideoFrame;
-    NSLog(@"Button Press %x", processVideoFrame);
+   // NSLog(@"Button Press %x", processVideoFrame);
 }
 
 -(void)TimerCallback{
@@ -186,9 +216,10 @@
     
     count++;
     
-    if(count>120){
+    if(count>10){
         count = 0;
-        [self subImage].hidden = true;
+      	processVideoFrame = true;
+//        [self subImage].hidden = true;
     }
 }
 
@@ -199,7 +230,7 @@
     
         // This example assumes the sample buffer came from an AVCaptureOutput,
         //so its image buffer is known to be  a pixel buffer.
-        NSLog(@"Image from sample buffer");
+     //   NSLog(@"Image from sample buffer");
         CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
         //Lock the base address of the pixel buffer.
         CVPixelBufferLockBaseAddress(imageBuffer,0);
@@ -227,7 +258,7 @@
     
     
     ///alright let's try the rosy writer code here.
-    unsigned char *pixel = (unsigned char *)CVPixelBufferGetBaseAddress(imageBuffer);
+ //   unsigned char *pixel = (unsigned char *)CVPixelBufferGetBaseAddress(imageBuffer);
     
     /*
     for( int row = 0; row < height; row++ ) {
@@ -247,7 +278,7 @@
         void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
         // Get the data size for contiguous planes of the pixel buffer.
         size_t bufferSize = CVPixelBufferGetDataSize(imageBuffer);
-          NSLog(@"Got Pixel Buffer Data");
+        //  NSLog(@"Got Pixel Buffer Data");
         // Create a Quartz direct-access data provider that uses data we supply.
         //a solution to that bad access from
         //// http://stackoverflow.com/questions/10774392/cgcontextdrawimage-crashes
@@ -267,6 +298,8 @@
         
         CGImageRelease(cgImage);
         CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+    
+    print_free_memory();
 NSLog(@"RETURNING IMAGE");
         return image;
 
