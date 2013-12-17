@@ -236,7 +236,16 @@ if(votes>threshold)
 
 //There HAS to be a better way to do this
 -(int)exaggerateVal:(int)value{
-
+    
+    
+    if(value == 0){
+        return 0;
+    }
+    else
+       return ((value/254) * 55)+200;
+    
+    
+/*
   //  NSLog(@"Exaggerating %i", value);
     
     if((value >= 0) && (value <=25)){
@@ -271,6 +280,7 @@ if(votes>threshold)
     }
 else
     return 25;
+ */
     
 }
 
@@ -355,7 +365,7 @@ else
     return _replacementColors;
 }
 
--(cv::Mat)ColorReplacer2:(cv::Mat)sampleMat :(NSString*)color :(UIImageView*)targetImage{
+-(cv::Mat)ColorReplacer2:(cv::Mat)sampleMat :(NSString*)color{
     
     ////First copy the mat
     /////create pointers to the various arguments

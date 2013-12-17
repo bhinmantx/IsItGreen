@@ -20,6 +20,8 @@
 @synthesize matcher = _matcher;
 ///For still image capture
 
+////From the rosy writer code
+#define BYTES_PER_PIXEL 4
 
 - (void)viewDidLoad
 {
@@ -27,7 +29,7 @@
       processVideoFrame = false;
     [self prepVidCapture];
 	// Do any additional setup after loading the view, typically from a nib.
-///make sure ui elements are in the right position
+    ///make sure ui elements are in the right position
     subImage.layer.zPosition = 10;
     cameraFeed.layer.zPosition = 1;
     
@@ -69,6 +71,9 @@
 		NSLog(@"Error to create camera capture:%@",error);
 	}
 	
+    ///We need to set the orientation:
+    
+    
 	// Set the output
 	AVCaptureVideoDataOutput* videoOutput = [[AVCaptureVideoDataOutput alloc] init];
 	
@@ -89,9 +94,11 @@
 	[session addInput:cameraInput];
 	[session addOutput:videoOutput];
 	
+    ///Set the orientation here?
+    [videoOutput.connections[0] setVideoOrientation:AVCaptureVideoOrientationPortrait];
+    
 	// Start the session
 	[session startRunning];	
-
 
 }
 
@@ -103,36 +110,43 @@
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
 	
     ////Again, from APPLE
-    if(processVideoFrame) {
+    
         /// They want you to implement this!
         ////    https://developer.apple.com/library/ios/documentation/AudioVideo/Conceptual/AVFoundationPG/AVFoundationPG.pdf
         ///
         if(processVideoFrame){
         NSLog(@"The process image system was called");
          //  thumbNail = [self imageFromSampleBuffer:sampleBuffer];
-        
+ 
+
+            
         processVideoFrame =false;
         thumbNail = [self imageFromSampleBuffer:sampleBuffer];
-         //  [self performSelectorOnMainThread:@selector(updateThumbnail) withObject:nil waitUntilDone:NO];
+            ///Crop the image to the center and 50 by 50
+            
+ 
             
             ////Right now ColorReplacer takes a MAT and a color (and a useless UIImageView) and
             ////Returns a MAT with the colors swapped.
             ////For testing we're going to crop the image here, conver to a MAT, pass it to the matcher
             ////Take the result and change it BACK to a UIImage and send it to the funcs below.
-            ////This is really gross. Let's not do it that way. 
+            ////This is really gross. Let's not do it that way.
             
             
             ////In order to reliably update the UI I have to run such updates from the main thread
                 dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"block async dispatch");
                 //
-                
-                UIImage* smallImage = [thumbNail scaleToSize:CGSizeMake(100.0f,100.0f)];
-                [subImage setImage:smallImage];
+                //what if we turned off scaling
+                  //  UIImage* smallImage = [thumbNail scaleToSize:CGSizeMake(200.0f,200.0f)];
+                    subImage.frame = CGRectMake(subImage.frame.origin.x, subImage.frame.origin.y, thumbNail.size.width/2, thumbNail.size.height/2);
+                    UIImage* smallImage = [thumbNail scaleToSize:CGSizeMake(thumbNail.size.width/2,thumbNail.size.height/2)];
+                    [subImage setImage:smallImage];
+                   // [subImage setImage:thumbNail];
                 
             });
 
-        }
+        
     }
 	
 }
@@ -179,7 +193,24 @@
                 return nil;
             }
         }
+    
+    
+    ///alright let's try the rosy writer code here.
+    unsigned char *pixel = (unsigned char *)CVPixelBufferGetBaseAddress(imageBuffer);
+    
+    /*
+    for( int row = 0; row < height; row++ ) {
         
+        for( int column = 0; column < width; column++ ) {
+            
+            pixel[1] = 0; // De-green (second pixel in BGRA is green)
+            
+            pixel += BYTES_PER_PIXEL;
+            
+        }
+        
+    }
+    */
         
         // Get the base address of the pixel buffer.
         void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
@@ -219,6 +250,7 @@
     CGFloat rows = image.size.height;
     
     cv::Mat cvMat(rows, cols, CV_8UC4); // 8 bits per component, 4 channels
+    
     
     CGContextRef contextRef = CGBitmapContextCreate(cvMat.data,                 // Pointer to  data
                                                     cols,                       // Width of bitmap
@@ -301,6 +333,14 @@
       [self subImage].image = newImage;
 }
 
+-(UIImage*) crop:(UIImage *)image :(CGRect)rect {
+    UIGraphicsBeginImageContextWithOptions([image size], false, [image scale]);
+//    [image drawAtPoint:CGPointMake(-rect.origin.x, -rect.origin.y))];
+    [image drawAtPoint:CGPointMake(-rect.origin.x, -rect.origin.y)];
+    UIImage* cropped_image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return cropped_image;
+}
 
 
 - (void)didReceiveMemoryWarning

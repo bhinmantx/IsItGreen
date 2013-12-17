@@ -21,9 +21,6 @@
 {
     IBOutlet UIView *cameraFeed;
     
-
-    
-    
     AVCaptureSession *session;
     
     BOOL processVideoFrame;
@@ -32,26 +29,27 @@
     ColorMatcher *_matcher;
     
     NSArray *_json;
-    
-  
+
 }
 
 
 @property(nonatomic, retain) IBOutlet UIView *cameraFeed;
 
 /////below is for still image capture
-//@property(nonatomic, retain) AVCaptureStillImageOutput *stillImageOutput;
+
 
 @property (strong, nonatomic) IBOutlet UIImageView *subImage;
 @property (strong, nonatomic) UIImage *thumbNail;
 @property (strong, nonatomic) ColorMatcher * matcher;
 
-//@property (strong,nonatomic)dispatch_queue_t captureQueue;
+
 
 ///image manipulation funcs
 -(UIImage *)imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer;
 -(UIImage *)imageWithCVMat:(const cv::Mat&)cvMat;
 -(cv::Mat)cvMatFromUIImage:(UIImage *)image;
+-(UIImage*)crop:(UIImage *)image :(CGRect)rect;
+
 
 -(void)prepVidCapture;
 -(void)updateThumbnail;
