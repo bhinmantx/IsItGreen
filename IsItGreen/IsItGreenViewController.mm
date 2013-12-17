@@ -44,7 +44,9 @@ void print_free_memory ()
 
 @implementation IsItGreenViewController
 
-@synthesize cameraFeed, subImage, thumbNail;
+//@synthesize cameraFeed, subImage, thumbNail;
+//////REMEMBER TO CHANGE THIS BACK
+@synthesize cameraFeed, subImage;
 @synthesize matcher = _matcher;
 @synthesize timer = _timer;
 ///For still image capture
@@ -157,7 +159,9 @@ void print_free_memory ()
 
             //////////////////////////REMEMBER TO CHANGE THIS BACK ////////////////////
         processVideoFrame =false;
-        thumbNail = [self imageFromSampleBuffer:sampleBuffer];
+        //thumbNail = [self imageFromSampleBuffer:sampleBuffer];
+          UIImage * newThumbNail = [self imageFromSampleBuffer:sampleBuffer];
+           NSLog(@"Image Finished Being Created");
             ///Crop the image to the center and 50 by 50
             
  
@@ -169,15 +173,24 @@ void print_free_memory ()
             ////This is really gross. Let's not do it that way.
             
             
-            int overLayX = (thumbNail.size.width / 2) - 160;
-            int overLayY = (thumbNail.size.height /2) - 120;
+            int overLayX = (newThumbNail.size.width / 2) - 160;
+            int overLayY = (newThumbNail.size.height /2) - 120;
             
          //   CGImageRef imageRef = CGImageCreateWithImageInRect([thumbNail CGImage], CGRectMake(thumbNail.size.width  , thumbNail.size.height / 2 , 320, 240));
-               CGImageRef imageRef = CGImageCreateWithImageInRect([thumbNail CGImage], CGRectMake(overLayX  , overLayY , 320, 240));
+            
+         
+          CGImageRef  imageRef = CGImageCreateWithImageInRect([newThumbNail CGImage], CGRectMake(overLayX  , overLayY , 320, 240));
           //  NSLog(@"JUST CROPPED");
             
-            UIImage * smallImage = [UIImage imageWithCGImage:imageRef scale:thumbNail.scale orientation:thumbNail.imageOrientation];
+           UIImage * smallImage = [UIImage imageWithCGImage:imageRef scale:newThumbNail.scale orientation:newThumbNail.imageOrientation];
             
+
+          //  CGImageRef imageRef = CGImageCreateWithImageInRect([newThumbNail CGImage], CGRectMake(overLayX  , overLayY , 320, 240));
+            //  NSLog(@"JUST CROPPED");
+
+            
+            
+            NSLog(@"Is it the small image creation?");
             //
             //what if we turned off scaling
             //  UIImage* smallImage = [thumbNail scaleToSize:CGSizeMake(200.0f,200.0f)];
@@ -189,8 +202,9 @@ void print_free_memory ()
             
             ////In order to reliably update the UI I have to run such updates from the main thread
                 dispatch_async(dispatch_get_main_queue(), ^{
-                NSLog(@"block async dispatch");
+//                NSLog(@"block async dispatch");
                     [subImage setImage:smallImage];
+
                     [self subImage].hidden = false;
                    // [subImage setImage:thumbNail];
                 
@@ -292,7 +306,7 @@ void print_free_memory ()
         
         CGDataProviderRelease(dataProvider);
         // Create and return an image object to represent the Quartz image.
-    NSLog(@"About to create the image");
+  //  NSLog(@"About to create the image");
         UIImage *image = [UIImage imageWithCGImage:cgImage];
         
         
@@ -300,7 +314,7 @@ void print_free_memory ()
         CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
     
     print_free_memory();
-NSLog(@"RETURNING IMAGE");
+//NSLog(@"RETURNING IMAGE");
         return image;
 
 }
@@ -390,7 +404,7 @@ NSLog(@"RETURNING IMAGE");
 
 
 -(void)updateThumbnail{
-  
+  /*
     CGSize newSize = CGSizeMake(384, 192);  //whatever size
     UIGraphicsBeginImageContext(newSize);
     //UIImage* image = thumbNail;
@@ -398,6 +412,7 @@ NSLog(@"RETURNING IMAGE");
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
       [self subImage].image = newImage;
+   */
 }
 
 -(UIImage*) crop:(UIImage *)image :(CGRect)rect {

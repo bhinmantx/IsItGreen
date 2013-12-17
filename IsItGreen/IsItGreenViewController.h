@@ -25,7 +25,7 @@
     
     BOOL processVideoFrame;
 
-    UIImage *thumbNail;
+ //  UIImage *thumbNail;
     ColorMatcher *_matcher;
     
     NSArray *_json;
@@ -40,7 +40,7 @@
 
 
 @property (strong, atomic) IBOutlet UIImageView *subImage;
-@property (strong, atomic) UIImage *thumbNail;
+//@property (strong, atomic) UIImage *thumbNail;
 @property (strong, atomic) ColorMatcher * matcher;
 @property (strong, atomic) NSTimer * timer;
 
