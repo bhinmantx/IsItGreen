@@ -17,12 +17,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view autoresizesSubviews="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SaO-cc-YIB">
-                                <rect key="frame" x="20" y="25" width="280" height="320"/>
+                            <view autoresizesSubviews="NO" contentMode="center" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SaO-cc-YIB">
+                                <rect key="frame" x="40" y="5" width="240" height="360"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="crosshairs.png" translatesAutoresizingMaskIntoConstraints="NO" id="9Wx-Gd-bNr">
-                                        <rect key="frame" x="90" y="110" width="100" height="100"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="crosshairs.png" translatesAutoresizingMaskIntoConstraints="NO" id="9Wx-Gd-bNr">
+                                        <rect key="frame" x="70" y="110" width="100" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>

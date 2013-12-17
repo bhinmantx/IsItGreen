@@ -18,6 +18,7 @@
 
 @synthesize cameraFeed, subImage, thumbNail;
 @synthesize matcher = _matcher;
+@synthesize timer = _timer;
 ///For still image capture
 
 ////From the rosy writer code
@@ -32,6 +33,9 @@
     ///make sure ui elements are in the right position
     subImage.layer.zPosition = 10;
     cameraFeed.layer.zPosition = 1;
+    
+    ///Setup our timer
+        _timer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(TimerCallback) userInfo:nil repeats:YES];
     
     ///Load up our color data
     [self processJSON];
@@ -49,15 +53,19 @@
     
     CALayer *viewLayer = self.cameraFeed.layer;
     AVCaptureVideoPreviewLayer *captureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
-    
+
+
     ///This should properly size and fill the preview layer
     CGRect bounds=self.cameraFeed.layer.bounds;
     captureVideoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    //    captureVideoPreviewLayer.videoGravity = AVLayerVideoGravityResize;
     captureVideoPreviewLayer.bounds=bounds;
     captureVideoPreviewLayer.position=CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
     
     
     captureVideoPreviewLayer.frame = viewLayer.bounds;
+
+    
     
     [self.cameraFeed.layer addSublayer:captureVideoPreviewLayer];
 
@@ -133,15 +141,27 @@
             ////This is really gross. Let's not do it that way.
             
             
+            int overLayX = (thumbNail.size.width / 2) - 160;
+            int overLayY = (thumbNail.size.height /2) - 120;
+            
+         //   CGImageRef imageRef = CGImageCreateWithImageInRect([thumbNail CGImage], CGRectMake(thumbNail.size.width  , thumbNail.size.height / 2 , 320, 240));
+               CGImageRef imageRef = CGImageCreateWithImageInRect([thumbNail CGImage], CGRectMake(overLayX  , overLayY , 320, 240));
+          //  NSLog(@"JUST CROPPED");
+            
+            UIImage * smallImage = [UIImage imageWithCGImage:imageRef scale:thumbNail.scale orientation:thumbNail.imageOrientation];
+            
             ////In order to reliably update the UI I have to run such updates from the main thread
                 dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"block async dispatch");
                 //
                 //what if we turned off scaling
                   //  UIImage* smallImage = [thumbNail scaleToSize:CGSizeMake(200.0f,200.0f)];
-                    subImage.frame = CGRectMake(subImage.frame.origin.x, subImage.frame.origin.y, thumbNail.size.width/2, thumbNail.size.height/2);
-                    UIImage* smallImage = [thumbNail scaleToSize:CGSizeMake(thumbNail.size.width/2,thumbNail.size.height/2)];
+                 //   subImage.frame = CGRectMake(subImage.frame.origin.x, subImage.frame.origin.y, thumbNail.size.width/2, thumbNail.size.height/2);
+
+                    subImage.frame = CGRectMake(subImage.frame.origin.x, subImage.frame.origin.y, cameraFeed.frame.size.width / 2, cameraFeed.frame.size.height / 2);
+                   // UIImage* smallImage = [thumbNail scaleToSize:CGSizeMake(thumbNail.size.width/2,thumbNail.size.height/2)];
                     [subImage setImage:smallImage];
+                    [self subImage].hidden = false;
                    // [subImage setImage:thumbNail];
                 
             });
@@ -159,6 +179,17 @@
 - (IBAction)testTriggerButton:(id)sender {
     processVideoFrame = !processVideoFrame;
     NSLog(@"Button Press %x", processVideoFrame);
+}
+
+-(void)TimerCallback{
+    static int count = 0;
+    
+    count++;
+    
+    if(count>120){
+        count = 0;
+        [self subImage].hidden = true;
+    }
 }
 
 
@@ -182,7 +213,7 @@
         
         size_t height = CVPixelBufferGetHeight(imageBuffer);
         //Create a device-dependent RGB color space.
-        
+//        NSLog(@"Height and width");
         static CGColorSpaceRef colorSpace = NULL;
         
         if (colorSpace == NULL) {
@@ -216,24 +247,27 @@
         void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
         // Get the data size for contiguous planes of the pixel buffer.
         size_t bufferSize = CVPixelBufferGetDataSize(imageBuffer);
-        
+          NSLog(@"Got Pixel Buffer Data");
         // Create a Quartz direct-access data provider that uses data we supply.
         //a solution to that bad access from
         //// http://stackoverflow.com/questions/10774392/cgcontextdrawimage-crashes
-        NSData *data = [NSData dataWithBytes:baseAddress length:bufferSize];
-   
+    
+    ///We have a memory leak somewhere. But we've got ARC!?
+    NSData *data = [NSData dataWithBytes:baseAddress length:bufferSize];
+   // NSLog(@"DATA CREATED");
         CGDataProviderRef dataProvider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
         // Create a bitmap image from data supplied by the data provider.
         CGImageRef cgImage = CGImageCreate(width, height, 8, 32, bytesPerRow, colorSpace, kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Little, dataProvider, NULL, true, kCGRenderingIntentDefault);
         
         CGDataProviderRelease(dataProvider);
         // Create and return an image object to represent the Quartz image.
+    NSLog(@"About to create the image");
         UIImage *image = [UIImage imageWithCGImage:cgImage];
         
         
         CGImageRelease(cgImage);
         CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
-
+NSLog(@"RETURNING IMAGE");
         return image;
 
 }

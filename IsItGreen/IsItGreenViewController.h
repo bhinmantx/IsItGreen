@@ -29,6 +29,7 @@
     ColorMatcher *_matcher;
     
     NSArray *_json;
+    NSTimer *_feedBackTimer;
 
 }
 
@@ -38,10 +39,10 @@
 /////below is for still image capture
 
 
-@property (strong, nonatomic) IBOutlet UIImageView *subImage;
-@property (strong, nonatomic) UIImage *thumbNail;
-@property (strong, nonatomic) ColorMatcher * matcher;
-
+@property (strong, atomic) IBOutlet UIImageView *subImage;
+@property (strong, atomic) UIImage *thumbNail;
+@property (strong, atomic) ColorMatcher * matcher;
+@property (strong, atomic) NSTimer * timer;
 
 
 ///image manipulation funcs
@@ -49,6 +50,7 @@
 -(UIImage *)imageWithCVMat:(const cv::Mat&)cvMat;
 -(cv::Mat)cvMatFromUIImage:(UIImage *)image;
 -(UIImage*)crop:(UIImage *)image :(CGRect)rect;
+-(void)TimerCallback;
 
 
 -(void)prepVidCapture;
