@@ -144,23 +144,7 @@
         
         UIImage * smallImage = [UIImage imageWithCGImage:imageRef scale:newThumbNail.scale /2 orientation:newThumbNail.imageOrientation];
         CGImageRelease(imageRef);
-        
-        //  CGImageRef imageRef = CGImageCreateWithImageInRect([newThumbNail CGImage], CGRectMake(overLayX  , overLayY , 320, 240));
-        //  NSLog(@"JUST CROPPED");
-        
-
-        
-       // NSLog(@"Is it the small image creation?");
-        //
-        //what if we turned off scaling
-        //  UIImage* smallImage = [thumbNail scaleToSize:CGSizeMake(200.0f,200.0f)];
-        //   subImage.frame = CGRectMake(subImage.frame.origin.x, subImage.frame.origin.y, thumbNail.size.width/2, thumbNail.size.height/2);
-        
-        //  subImage.frame = CGRectMake(subImage.frame.origin.x, subImage.frame.origin.y, cameraFeed.frame.size.width / 2, cameraFeed.frame.size.height / 2);
-      //  subImage.frame = CGRectMake(subImage.frame.origin.x, subImage.frame.origin.y, 120,160);
-        // UIImage* smallImage = [thumbNail scaleToSize:CGSizeMake(thumbNail.size.width/2,thumbNail.size.height/2)];
-        
-        
+     
         ////In order to reliably update the UI I have to run such updates from the main thread
         dispatch_async(dispatch_get_main_queue(), ^{
             //                NSLog(@"block async dispatch");
@@ -171,8 +155,7 @@
             // [subImage setImage:thumbNail];
  
         });
-        
-              //  processVideoFrame = true;
+
     }
     
 }

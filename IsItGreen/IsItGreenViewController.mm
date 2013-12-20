@@ -166,9 +166,6 @@ void print_free_memory ()
         ////    https://developer.apple.com/library/ios/documentation/AudioVideo/Conceptual/AVFoundationPG/AVFoundationPG.pdf
         ///
         if(processVideoFrame){
-   //     NSLog(@"The process image system was called");
-         //  thumbNail = [self imageFromSampleBuffer:sampleBuffer];
- 
 
             //////////////////////////REMEMBER TO CHANGE THIS BACK ////////////////////
         processVideoFrame =false;
@@ -176,43 +173,7 @@ void print_free_memory ()
           UIImage * newThumbNail = [self imageFromSampleBuffer:sampleBuffer];
            //NSLog(@"Image Finished Being Created with width %f and height %f", newThumbNail.size.width, newThumbNail.size.height);
             ///Crop the image to the center and 50 by 50
-            
  
-            
-
-         ////////ORIGINAL OVERLAY CODE
-            /*
-            
-            int overLayX = (newThumbNail.size.width / 2) - 160;
-            int overLayY = (newThumbNail.size.height /2) - 120;
-            
-         //   CGImageRef imageRef = CGImageCreateWithImageInRect([thumbNail CGImage], CGRectMake(thumbNail.size.width  , thumbNail.size.height / 2 , 320, 240));
-            
-         
-          CGImageRef  imageRef = CGImageCreateWithImageInRect([newThumbNail CGImage], CGRectMake(overLayX  , overLayY , 320, 240));
-          //  NSLog(@"JUST CROPPED");
-            
-           UIImage * smallImage = [UIImage imageWithCGImage:imageRef scale:newThumbNail.scale /2 orientation:newThumbNail.imageOrientation];
-            CGImageRelease(imageRef);
-
-          //  CGImageRef imageRef = CGImageCreateWithImageInRect([newThumbNail CGImage], CGRectMake(overLayX  , overLayY , 320, 240));
-            //  NSLog(@"JUST CROPPED");
-
-          */
-
-            //
-            //what if we turned off scaling
-            //  UIImage* smallImage = [thumbNail scaleToSize:CGSizeMake(200.0f,200.0f)];
-            //   subImage.frame = CGRectMake(subImage.frame.origin.x, subImage.frame.origin.y, thumbNail.size.width/2, thumbNail.size.height/2);
-            
-          //  subImage.frame = CGRectMake(subImage.frame.origin.x, subImage.frame.origin.y, cameraFeed.frame.size.width / 2, cameraFeed.frame.size.height / 2);
-            //////////THIS WAS WHAT WE HAD BEFORE, TRYING TO REMOVE IT
-//            subImage.frame = CGRectMake(subImage.frame.origin.x, subImage.frame.origin.y, 640,480);
-            
-            
-            
-            // UIImage* smallImage = [thumbNail scaleToSize:CGSizeMake(thumbNail.size.width/2,thumbNail.size.height/2)];
-
             
             ////In order to reliably update the UI I have to run such updates from the main thread
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -363,7 +324,7 @@ NSString *feedback = [NSString stringWithFormat:@"%@ R %i G %i B %i", result, R,
         //a solution to that bad access from
         //// http://stackoverflow.com/questions/10774392/cgcontextdrawimage-crashes
     
-    ///We have a memory leak somewhere. But we've got ARC!?
+
     NSData *data = [NSData dataWithBytes:baseAddress length:bufferSize];
    // NSLog(@"DATA CREATED");
         CGDataProviderRef dataProvider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
