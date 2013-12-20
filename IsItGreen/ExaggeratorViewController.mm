@@ -52,8 +52,6 @@
     _imageProcessActivityIndicator.hidesWhenStopped = YES;
     
 
-  
-
 
 }
 -(void)viewWillDisappear:(BOOL)animated{

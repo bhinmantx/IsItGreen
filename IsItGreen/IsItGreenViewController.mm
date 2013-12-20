@@ -258,7 +258,7 @@ void print_free_memory ()
     ///Set our actual starting positions as the center with a 5 pixel offset
     int x = (originx/2) - 5;
     int y = (originy/2) - 5;
-    NSLog(@"x %i  y %i", x, y);
+   // NSLog(@"x %i  y %i", x, y);
 //    int x = ((width/2)) - 5;
   // int y = ((height/2)) - 5 ;
    // int x = 1;
@@ -270,7 +270,7 @@ void print_free_memory ()
         
         
         for(int j = 0; j<=9; j++){
-            
+            ///Get our position in the buffer
             int pixnumber = ((y+j)*(fwidth) + (x+i));
             
             //pixnumber += (4 - (pixnumber % 4));
@@ -306,7 +306,8 @@ NSString *feedback = [NSString stringWithFormat:@"%@ R %i G %i B %i", result, R,
     ////In order to reliably update the UI I have to run such updates from the main thread
     dispatch_async(dispatch_get_main_queue(), ^{
     [self ColorNameLabel].text = feedback;
-        [self ColorNameLabel].textColor = [UIColor colorWithRed:R/255.0 green:G/255.0 blue:G/255.0 alpha:1.0];
+      ///The following line was cute but let's just keep it white on a black background
+//        [self ColorNameLabel].textColor = [UIColor colorWithRed:R/255.0 green:G/255.0 blue:G/255.0 alpha:1.0];
         
         [[self ColorNameLabel] setNeedsDisplay];
     });
