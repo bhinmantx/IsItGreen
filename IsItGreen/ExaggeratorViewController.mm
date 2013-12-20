@@ -42,7 +42,16 @@
     _frameLimiterTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(TimerCallback) userInfo:nil repeats:YES];
     processVideoFrame = true;
     [self prepVidCapture];
+  
+    _imageProcessActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+
+    _imageProcessActivityIndicator.center = CGPointMake(160, 160);
+    [self.view addSubview:_imageProcessActivityIndicator];
     _imageProcessActivityIndicator.layer.zPosition = 10;
+
+    _imageProcessActivityIndicator.hidesWhenStopped = YES;
+    
+
   
 
 
@@ -156,8 +165,8 @@
            // [[self ExaggeratorImageView] setImage:smallImage];
             
             [[self ExaggeratorImageView] setImage:newThumbNail];
-
-            
+            [_imageProcessActivityIndicator stopAnimating];
+            [self ProcessLabel].hidden = true;
             [self ExaggeratorImageView].hidden = false;
             // [subImage setImage:thumbNail];
  
@@ -305,6 +314,7 @@
 
     }
         NSLog(@"Check is complete");
+       
         colorcheckiscomplete = true;
     }
     
@@ -377,17 +387,14 @@
             ////colorcheck is still in process
             count = 0;
         }
-        ///color check is complete
+
         else if(count >300){
             greenbuttonispressed = false;
             count=0;
             processVideoFrame = true;
             [self ProcessLabel ].hidden = true;
         }
-        if(colorcheckiscomplete){
-            [self ProcessLabel ].hidden = true;
-            [_imageProcessActivityIndicator stopAnimating];
-        }
+        ///originally the color check is complete feedback stuff was right here.
         count++;
     }
     else if(count > 1){
@@ -402,17 +409,17 @@
 -(IBAction)IsItGreenButton{
     processVideoFrame = true;
     greenbuttonispressed = true;
-    [self ProcessLabel].hidden = false;
+
     ///We should put this into its own fuction
 //  _imageProcessActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    _imageProcessActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    //_imageProcessActivityIndicator.backgroundColor = [UIColor grayColor];
-   // _imageProcessActivityIndicator.alpha = .5;
-    _imageProcessActivityIndicator.center = CGPointMake(160, 160);
-    [self.view addSubview:_imageProcessActivityIndicator];
-    _imageProcessActivityIndicator.hidden =false;
-    _imageProcessActivityIndicator.hidesWhenStopped = YES;
-    [_imageProcessActivityIndicator startAnimating];
+ 
+    ///To get a reliable UI update.
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self ProcessLabel].hidden = false;
+        [_imageProcessActivityIndicator startAnimating];
+    });
+    
+    
 }
 
 @end
