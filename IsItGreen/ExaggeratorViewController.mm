@@ -42,7 +42,7 @@
           _frameLimiterTimer = [NSTimer scheduledTimerWithTimeInterval:0.04 target:self selector:@selector(TimerCallback) userInfo:nil repeats:YES];
     processVideoFrame = true;
     [self prepVidCapture];
-
+    _imageProcessActivityIndicator.layer.zPosition = 10;
   
 
 
@@ -73,23 +73,6 @@
 //	session.sessionPreset = AVCaptureSessionPreset640x480;
     session.sessionPreset = AVCaptureSessionPreset352x288;
     
-   // CALayer *viewLayer = self.cameraFeed.layer;
-  //  AVCaptureVideoPreviewLayer *captureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
-    
-    
-    ///This should properly size and fill the preview layer
-  //  CGRect bounds=self.cameraFeed.layer.bounds;
-   // captureVideoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    //    captureVideoPreviewLayer.videoGravity = AVLayerVideoGravityResize;
-  //  captureVideoPreviewLayer.bounds=bounds;
-  //  captureVideoPreviewLayer.position=CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
-    
-    
- //   captureVideoPreviewLayer.frame = viewLayer.bounds;
-    
-    
-    
-  //  [self.cameraFeed.layer addSublayer:captureVideoPreviewLayer];
     
 	// Get the default camera device
 	AVCaptureDevice* camera = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
@@ -116,19 +99,14 @@
 	// configure the pixel format
 	videoOutput.videoSettings = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithUnsignedInt:kCVPixelFormatType_32BGRA], (id)kCVPixelBufferPixelFormatTypeKey,
                                  nil];
-    
-    
-	// and the size of the frames we want
-	//[session setSessionPreset:AVCaptureSessionPresetMedium];
-    
+   
 	// Add the input and output
 	[session addInput:cameraInput];
 	[session addOutput:videoOutput];
 	
     ///Set the orientation here?
     [videoOutput.connections[0] setVideoOrientation:AVCaptureVideoOrientationPortrait];
-  
-    
+
 	// Start the session
 	[session startRunning];	
     
@@ -296,27 +274,7 @@
             return nil;
         }
     }
-    
- 
-    /*
-    ///alright let's try the rosy writer code here.
-      unsigned char *pixel = (unsigned char *)CVPixelBufferGetBaseAddress(imageBuffer);
-    
-  
-     for( int row = 0; row < height; row++ ) {
-     
-     for( int column = 0; column < width; column++ ) {
-     
-     pixel[2] = 0; // Total-green (second pixel in BGRA is green)
-         pixel[0] = 0;
-     
-     pixel += BYTES_PER_PIXEL;
-     
-     }
-     
-     }
-    
-    */
+
     ////Now let's try the color matcher
     
 
@@ -329,8 +287,6 @@
         
         for( int column = 0; column < width; column++ ) {
             
-//            pixel[2] = 0; // Total-green (second pixel in BGRA is green)
-  //          pixel[0] = 0;
             ///HA HA. IT'S IN REVERSE ORDER
             int r,g,b;
             b = pixel[0];
@@ -424,7 +380,6 @@
     count++;
     ////If
 
-    
     ///If the button was pressed and the video frame isn't finished being processed
     ////reset the count to zero
     if(greenbuttonispressed){
@@ -439,41 +394,35 @@
             processVideoFrame = true;
             [self ProcessLabel ].hidden = true;
         }
-        if(colorcheckiscomplete)
+        if(colorcheckiscomplete){
             [self ProcessLabel ].hidden = true;
-        
+            [_imageProcessActivityIndicator stopAnimating];
+        }
         count++;
     }
     else if(count > 1){
         count = 0;
         processVideoFrame = true;
     }
-    
-    /*
 
- 
-
-    
-    if(greenbuttonispressed){
-        count = 0;
-        if(count > 100
-    }
-    
-    else if(count>2){
-        count = 0;
-        	processVideoFrame = true;
-        //        [self subImage].hidden = true;
-    }
-    */
-    
     
 }
 
-
+///TODO: Break this into functions
 -(IBAction)IsItGreenButton{
     processVideoFrame = true;
     greenbuttonispressed = true;
     [self ProcessLabel].hidden = false;
+    ///We should put this into its own fuction
+//  _imageProcessActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _imageProcessActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    //_imageProcessActivityIndicator.backgroundColor = [UIColor grayColor];
+   // _imageProcessActivityIndicator.alpha = .5;
+    _imageProcessActivityIndicator.center = CGPointMake(160, 160);
+    [self.view addSubview:_imageProcessActivityIndicator];
+    _imageProcessActivityIndicator.hidden =false;
+    _imageProcessActivityIndicator.hidesWhenStopped = YES;
+    [_imageProcessActivityIndicator startAnimating];
 }
 
 @end

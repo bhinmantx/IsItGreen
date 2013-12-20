@@ -40,6 +40,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *ExaggeratorImageView;
 @property (strong, atomic) NSTimer * frameLimiterTimer;
 @property (strong, nonatomic) IBOutlet UILabel *ProcessLabel;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *imageProcessActivityIndicator;
 
 ///REDUDANT CODE
 -(UIImage *)imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer;
