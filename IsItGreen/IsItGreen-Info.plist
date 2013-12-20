@@ -5,9 +5,24 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>Is It Green?</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>IsItGreenIcon80</string>
+				<string>IsItGreenIcon58</string>
+				<string>IsItGreenIcon29</string>
+				<string>IsItGreenIcon120</string>
+				<string>IsItGreenIcon114</string>
+				<string>IsItGreenIcon57</string>
+			</array>
+		</dict>
+	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>com.gravitywellinteractive.${PRODUCT_NAME:rfc1034identifier}2</string>
 	<key>CFBundleInfoDictionaryVersion</key>
