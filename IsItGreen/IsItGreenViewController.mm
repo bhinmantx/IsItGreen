@@ -11,8 +11,8 @@
 #import "ColorMatcher.h"
 
 ////Memory profiling code
-#import <mach/mach.h>
-#import <mach/mach_host.h>
+//#import <mach/mach.h>
+//#import <mach/mach_host.h>
 /*
 void print_free_memory ()
 {
@@ -83,6 +83,7 @@ void print_free_memory ()
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    processVideoFrame = true;
     [session startRunning];
 }
 
@@ -184,7 +185,7 @@ void print_free_memory ()
                    [subImage setImage:newThumbNail];
                 
             });
-
+            processVideoFrame = true;
         
     }
 
@@ -207,7 +208,7 @@ void print_free_memory ()
     
     if(count>3){
         count = 0;
-      	processVideoFrame = true;
+      	//processVideoFrame = true;
 //        [self subImage].hidden = true;
     }
 }
@@ -250,13 +251,13 @@ void print_free_memory ()
    unsigned char *pixel = (unsigned char *)CVPixelBufferGetBaseAddress(imageBuffer);
     
     
-    int x = (int)width;
-    int y = (int)height;
+    int originx = (int)width;
+    int originy = (int)height;
     int fwidth = (int)width;
     
     ///Set our actual starting positions as the center with a 5 pixel offset
-    x = (x/2) - 5;
-    y = (y/2) - 5;
+    int x = (originx/2) - 5;
+    int y = (originy/2) - 5;
     NSLog(@"x %i  y %i", x, y);
 //    int x = ((width/2)) - 5;
   // int y = ((height/2)) - 5 ;
@@ -280,9 +281,12 @@ void print_free_memory ()
             g += pixptr[1];
             r += pixptr[2];
             
+            ///Draw our box
+            if ((i == 0) || (j == 0) || (i == 9) || (j == 9)) {
             pixptr[0] = 0;
             pixptr[1] = 0;
             pixptr[2] = 0;
+            }
             
           // NSLog(@"X is %i y is %i pixnumber is %zx", (x+j), (y+i), pixnumber);
             
@@ -293,7 +297,7 @@ void print_free_memory ()
     int R = (r/100);
     int G = (g/100);
     int B = (b/100);
- NSLog(@"R %i G %i B %i",R,G,B);
+ //NSLog(@"R %i G %i B %i",R,G,B);
     NSString* result = [_matcher getNameFromRGB:R:G:B];
    
     
@@ -307,7 +311,7 @@ NSString *feedback = [NSString stringWithFormat:@"%@ R %i G %i B %i", result, R,
         [[self ColorNameLabel] setNeedsDisplay];
     });
     
-    NSLog(@"Result is %@", result);
+   // NSLog(@"Result is %@", result);
     //////Let's take half the height, half the width
     ////That gives us the center.
     ///subtract 5 from each and that gives us

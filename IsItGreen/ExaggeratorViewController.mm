@@ -39,7 +39,7 @@
     [self processJSON];
     _matcher = [[ColorMatcher alloc]initWithJSON:_json];
       ///And set up our timer
-          _frameLimiterTimer = [NSTimer scheduledTimerWithTimeInterval:0.04 target:self selector:@selector(TimerCallback) userInfo:nil repeats:YES];
+    _frameLimiterTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(TimerCallback) userInfo:nil repeats:YES];
     processVideoFrame = true;
     [self prepVidCapture];
     _imageProcessActivityIndicator.layer.zPosition = 10;
@@ -90,6 +90,8 @@
 	// Set the output
 	AVCaptureVideoDataOutput* videoOutput = [[AVCaptureVideoDataOutput alloc] init];
 	
+  
+    
 	// create a queue to run the capture on
 	dispatch_queue_t captureQueue=dispatch_queue_create("ExaggeratorQueue", NULL);
 	
@@ -132,24 +134,29 @@
        // NSLog(@"Image Finished Being Created with width %f and height %f", newThumbNail.size.width, newThumbNail.size.height);
         ///Crop the image to the center and 50 by 50
         
-   
-        int overLayX = (newThumbNail.size.width / 2) - 160;
-        int overLayY = (newThumbNail.size.height /2) - 120;
+   ///Wait a minute this isn't right
+        ///eset352x288;
+      //  int overLayX = (newThumbNail.size.width / 2) - 160;
+     //   int overLayY = (newThumbNail.size.height /2) - 120;
         
         //   CGImageRef imageRef = CGImageCreateWithImageInRect([thumbNail CGImage], CGRectMake(thumbNail.size.width  , thumbNail.size.height / 2 , 320, 240));
         
-        
-        CGImageRef  imageRef = CGImageCreateWithImageInRect([newThumbNail CGImage], CGRectMake(overLayX  , overLayY , 320, 240));
+        ///Original
+//        CGImageRef  imageRef = CGImageCreateWithImageInRect([newThumbNail CGImage], CGRectMake(overLayX  , overLayY , 320, 240));
+    //     CGImageRef  imageRef = CGImageCreateWithImageInRect([newThumbNail CGImage], CGRectMake(overLayX  , overLayY , 352, 288));
         //  NSLog(@"JUST CROPPED");
         
-        UIImage * smallImage = [UIImage imageWithCGImage:imageRef scale:newThumbNail.scale /2 orientation:newThumbNail.imageOrientation];
-        CGImageRelease(imageRef);
+    //    UIImage * smallImage = [UIImage imageWithCGImage:imageRef scale:newThumbNail.scale /2 orientation:newThumbNail.imageOrientation];
+    //    CGImageRelease(imageRef);
      
         ////In order to reliably update the UI I have to run such updates from the main thread
         dispatch_async(dispatch_get_main_queue(), ^{
             //                NSLog(@"block async dispatch");
-            [[self ExaggeratorImageView] setImage:smallImage];
-        //    [ExaggeratorImageView setim
+            ////Previously working
+           // [[self ExaggeratorImageView] setImage:smallImage];
+            
+            [[self ExaggeratorImageView] setImage:newThumbNail];
+
             
             [self ExaggeratorImageView].hidden = false;
             // [subImage setImage:thumbNail];
