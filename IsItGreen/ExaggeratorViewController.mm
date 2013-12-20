@@ -444,7 +444,7 @@
         
         count++;
     }
-    else if(count > 2){
+    else if(count > 1){
         count = 0;
         processVideoFrame = true;
     }
