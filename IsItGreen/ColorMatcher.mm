@@ -168,9 +168,6 @@
         
     }
    
-  //      NSLog(@"%@, r %ld, g %ld b %ld",@"Sample", (long)r, (long)g, (long)b);
-    
-//    NSLog(@"%@ %@, r %@, g %@ b %@",[[_colors objectAtIndex:indexOfClosest] objectForKey:@"name"], [[_colors objectAtIndex:indexOfClosest] objectForKey:@"FriendlyName"],[[_colors objectAtIndex:indexOfClosest] objectForKey:@"r"], [[_colors objectAtIndex:indexOfClosest] objectForKey:@"g"],[[_colors objectAtIndex:indexOfClosest] objectForKey:@"b"]);
     
     return [[_colors objectAtIndex:indexOfClosest] objectForKey:@"FriendlyName"];
 }
