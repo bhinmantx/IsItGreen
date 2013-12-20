@@ -6,6 +6,9 @@
 //  Copyright (c) 2013 Brendan Hinman. All rights reserved.
 //
 
+#ifndef FILE_COLOR_MATCHER
+#define FILE_COLOR_MATCHER
+
 #import <Foundation/Foundation.h>
 #import <opencv2/highgui/cap_ios.h>
 
@@ -33,4 +36,11 @@ NSArray *_colors;
 -(cv::Mat)ColorReplacer2:(cv::Mat)sampleMat :(NSString*)color;
 -(int)exaggerateVal:(int)value;
 
+-(bool)checkNearestFromRGB:(int)r :(int)g :(int)b :(NSString*)color;
+
+-(NSString*)getNameFromRGB:(int)r :(int)g :(int)b;
+
 @end
+
+
+#endif

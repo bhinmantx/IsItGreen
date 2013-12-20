@@ -15,6 +15,7 @@
 		C6500BEB184E7BEF00C42BAA /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6500BE9184E7BEF00C42BAA /* ImageIO.framework */; };
 		C6500BED184E7BFF00C42BAA /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6500BEC184E7BFF00C42BAA /* CoreVideo.framework */; };
 		C6500BEF184E7C2500C42BAA /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6500BEE184E7C2500C42BAA /* CoreMedia.framework */; };
+		C66AE8251863D15C006AB9C6 /* ExaggeratorViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C66AE8241863D15C006AB9C6 /* ExaggeratorViewController.mm */; };
 		C6A63960184DD65A00C4241C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A6395F184DD65A00C4241C /* Foundation.framework */; };
 		C6A63962184DD65A00C4241C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A63961184DD65A00C4241C /* CoreGraphics.framework */; };
 		C6A63964184DD65A00C4241C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A63963184DD65A00C4241C /* UIKit.framework */; };
@@ -27,8 +28,6 @@
 		C6A6397F184DD65A00C4241C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A6397E184DD65A00C4241C /* XCTest.framework */; };
 		C6A63980184DD65A00C4241C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A6395F184DD65A00C4241C /* Foundation.framework */; };
 		C6A63981184DD65A00C4241C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A63963184DD65A00C4241C /* UIKit.framework */; };
-		C6A63989184DD65A00C4241C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C6A63987184DD65A00C4241C /* InfoPlist.strings */; };
-		C6A6398B184DD65A00C4241C /* IsItGreenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C6A6398A184DD65A00C4241C /* IsItGreenTests.m */; };
 		C6B487E51855D42500E5A0F9 /* UIImageResizing.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B487E41855D42500E5A0F9 /* UIImageResizing.m */; };
 		C6B487E81856F09E00E5A0F9 /* ColorMatcher.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6B487E61856F09E00E5A0F9 /* ColorMatcher.mm */; };
 		C6B487EB1856F7D400E5A0F9 /* colordata2.js in Resources */ = {isa = PBXBuildFile; fileRef = C6B487E91856F7BB00E5A0F9 /* colordata2.js */; };
@@ -53,6 +52,8 @@
 		C6500BE9184E7BEF00C42BAA /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/ImageIO.framework; sourceTree = DEVELOPER_DIR; };
 		C6500BEC184E7BFF00C42BAA /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
 		C6500BEE184E7C2500C42BAA /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
+		C66AE8231863D15C006AB9C6 /* ExaggeratorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExaggeratorViewController.h; sourceTree = "<group>"; };
+		C66AE8241863D15C006AB9C6 /* ExaggeratorViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ExaggeratorViewController.mm; sourceTree = "<group>"; };
 		C6A6395C184DD65A00C4241C /* IsItGreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IsItGreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A6395F184DD65A00C4241C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C6A63961184DD65A00C4241C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -69,9 +70,6 @@
 		C6A63977184DD65A00C4241C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C6A6397D184DD65A00C4241C /* IsItGreenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IsItGreenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A6397E184DD65A00C4241C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		C6A63986184DD65A00C4241C /* IsItGreenTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IsItGreenTests-Info.plist"; sourceTree = "<group>"; };
-		C6A63988184DD65A00C4241C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		C6A6398A184DD65A00C4241C /* IsItGreenTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IsItGreenTests.m; sourceTree = "<group>"; };
 		C6B487E31855D3F500E5A0F9 /* UIImageResizing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageResizing.h; sourceTree = "<group>"; };
 		C6B487E41855D42500E5A0F9 /* UIImageResizing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageResizing.m; sourceTree = "<group>"; };
 		C6B487E61856F09E00E5A0F9 /* ColorMatcher.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ColorMatcher.mm; sourceTree = "<group>"; };
@@ -113,7 +111,6 @@
 			isa = PBXGroup;
 			children = (
 				C6A63965184DD65A00C4241C /* IsItGreen */,
-				C6A63984184DD65A00C4241C /* IsItGreenTests */,
 				C6A6395E184DD65A00C4241C /* Frameworks */,
 				C6A6395D184DD65A00C4241C /* Products */,
 			);
@@ -148,6 +145,8 @@
 		C6A63965184DD65A00C4241C /* IsItGreen */ = {
 			isa = PBXGroup;
 			children = (
+				C66AE8231863D15C006AB9C6 /* ExaggeratorViewController.h */,
+				C66AE8241863D15C006AB9C6 /* ExaggeratorViewController.mm */,
 				C6B487E61856F09E00E5A0F9 /* ColorMatcher.mm */,
 				C6B487E71856F09E00E5A0F9 /* ColorMatcher.h */,
 				C6B487E31855D3F500E5A0F9 /* UIImageResizing.h */,
@@ -173,24 +172,6 @@
 				C6A63968184DD65A00C4241C /* InfoPlist.strings */,
 				C6A6396B184DD65A00C4241C /* main.m */,
 				C6A6396D184DD65A00C4241C /* IsItGreen-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		C6A63984184DD65A00C4241C /* IsItGreenTests */ = {
-			isa = PBXGroup;
-			children = (
-				C6A6398A184DD65A00C4241C /* IsItGreenTests.m */,
-				C6A63985184DD65A00C4241C /* Supporting Files */,
-			);
-			path = IsItGreenTests;
-			sourceTree = "<group>";
-		};
-		C6A63985184DD65A00C4241C /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				C6A63986184DD65A00C4241C /* IsItGreenTests-Info.plist */,
-				C6A63987184DD65A00C4241C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -285,7 +266,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6A63989184DD65A00C4241C /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C66AE8251863D15C006AB9C6 /* ExaggeratorViewController.mm in Sources */,
 				C6B487E51855D42500E5A0F9 /* UIImageResizing.m in Sources */,
 				C6A63976184DD65A00C4241C /* IsItGreenViewController.mm in Sources */,
 				C6A6396C184DD65A00C4241C /* main.m in Sources */,
@@ -308,7 +289,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6A6398B184DD65A00C4241C /* IsItGreenTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,14 +317,6 @@
 				C6A63972184DD65A00C4241C /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		C6A63987184DD65A00C4241C /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C6A63988184DD65A00C4241C /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -428,6 +400,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Brendan/Documents/IsItGreen,
@@ -437,7 +410,7 @@
 				INFOPLIST_FILE = "IsItGreen/IsItGreen-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos6.1;
+				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -449,6 +422,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Brendan/Documents/IsItGreen,
@@ -458,7 +432,7 @@
 				INFOPLIST_FILE = "IsItGreen/IsItGreen-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos6.1;
+				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

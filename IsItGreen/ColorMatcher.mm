@@ -245,42 +245,7 @@ if(votes>threshold)
        return ((value/254) * 55)+200;
     
     
-/*
-  //  NSLog(@"Exaggerating %i", value);
-    
-    if((value >= 0) && (value <=25)){
-        return 105;
-    }
-    if((value >= 26) && (value <=50)){
-        return 125;
-    }
-    if((value >= 51) && (value <=75)){
-             return 135;
-    }
-    if((value >= 76) && (value <=100)){
-             return 155;
-    }
-    if((value >= 101) && (value <=125)){
-             return 175;
-    }
-    if((value >= 126) && (value <=150)){
-             return 185;
-    }
-    if((value >= 151) && (value <=175)){
-             return 195;
-    }
-    if((value >= 176) && (value <=200)){
-             return 220;
-    }
-    if((value >= 201) && (value <=225)){
-             return 235;
-    }
-    if((value >= 226) && (value <=255)){
-             return 255;
-    }
-else
-    return 25;
- */
+
     
 }
 
@@ -439,6 +404,55 @@ else
     NSLog(@"Completed Color Replacer 2");
     return _replacementColors;
 }
+
+
+
+-(bool)checkNearestFromRGB:(int)r :(int)g :(int)b :(NSString*)color{
+    
+    cv::vector<Float32> singleQuery;
+    cv::vector<int> index(1);
+    cv::vector<Float32> dist(1);
+    
+    
+    singleQuery.push_back(r);
+    singleQuery.push_back(g);
+    singleQuery.push_back(b);
+    //singleQuery.push_back(alpha);
+    
+    [self kdtree]->knnSearch(singleQuery, index, dist, 1, cv::flann::SearchParams(8));
+    
+    //  NSLog(@"Index, %x ,  dist %f", index[0], dist[0]);
+    int i = index[0];
+    
+    if (   [[[_colors objectAtIndex:i] objectForKey:@"FriendlyName"] isEqual:color]) {
+        return true;
+    }
+   
+    else
+    return false;
+}
+
+
+
+
+-(NSString*)getNameFromRGB:(int)r :(int)g :(int)b{
+    cv::vector<Float32> singleQuery;
+    cv::vector<int> index(1);
+    cv::vector<Float32> dist(1);
+    
+    
+    singleQuery.push_back(r);
+    singleQuery.push_back(g);
+    singleQuery.push_back(b);
+    
+    [self kdtree]->knnSearch(singleQuery, index, dist, 1, cv::flann::SearchParams(16));
+    
+    int i = index[0];
+    
+    return [[_colors objectAtIndex:i] objectForKey:@"name"];
+    
+}
+
 
 
 @end

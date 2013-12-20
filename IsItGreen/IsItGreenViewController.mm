@@ -13,7 +13,7 @@
 ////Memory profiling code
 #import <mach/mach.h>
 #import <mach/mach_host.h>
-
+/*
 void print_free_memory ()
 {
     mach_port_t host_port;
@@ -29,7 +29,7 @@ void print_free_memory ()
     if (host_statistics(host_port, HOST_VM_INFO, (host_info_t)&vm_stat, &host_size) != KERN_SUCCESS)
         NSLog(@"Failed to fetch vm statistics");
     
-    /* Stats in bytes */
+    /// Stats in bytes
     natural_t mem_used = (vm_stat.active_count +
                           vm_stat.inactive_count +
                           vm_stat.wire_count) * pagesize;
@@ -37,6 +37,7 @@ void print_free_memory ()
     natural_t mem_total = mem_used + mem_free;
     NSLog(@"used: %u free: %u total: %u", mem_used, mem_free, mem_total);
 }
+*/
 
 @interface IsItGreenViewController ()
 
@@ -49,6 +50,7 @@ void print_free_memory ()
 @synthesize cameraFeed, subImage;
 @synthesize matcher = _matcher;
 @synthesize timer = _timer;
+@synthesize ColorNameLabel;
 ///For still image capture
 
 ////From the rosy writer code
@@ -63,6 +65,7 @@ void print_free_memory ()
     ///make sure ui elements are in the right position
     subImage.layer.zPosition = 10;
     cameraFeed.layer.zPosition = 1;
+    ColorNameLabel.layer.zPosition = 15;
     
     ///Setup our timer
       _timer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(TimerCallback) userInfo:nil repeats:YES];
@@ -73,13 +76,23 @@ void print_free_memory ()
     _matcher = [[ColorMatcher alloc]initWithJSON:_json];
   
 }
+-(void)viewWillDisappear:(BOOL)animated{
+
+    [session stopRunning];
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [session startRunning];
+}
 
 
 ///Creates all the preview layers, adds inputs/outputs, registers the queue
 -(void)prepVidCapture{
 
     session = [[AVCaptureSession alloc] init];
-	
+	//session.sessionPreset = AVCaptureSessionPreset640x480;
+    session.sessionPreset = AVCaptureSessionPreset352x288;
     
     CALayer *viewLayer = self.cameraFeed.layer;
     AVCaptureVideoPreviewLayer *captureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
@@ -161,17 +174,14 @@ void print_free_memory ()
         processVideoFrame =false;
         //thumbNail = [self imageFromSampleBuffer:sampleBuffer];
           UIImage * newThumbNail = [self imageFromSampleBuffer:sampleBuffer];
-           NSLog(@"Image Finished Being Created");
+           //NSLog(@"Image Finished Being Created with width %f and height %f", newThumbNail.size.width, newThumbNail.size.height);
             ///Crop the image to the center and 50 by 50
             
  
             
-            ////Right now ColorReplacer takes a MAT and a color (and a useless UIImageView) and
-            ////Returns a MAT with the colors swapped.
-            ////For testing we're going to crop the image here, conver to a MAT, pass it to the matcher
-            ////Take the result and change it BACK to a UIImage and send it to the funcs below.
-            ////This is really gross. Let's not do it that way.
-            
+
+         ////////ORIGINAL OVERLAY CODE
+            /*
             
             int overLayX = (newThumbNail.size.width / 2) - 160;
             int overLayY = (newThumbNail.size.height /2) - 120;
@@ -182,31 +192,35 @@ void print_free_memory ()
           CGImageRef  imageRef = CGImageCreateWithImageInRect([newThumbNail CGImage], CGRectMake(overLayX  , overLayY , 320, 240));
           //  NSLog(@"JUST CROPPED");
             
-           UIImage * smallImage = [UIImage imageWithCGImage:imageRef scale:newThumbNail.scale orientation:newThumbNail.imageOrientation];
-            
+           UIImage * smallImage = [UIImage imageWithCGImage:imageRef scale:newThumbNail.scale /2 orientation:newThumbNail.imageOrientation];
+            CGImageRelease(imageRef);
 
           //  CGImageRef imageRef = CGImageCreateWithImageInRect([newThumbNail CGImage], CGRectMake(overLayX  , overLayY , 320, 240));
             //  NSLog(@"JUST CROPPED");
 
-            
-            
-            NSLog(@"Is it the small image creation?");
+          */
+
             //
             //what if we turned off scaling
             //  UIImage* smallImage = [thumbNail scaleToSize:CGSizeMake(200.0f,200.0f)];
             //   subImage.frame = CGRectMake(subImage.frame.origin.x, subImage.frame.origin.y, thumbNail.size.width/2, thumbNail.size.height/2);
             
-            subImage.frame = CGRectMake(subImage.frame.origin.x, subImage.frame.origin.y, cameraFeed.frame.size.width / 2, cameraFeed.frame.size.height / 2);
+          //  subImage.frame = CGRectMake(subImage.frame.origin.x, subImage.frame.origin.y, cameraFeed.frame.size.width / 2, cameraFeed.frame.size.height / 2);
+            //////////THIS WAS WHAT WE HAD BEFORE, TRYING TO REMOVE IT
+//            subImage.frame = CGRectMake(subImage.frame.origin.x, subImage.frame.origin.y, 640,480);
+            
+            
+            
             // UIImage* smallImage = [thumbNail scaleToSize:CGSizeMake(thumbNail.size.width/2,thumbNail.size.height/2)];
 
             
             ////In order to reliably update the UI I have to run such updates from the main thread
                 dispatch_async(dispatch_get_main_queue(), ^{
 //                NSLog(@"block async dispatch");
-                    [subImage setImage:smallImage];
+                   // [subImage setImage:smallImage];
 
                     [self subImage].hidden = false;
-                   // [subImage setImage:thumbNail];
+                   [subImage setImage:newThumbNail];
                 
             });
 
@@ -230,7 +244,7 @@ void print_free_memory ()
     
     count++;
     
-    if(count>10){
+    if(count>3){
         count = 0;
       	processVideoFrame = true;
 //        [self subImage].hidden = true;
@@ -271,22 +285,74 @@ void print_free_memory ()
         }
     
     
-    ///alright let's try the rosy writer code here.
- //   unsigned char *pixel = (unsigned char *)CVPixelBufferGetBaseAddress(imageBuffer);
+    ///alright let's try the processing code here
+   unsigned char *pixel = (unsigned char *)CVPixelBufferGetBaseAddress(imageBuffer);
     
-    /*
-    for( int row = 0; row < height; row++ ) {
+    
+    int x = (int)width;
+    int y = (int)height;
+    int fwidth = (int)width;
+    
+    ///Set our actual starting positions as the center with a 5 pixel offset
+    x = (x/2) - 5;
+    y = (y/2) - 5;
+    NSLog(@"x %i  y %i", x, y);
+//    int x = ((width/2)) - 5;
+  // int y = ((height/2)) - 5 ;
+   // int x = 1;
+   // int y = 1;
+    size_t r = 0;
+    size_t g = 0;
+    size_t b = 0;
+    for(int i = 0; i<=9; i++){
         
-        for( int column = 0; column < width; column++ ) {
+        
+        for(int j = 0; j<=9; j++){
             
-            pixel[1] = 0; // De-green (second pixel in BGRA is green)
+            int pixnumber = ((y+j)*(fwidth) + (x+i));
             
-            pixel += BYTES_PER_PIXEL;
+            //pixnumber += (4 - (pixnumber % 4));
+       //     NSLog(@"Pixnumber %i", pixnumber);
+            unsigned char* pixptr = (pixel + ((BYTES_PER_PIXEL)*(pixnumber)));
+           // unsigned char* pixptr = (pixel + ((BYTES_PER_PIXEL)*(j)));
+            b += pixptr[0];
+            g += pixptr[1];
+            r += pixptr[2];
+            
+            pixptr[0] = 0;
+            pixptr[1] = 0;
+            pixptr[2] = 0;
+            
+          // NSLog(@"X is %i y is %i pixnumber is %zx", (x+j), (y+i), pixnumber);
             
         }
-        
+    
     }
-    */
+   
+    int R = (r/100);
+    int G = (g/100);
+    int B = (b/100);
+ NSLog(@"R %i G %i B %i",R,G,B);
+    NSString* result = [_matcher getNameFromRGB:R:G:B];
+   
+    
+NSString *feedback = [NSString stringWithFormat:@"%@ R %i G %i B %i", result, R,G,B];
+    
+    ////In order to reliably update the UI I have to run such updates from the main thread
+    dispatch_async(dispatch_get_main_queue(), ^{
+    [self ColorNameLabel].text = feedback;
+        [self ColorNameLabel].textColor = [UIColor colorWithRed:R/255.0 green:G/255.0 blue:G/255.0 alpha:1.0];
+        
+        [[self ColorNameLabel] setNeedsDisplay];
+    });
+    
+    NSLog(@"Result is %@", result);
+    //////Let's take half the height, half the width
+    ////That gives us the center.
+    ///subtract 5 from each and that gives us
+    
+    
+    
         
         // Get the base address of the pixel buffer.
         void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
@@ -313,7 +379,7 @@ void print_free_memory ()
         CGImageRelease(cgImage);
         CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
     
-    print_free_memory();
+   // print_free_memory();
 //NSLog(@"RETURNING IMAGE");
         return image;
 

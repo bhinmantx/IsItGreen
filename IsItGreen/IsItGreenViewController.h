@@ -31,10 +31,11 @@
     NSArray *_json;
     NSTimer *_feedBackTimer;
 
+    bool greenbuttonispressed;
 }
 
 
-@property(nonatomic, retain) IBOutlet UIView *cameraFeed;
+@property(nonatomic, strong) IBOutlet UIView *cameraFeed;
 
 /////below is for still image capture
 
@@ -56,6 +57,7 @@
 -(void)prepVidCapture;
 -(void)updateThumbnail;
 
+@property (strong, nonatomic) IBOutlet UILabel *ColorNameLabel;
 
 @property (strong, nonatomic) IBOutlet UIButton *TriggerButton;
 
