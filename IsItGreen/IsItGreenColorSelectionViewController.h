@@ -15,13 +15,20 @@
 
 @interface IsItGreenColorSelectionViewController : UIViewController  <UIPickerViewDelegate, UIPickerViewDataSource>{
     NSMutableArray *_colorOptions;
-
+    NSString * _originalColorOfInterest;
+    
+    std::map<NSString*,NSString*> _friendlyNameToName;
+    std::map<NSString*,NSString*> _nameToFriendlyName;
+    
 }
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *didSelectCancel;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *didSelectDone;
 
-
+@property (strong, nonatomic) NSString *originalColorOfInterest;
 @property (strong, nonatomic) IBOutlet UIPickerView *colorPicker;
+
+@property(nonatomic)     std::map<NSString*,NSString*> friendlyNameToName;
+@property(nonatomic)     std::map<NSString*,NSString*> nameToFriendlyName;
 
 @property(strong, nonatomic) NSMutableArray *colorOptions;
 

@@ -45,7 +45,7 @@
 		C6CAFC731864E1050057E69A /* IsItGreenIcon120.png in Resources */ = {isa = PBXBuildFile; fileRef = C6CAFC651864E1050057E69A /* IsItGreenIcon120.png */; };
 		C6CAFC741864E1050057E69A /* IsItGreenIcon152.png in Resources */ = {isa = PBXBuildFile; fileRef = C6CAFC661864E1050057E69A /* IsItGreenIcon152.png */; };
 		C6CAFC751864E1050057E69A /* IsItGreenIcon1024.png in Resources */ = {isa = PBXBuildFile; fileRef = C6CAFC671864E1050057E69A /* IsItGreenIcon1024.png */; };
-		C6CAFC7818650E1B0057E69A /* IsItGreenColorSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6CAFC7718650E1B0057E69A /* IsItGreenColorSelectionViewController.m */; };
+		C6CAFC7818650E1B0057E69A /* IsItGreenColorSelectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6CAFC7718650E1B0057E69A /* IsItGreenColorSelectionViewController.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,7 +105,7 @@
 		C6CAFC661864E1050057E69A /* IsItGreenIcon152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IsItGreenIcon152.png; sourceTree = "<group>"; };
 		C6CAFC671864E1050057E69A /* IsItGreenIcon1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IsItGreenIcon1024.png; sourceTree = "<group>"; };
 		C6CAFC7618650E1B0057E69A /* IsItGreenColorSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IsItGreenColorSelectionViewController.h; sourceTree = "<group>"; };
-		C6CAFC7718650E1B0057E69A /* IsItGreenColorSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IsItGreenColorSelectionViewController.m; sourceTree = "<group>"; };
+		C6CAFC7718650E1B0057E69A /* IsItGreenColorSelectionViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IsItGreenColorSelectionViewController.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,7 +183,7 @@
 				C6A6396F184DD65A00C4241C /* IsItGreenAppDelegate.mm */,
 				C6A63971184DD65A00C4241C /* Main.storyboard */,
 				C6CAFC7618650E1B0057E69A /* IsItGreenColorSelectionViewController.h */,
-				C6CAFC7718650E1B0057E69A /* IsItGreenColorSelectionViewController.m */,
+				C6CAFC7718650E1B0057E69A /* IsItGreenColorSelectionViewController.mm */,
 				C6A63974184DD65A00C4241C /* IsItGreenViewController.h */,
 				C6A63975184DD65A00C4241C /* IsItGreenViewController.mm */,
 				C6A63977184DD65A00C4241C /* Images.xcassets */,
@@ -354,7 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C66AE8251863D15C006AB9C6 /* ExaggeratorViewController.mm in Sources */,
-				C6CAFC7818650E1B0057E69A /* IsItGreenColorSelectionViewController.m in Sources */,
+				C6CAFC7818650E1B0057E69A /* IsItGreenColorSelectionViewController.mm in Sources */,
 				C6B487E51855D42500E5A0F9 /* UIImageResizing.m in Sources */,
 				C6A63976184DD65A00C4241C /* IsItGreenViewController.mm in Sources */,
 				C6A6396C184DD65A00C4241C /* main.m in Sources */,

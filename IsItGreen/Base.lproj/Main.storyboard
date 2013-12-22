@@ -74,6 +74,7 @@
                     <tabBarItem key="tabBarItem" title="Color Exaggerator" id="Qdt-uY-jCd"/>
                     <connections>
                         <outlet property="ExaggeratorImageView" destination="H69-yC-LHs" id="29K-kH-Fss"/>
+                        <outlet property="IsItGreenButtonOutlet" destination="qCz-p7-9Gp" id="exp-Hc-Ej2"/>
                         <outlet property="imageProcessActivityIndicator" destination="5Zq-mB-151" id="WRo-6R-7OV"/>
                     </connections>
                 </viewController>

@@ -37,12 +37,15 @@
     
      bool greenbuttonispressed;
     bool colorcheckiscomplete;
+    std::map<NSString*,NSString*> friendlyNameToName;
+    std::map<NSString*,NSString*> nameToFriendlyName;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *ExaggeratorImageView;
 @property (strong, atomic) NSTimer * frameLimiterTimer;
 
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *imageProcessActivityIndicator;
+@property (strong, nonatomic) IBOutlet UIButton *IsItGreenButtonOutlet;
 
 ///REDUDANT CODE
 -(UIImage *)imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer;
@@ -52,7 +55,11 @@
 
 -(void)TimerCallback;
 
+///Initialization helpers
 -(void)prepVidCapture;
+-(void)populateMaps;
+
+
 //-(void)updateThumbnail;
 -(IBAction)IsItGreenButton;
 

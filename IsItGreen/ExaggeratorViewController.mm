@@ -55,7 +55,7 @@
 
     _imageProcessActivityIndicator.hidesWhenStopped = YES;
     
-
+    [self populateMaps];
 
 }
 -(void)viewWillDisappear:(BOOL)animated{
@@ -283,7 +283,7 @@
         processVideoFrame = false;
     unsigned char *pixel = (unsigned char *)CVPixelBufferGetBaseAddress(imageBuffer);
         colorcheckiscomplete = false;
-    
+         NSLog(@"Checking for %@", _colorOfInterest);
     for( int row = 0; row < height; row++ ) {
         
         for( int column = 0; column < width; column++ ) {
@@ -368,6 +368,30 @@
     return cropped_image;
 }
 
+-(void)populateMaps{
+    //	"r = Red, o = Orange, y = Yellow, g = Green, w = white"  "b = Blue, v = violet or purple, e = grey, k = black"
+    
+    friendlyNameToName[@"r"] = @"Red";
+    friendlyNameToName[@"o"] = @"Orange";
+    friendlyNameToName[@"y"] = @"Yellow";
+    friendlyNameToName[@"g"] = @"Green";
+    friendlyNameToName[@"w"] = @"White";
+    friendlyNameToName[@"b"] = @"Blue";
+    friendlyNameToName[@"v"] = @"Violet Or Purple";
+    friendlyNameToName[@"e"] = @"Gray";
+    friendlyNameToName[@"k"] = @"Black";
+    
+    nameToFriendlyName[@"Red"] = @"r";
+    nameToFriendlyName[@"Orange"] = @"o";
+    nameToFriendlyName[@"Yellow"] = @"y";
+    nameToFriendlyName[@"Green"] = @"g";
+    nameToFriendlyName[@"White"] = @"w";
+    nameToFriendlyName[@"Blue"] = @"b";
+    nameToFriendlyName[@"Violet"] = @"v";
+    nameToFriendlyName[@"Gray"] = @"e";
+    nameToFriendlyName[@"Black"] = @"k";
+    
+}
 
 -(void)processJSON{
     
@@ -437,17 +461,27 @@
 ///Modal View Business
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSLog(@"PrepForSegue");
+    ///Is it the color of interest selector button?
     if([segue.identifier isEqualToString:@"ColorOfInterestPicker"]){
-           NSLog(@"Inside If");
+        
         IsItGreenColorSelectionViewController *pickerController = segue.destinationViewController;
         pickerController.delegate = self;
+        pickerController.originalColorOfInterest = _colorOfInterest;
+        pickerController.nameToFriendlyName = nameToFriendlyName;
+        pickerController.friendlyNameToName = friendlyNameToName;
     }
     
 }
 
 -(void)didDismissPresentedViewController:(NSString *)color{
     _colorOfInterest = color;
+    
+    ///Need to update the name of the button
+    
+    NSString *newButtonName = [NSString stringWithFormat:@"What Is %@%@", friendlyNameToName[color],@"?"];
+    
+    _IsItGreenButtonOutlet.titleLabel.text = newButtonName;
+    NSLog(@"Color of interest is now %@", _colorOfInterest);
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
