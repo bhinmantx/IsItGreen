@@ -37,8 +37,10 @@
     
      bool greenbuttonispressed;
     bool colorcheckiscomplete;
+    bool _shouldWhiteBalance;
     std::map<NSString*,NSString*> friendlyNameToName;
     std::map<NSString*,NSString*> nameToFriendlyName;
+    CIColor *whitebalancereference;
 }
 
 @property (strong, nonatomic) IBOutlet UIImageView *ExaggeratorImageView;
@@ -46,6 +48,7 @@
 
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *imageProcessActivityIndicator;
 @property (strong, nonatomic) IBOutlet UIButton *IsItGreenButtonOutlet;
+@property (strong, nonatomic) IBOutlet UIButton *Whitebalance;
 
 ///REDUDANT CODE
 -(UIImage *)imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer;
@@ -59,6 +62,7 @@
 -(void)prepVidCapture;
 -(void)populateMaps;
 
+-(UIImage*)tryWhiteBalancing:(UIImage*)sourceImage;
 
 //-(void)updateThumbnail;
 -(IBAction)IsItGreenButton;

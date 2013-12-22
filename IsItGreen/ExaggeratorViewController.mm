@@ -50,7 +50,12 @@
     [self prepVidCapture];
     [self populateMaps];
 
+    
+    //whitebalancereference = [[CIColor alloc] initWithCGColor:[UIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:255.0]];
+    whitebalancereference =  [CIColor colorWithRed:255.0 green:255.0 blue:255.0 alpha:255.0];
 
+    
+    
     ////Change button name to reflect our default color search
     NSString *newButtonName = [NSString stringWithFormat:@"What Is %@%@", friendlyNameToName[_colorOfInterest],@"?"];
     [_IsItGreenButtonOutlet setTitle:newButtonName forState:normal];
@@ -288,6 +293,8 @@
     }
 
     ////Now let's try the color matcher
+    ////This should also be its own function. We should see about changing this image from buffer func
+    ////to also accept a function pointer or selector
     
 
     if(greenbuttonispressed){
@@ -365,6 +372,9 @@
     CGImageRelease(cgImage);
     CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
     
+    image = [self tryWhiteBalancing:image];
+    
+  // CIFilter* filter  = [CIFilter filterWithName:@"CIWhitePointAdjust"]
   //  print_free_memory();
     //NSLog(@"RETURNING IMAGE");
     return image;
@@ -495,7 +505,82 @@
     NSLog(@"Color of interest is now %@", _colorOfInterest);
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
+- (IBAction)WhiteBalanceTest:(id)sender {
+    
+    _shouldWhiteBalance = !_shouldWhiteBalance;
+     //whitebalancereference =  [CIColor colorWithRed:55.0 green:100.0 blue:255.0 alpha:255.0];
+    NSLog(@"White balance Changed");
+}
+
+-(UIImage*)tryWhiteBalancing:(UIImage*)sourceImage{
+    
+ 
+    if(_shouldWhiteBalance){
+  
+        CIContext *context = [CIContext contextWithOptions:nil];
+        CIImage *inputImage = [CIImage imageWithCGImage:[sourceImage CGImage]];
+        CIFilter *hueFilter = [CIFilter filterWithName:@"CITemperatureAndTint"];
+        //[hueFilter setValue:inputImage forKey:kCIInputImageKey];
+        [hueFilter setValue:inputImage forKey:@"InputImage"];
+
+        [hueFilter setValue:[CIVector vectorWithX:6000.0 Y:0] forKey:@"inputNeutral"];
+        [hueFilter setValue:[CIVector vectorWithX:1000.0 Y:0] forKey:@"inputTargetNeutral"];
+
+        CIImage *result = [hueFilter outputImage];
+        CGImageRef cgImage = [context createCGImage:result fromRect:[result extent]];
+        UIImage *imageResult = [UIImage imageWithCGImage:cgImage];
+        CGImageRelease(cgImage);
+        
+        return imageResult;
+    }
+  
+    /*
+  
+    if(!_shouldWhiteBalance){
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CIImage *inputImage = [CIImage imageWithCGImage:[sourceImage CGImage]];
+    CIFilter *hueFilter = [CIFilter filterWithName:@"CIHueAdjust"];
+    [hueFilter setValue:inputImage forKey:kCIInputImageKey];
+    [hueFilter setValue:[NSNumber numberWithDouble:-2*M_PI/8] forKey:@"inputAngle"];
+    CIImage *result = [hueFilter outputImage];
+    CGImageRef cgImage = [context createCGImage:result fromRect:[result extent]];
+    UIImage *imageResult = [UIImage imageWithCGImage:cgImage];
+    CGImageRelease(cgImage);
+    return imageResult;
+   
+    
+    }
+     */
+
+    
+
+    
+    
+    else{
+
+    //We create a simple context without any option
+    CIContext *context = [CIContext contextWithOptions:nil];
+    
+    ////We'll turn our incoming UIIMage into something we can filter.
+    CIImage *inputImage = [CIImage imageWithCGImage:[sourceImage CGImage]];
+    
+ //  CIFilter *filter = [CIFilter filterWithName:@"CIWhitePointAdjust" keysAndValues:@"InputImage", inputImage, @"InputColor", whitebalancereference, nil];
+    CIFilter *filter = [CIFilter filterWithName:@"CIWhitePointAdjust"];
+   [filter setValue:inputImage forKey:kCIInputImageKey];
+    [filter setValue:[CIColor colorWithRed:55.0 green:100.0 blue:180.0 alpha:255.0] forKey:@"InputColor"];
+
+    CIImage *result = [filter outputImage];
+    CGImageRef cgImage = [context createCGImage:result fromRect:[result extent]];
+    
+    
+    UIImage *outputImage = [UIImage imageWithCGImage:cgImage];
+    CGImageRelease(cgImage);
+    return outputImage;
+    }
+
+}
 
 
+////White balance test
 
 @end

@@ -8,10 +8,23 @@
 
 #import "IsItGreenAppDelegate.h"
 
+
+
 @implementation IsItGreenAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    
+    ////Shared Data to create and pass around:
+    
+    ///Color Matching database and object
+    ///The camera session
+    ///maps
+    ////previous color of interest
+    
+    
+    
     // Override point for customization after application launch.
     return YES;
 }
