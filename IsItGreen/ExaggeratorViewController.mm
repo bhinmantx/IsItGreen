@@ -164,7 +164,7 @@
             
             [[self ExaggeratorImageView] setImage:newThumbNail];
             [_imageProcessActivityIndicator stopAnimating];
-            [self ProcessLabel].hidden = true;
+        
             [self ExaggeratorImageView].hidden = false;
             // [subImage setImage:thumbNail];
  
@@ -389,8 +389,7 @@
         else if(count >300){
             greenbuttonispressed = false;
             count=0;
-            processVideoFrame = true;
-            [self ProcessLabel ].hidden = true;
+            processVideoFrame = true;          
         }
         ///originally the color check is complete feedback stuff was right here.
         count++;
@@ -413,11 +412,32 @@
  
     ///To get a reliable UI update.
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self ProcessLabel].hidden = false;
         [_imageProcessActivityIndicator startAnimating];
     });
     
     
 }
+
+
+///Modal View stuff
+
+
+///Modal View Business
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSLog(@"PrepForSegue");
+    if([segue.identifier isEqualToString:@"ColorOfInterestPicker"]){
+           NSLog(@"Inside If");
+        IsItGreenColorSelectionViewController *pickerController = segue.destinationViewController;
+        pickerController.delegate = self;
+    }
+    
+}
+
+-(void)didDismissPresentedViewController:(NSString *)color{
+    _colorOfInterest = color;
+}
+
+
 
 @end

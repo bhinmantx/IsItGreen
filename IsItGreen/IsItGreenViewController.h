@@ -15,7 +15,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "ColorMatcher.h"
 #import "UIImageResizing.h"
-
+#import "IsItGreenColorSelectionViewController.h"
 
 @interface IsItGreenViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate>
 {
@@ -31,7 +31,9 @@
     NSArray *_json;
     NSTimer *_feedBackTimer;
 
-    bool greenbuttonispressed;
+    NSString *_colorOfInterest; 
+    
+    //bool greenbuttonispressed;
 }
 
 

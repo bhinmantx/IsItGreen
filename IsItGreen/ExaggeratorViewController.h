@@ -16,9 +16,10 @@
 #import <AVFoundation/AVFoundation.h>
 #import "ColorMatcher.h"
 #import "UIImageResizing.h"
+#import "IsItGreenColorSelectionViewController.h"
 
 
-@interface ExaggeratorViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate> {
+@interface ExaggeratorViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate,ColorSelectionViewControllerDelegate> {
     AVCaptureSession *session;
     
   //  IBOutlet UIView *exaggeratorFeed;
@@ -27,6 +28,7 @@
     
     NSTimer *_frameLimiterTimer;
     
+    NSString *_colorOfInterest;
     
     ////REDUNDANT AGAIN
     ColorMatcher *_matcher;
@@ -39,7 +41,7 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *ExaggeratorImageView;
 @property (strong, atomic) NSTimer * frameLimiterTimer;
-@property (strong, nonatomic) IBOutlet UILabel *ProcessLabel;
+
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *imageProcessActivityIndicator;
 
 ///REDUDANT CODE
