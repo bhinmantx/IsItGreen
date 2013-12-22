@@ -38,6 +38,10 @@
     [super viewDidLoad];
     [self processJSON];
     _matcher = [[ColorMatcher alloc]initWithJSON:_json];
+    
+    ///By default we're looking for green
+    _colorOfInterest = @"g";
+    
       ///And set up our timer
     _frameLimiterTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(TimerCallback) userInfo:nil repeats:YES];
     processVideoFrame = true;
@@ -291,9 +295,17 @@
             r = pixel[2];
             
             
-            if([_matcher checkNearestFromRGB:pixel[2] :pixel[1] :pixel[0] :@"g"]){
+         //   if([_matcher checkNearestFromRGB:pixel[2] :pixel[1] :pixel[0] :@"g"]){
+               if([_matcher checkNearestFromRGB:pixel[2] :pixel[1] :pixel[0] :_colorOfInterest]){
+                ///TODO make a function that's a switch statement or something for this
+                   if ([_colorOfInterest isEqualToString:@"r"]) {
+                       pixel[1] = 0; //Setting it to only red
+                       pixel[0] = 0;
+                   }
+                   else{
                 pixel[2] = 0; // Total-green (second pixel in BGRA is green)
                 pixel[0] = 0;
+                   }
             }
             ///if it's not green, it's grayscale
             else{
@@ -436,6 +448,7 @@
 
 -(void)didDismissPresentedViewController:(NSString *)color{
     _colorOfInterest = color;
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 

@@ -38,11 +38,7 @@
     
     [_colorOptions addObject:@"g"];
     [_colorOptions addObject:@"r"];
-    
-    
-    
-    NSLog(@"%@", [_colorOptions objectAtIndex:0]);
-        NSLog(@"%@", [_colorOptions objectAtIndex:1]);
+
     
 }
 
@@ -83,13 +79,26 @@
 }
 
 
- 
-///Buttons on the nav bar
+- (IBAction)didSelectDone:(id)sender {
+    NSLog(@"Did Select Done");
+    //here we return the so called "friendly" name. Right now we're still just passing color initials back and forth
+    NSString* selectedColor = [_colorOptions objectAtIndex:[_colorPicker selectedRowInComponent:0]];
+    [self.delegate didDismissPresentedViewController:selectedColor];
+}
+- (IBAction)didSelectCancel:(id)sender {
+}
 
+
+///NavBar items are apparently hooked up through
+///the storyboard more easily
+/*
 - (IBAction)didSelectDone:(UIButton *)sender
 {
-    
-   [self.delegate didDismissPresentedViewController:@"g"];
+    NSLog(@"Did Select Done");
+    //here we return the so called "friendly" name. Right now we're still just passing color initials back and forth
+    NSString* selectedColor = [_colorOptions objectAtIndex:[_colorPicker selectedRowInComponent:0]];
+   [self.delegate didDismissPresentedViewController:selectedColor];
 }
+ */
 
 @end
