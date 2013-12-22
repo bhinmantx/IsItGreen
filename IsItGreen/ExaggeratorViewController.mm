@@ -45,8 +45,18 @@
       ///And set up our timer
     _frameLimiterTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(TimerCallback) userInfo:nil repeats:YES];
     processVideoFrame = true;
+
+    
     [self prepVidCapture];
-  
+    [self populateMaps];
+
+
+    ////Change button name to reflect our default color search
+    NSString *newButtonName = [NSString stringWithFormat:@"What Is %@%@", friendlyNameToName[_colorOfInterest],@"?"];
+    [_IsItGreenButtonOutlet setTitle:newButtonName forState:normal];
+
+    
+    //TODO break this into its own initialization func.
     _imageProcessActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
 
     _imageProcessActivityIndicator.center = CGPointMake(160, 160);
@@ -55,7 +65,7 @@
 
     _imageProcessActivityIndicator.hidesWhenStopped = YES;
     
-    [self populateMaps];
+
 
 }
 -(void)viewWillDisappear:(BOOL)animated{
@@ -162,6 +172,7 @@
      
         ////In order to reliably update the UI I have to run such updates from the main thread
         dispatch_async(dispatch_get_main_queue(), ^{
+
             //                NSLog(@"block async dispatch");
             ////Previously working
            // [[self ExaggeratorImageView] setImage:smallImage];
@@ -479,8 +490,8 @@
     ///Need to update the name of the button
     
     NSString *newButtonName = [NSString stringWithFormat:@"What Is %@%@", friendlyNameToName[color],@"?"];
-    
-    _IsItGreenButtonOutlet.titleLabel.text = newButtonName;
+
+    [_IsItGreenButtonOutlet setTitle:newButtonName forState:normal];
     NSLog(@"Color of interest is now %@", _colorOfInterest);
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
