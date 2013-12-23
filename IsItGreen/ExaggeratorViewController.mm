@@ -158,9 +158,9 @@
         //thumbNail = [self imageFromSampleBuffer:sampleBuffer];
 
         ////Previous line
-//        UIImage * newThumbNail = [self imageFromSampleBuffer:sampleBuffer];
+       UIImage * newThumbNail = [self imageFromSampleBuffer:sampleBuffer];
         
-        UIImage * newThumbNail = [self processImage:sampleBuffer];
+      //  UIImage * newThumbNail = [self processImage:sampleBuffer];
         
        // NSLog(@"Image Finished Being Created with width %f and height %f", newThumbNail.size.width, newThumbNail.size.height);
         ///Crop the image to the center and 50 by 50
@@ -194,9 +194,9 @@
             // [subImage setImage:thumbNail];
  
         });
-
+        processVideoFrame = true;
     }
-   
+    
 }
 
 
@@ -460,6 +460,7 @@
         ///originally the color check is complete feedback stuff was right here.
         count++;
     }
+    /*
     else if((count > 5)&& _shouldWhiteBalance){
         count = 0;
         processVideoFrame = true;
@@ -468,7 +469,7 @@
         count = 0;
         processVideoFrame = true;
     }
-
+*/
     
 }
 
