@@ -156,7 +156,12 @@
         //////////////////////////REMEMBER TO CHANGE THIS BACK ////////////////////
         processVideoFrame =false;
         //thumbNail = [self imageFromSampleBuffer:sampleBuffer];
-        UIImage * newThumbNail = [self imageFromSampleBuffer:sampleBuffer];
+
+        ////Previous line
+//        UIImage * newThumbNail = [self imageFromSampleBuffer:sampleBuffer];
+        
+        UIImage * newThumbNail = [self processImage:sampleBuffer];
+        
        // NSLog(@"Image Finished Being Created with width %f and height %f", newThumbNail.size.width, newThumbNail.size.height);
         ///Crop the image to the center and 50 by 50
         
@@ -364,6 +369,10 @@
     CGImageRef cgImage = CGImageCreate(width, height, 8, 32, bytesPerRow, colorSpace, kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Little, dataProvider, NULL, true, kCGRenderingIntentDefault);
     
     CGDataProviderRelease(dataProvider);
+    
+
+    
+    
     // Create and return an image object to represent the Quartz image.
     //  NSLog(@"About to create the image");
     UIImage *image = [UIImage imageWithCGImage:cgImage];
@@ -371,8 +380,8 @@
     
     CGImageRelease(cgImage);
     CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
-    
-    image = [self tryWhiteBalancing:image];
+    ////Since we changed the white balance code
+    //image = [self tryWhiteBalancing:image];
     
   // CIFilter* filter  = [CIFilter filterWithName:@"CIWhitePointAdjust"]
   //  print_free_memory();
@@ -516,13 +525,20 @@
     NSLog(@"White balance Changed");
 }
 
--(UIImage*)tryWhiteBalancing:(UIImage*)sourceImage{
-    
+-(CGImage*)tryWhiteBalancing:(CGImage*)sourceImage{
+    /*
  
     if(_shouldWhiteBalance){
+   
+
   
         CIContext *context = [CIContext contextWithOptions:nil];
-        CIImage *inputImage = [CIImage imageWithCGImage:[sourceImage CGImage]];
+        
+        ///When this took a UIImage
+        ///CIImage *inputImage = [CIImage imageWithCGImage:[sourceImage CGImage]];
+        CIImage *inputImage = [CIImage imageWithCGImage:sourceImage];
+        
+        
         CIFilter *hueFilter = [CIFilter filterWithName:@"CITemperatureAndTint"];
         //[hueFilter setValue:inputImage forKey:kCIInputImageKey];
         [hueFilter setValue:inputImage forKey:@"InputImage"];
@@ -531,13 +547,30 @@
       [hueFilter setValue:[CIVector vectorWithX:100.0 Y:0] forKey:@"inputTargetNeutral"];
 
         CIImage *result = [hueFilter outputImage];
-        CGImageRef cgImage = [context createCGImage:result fromRect:[result extent]];
-        UIImage *imageResult = [UIImage imageWithCGImage:cgImage];
-        CGImageRelease(cgImage);
         
-        return imageResult;
+        
+        ///Originally creating then releasing. We just want an assignment I think.
+//        CGImageRef cgImage = [context createCGImage:result fromRect:[result extent]];
+           
+       // UIImage *imageResult = [UIImage imageWithCGImage:cgImage];
+//        CGImageRelease(cgImage);
+        //////////////////////////LOOKOUT FOR A MEMORY LEAK
+        //return imageResult;
+         
+        // CGImageRelease(sourceImage);
+  CGImageRef newImage = [context createCGImage:result fromRect:[result extent]];
+           
+           return newImage;
     }
   
+       else{
+           
+           
+           return sourceImage;
+           
+           
+       }
+    */
     /*
   
     if(!_shouldWhiteBalance){
@@ -558,33 +591,254 @@
 
     
 
-    
-    
-    else{
+  
 
     //We create a simple context without any option
     CIContext *context = [CIContext contextWithOptions:nil];
     
     ////We'll turn our incoming UIIMage into something we can filter.
-    CIImage *inputImage = [CIImage imageWithCGImage:[sourceImage CGImage]];
-    
- //  CIFilter *filter = [CIFilter filterWithName:@"CIWhitePointAdjust" keysAndValues:@"InputImage", inputImage, @"InputColor", whitebalancereference, nil];
+CIImage *inputImage = [CIImage imageWithCGImage:sourceImage];
     CIFilter *filter = [CIFilter filterWithName:@"CIWhitePointAdjust"];
    [filter setValue:inputImage forKey:kCIInputImageKey];
-    [filter setValue:[CIColor colorWithRed:55.0 green:100.0 blue:180.0 alpha:255.0] forKey:@"InputColor"];
+    [filter setValue:[CIColor colorWithRed:1.0 green:.5 blue:.8 alpha:1.0] forKey:@"InputColor"];
 
     CIImage *result = [filter outputImage];
     CGImageRef cgImage = [context createCGImage:result fromRect:[result extent]];
+
+        return cgImage;
+   
     
-    
-    UIImage *outputImage = [UIImage imageWithCGImage:cgImage];
-    CGImageRelease(cgImage);
-    return outputImage;
-    }
 
 }
 
 
 ////White balance test
+
+
+
+
+-(UIImage*)processImage:(CMSampleBufferRef)sampleBuffer{
+  
+    ////Right now this is doing all the work. We want to break this into functions.
+    // This example assumes the sample buffer came from an AVCaptureOutput,
+    //so its image buffer is known to be  a pixel buffer.
+    //   NSLog(@"Image from sample buffer");
+    CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+    //Lock the base address of the pixel buffer.
+    CVPixelBufferLockBaseAddress(imageBuffer,0);
+    
+    
+    //Get the number of bytes per row for the pixel buffer.
+   size_t bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
+    //Get the pixel  buffer width and height.
+    
+    size_t width = CVPixelBufferGetWidth(imageBuffer);
+    
+    size_t height = CVPixelBufferGetHeight(imageBuffer);
+    //Create a device-dependent RGB color space.
+    //        NSLog(@"Height and width");
+    static CGColorSpaceRef colorSpace = NULL;
+    
+    if (colorSpace == NULL) {
+        colorSpace = CGColorSpaceCreateDeviceRGB();
+        if (colorSpace == NULL){
+            // Handle the error appropriately.
+            
+            return nil;
+        }
+    }
+
+    
+    
+    // Get the base address of the pixel buffer.
+    void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
+    // Get the data size for contiguous planes of the pixel buffer.
+    size_t bufferSize = CVPixelBufferGetDataSize(imageBuffer);
+    //  NSLog(@"Got Pixel Buffer Data");
+    // Create a Quartz direct-access data provider that uses data we supply.
+    //a solution to that bad access from
+    //// http://stackoverflow.com/questions/10774392/cgcontextdrawimage-crashes
+    
+    ///We have a memory leak somewhere. But we've got ARC!?
+   NSData *data = [NSData dataWithBytes:baseAddress length:bufferSize];
+   // char* pixel = (char *)[data bytes];
+    // NSLog(@"DATA CREATED");
+    
+    CGDataProviderRef dataProvider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
+    
+    /*
+    for(int i = 0; i < [data length]; i += 4)
+    {
+        int r = i;
+        int g = i+1;
+        int b = i+2;
+        int a = i+3;
+        
+        pixel[r]   = 0; // eg. remove red
+        pixel[g]   = pixel[g];
+        pixel[b]   = pixel[b];
+        pixel[a]   = pixel[a];
+    }
+    */
+    
+    // Create a bitmap image from data supplied by the data provider.
+    CGImageRef cgImage = CGImageCreate(width, height, 8, 32, bytesPerRow, colorSpace, kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Little, dataProvider, NULL, true, kCGRenderingIntentDefault);
+   
+    CGImageRef cgWhiteBalanced;
+    if(_shouldWhiteBalance){
+    cgWhiteBalanced = [self tryWhiteBalancing:cgImage];
+    
+   // if(_shouldWhiteBalance)
+   CGImageRelease(cgImage);
+    }
+    else {
+        cgWhiteBalanced = cgImage;
+        //CGImageRelease(cgImage);
+    }
+    
+    ///Let's see if we can hit the buffer again directly.
+    //data = (__bridge NSData *)CGDataProviderCopyData(CGImageGetDataProvider(cgImage));
+    
+    
+   // data = (NSData*) CFBridgingRelease(CGDataProviderCopyData(CGImageGetDataProvider(cgImage)));
+    
+    
+    ////How ccould this be our memory leak?
+    data = [NSData dataWithBytes:[data bytes] length:data.length];
+    
+    CGDataProviderRelease(dataProvider);
+    
+    
+    dataProvider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
+    
+   // void *baseAddress1 = (char *)[data bytes];
+    char *pixels        = (char *)[data bytes];
+
+    for(int i = 0; i < [data length]; i += 4)
+    {
+        int r = i;
+        int g = i+1;
+        int b = i+2;
+        int a = i+3;
+        
+        pixels[r]   = 0; // eg. remove red
+        pixels[g]   = pixels[g];
+        pixels[b]   = pixels[b];
+        pixels[a]   = pixels[a];
+    }
+    
+    
+    
+    
+    CGBitmapInfo bitmapInfo  = CGImageGetBitmapInfo(cgWhiteBalanced);
+  
+
+    CGImageRef cgOutputImage = CGImageCreate(width, height, 8, 32, bytesPerRow, colorSpace, bitmapInfo, dataProvider, NULL, true, kCGRenderingIntentDefault);
+    CGImageRelease(cgWhiteBalanced);
+    CGDataProviderRelease(dataProvider);
+   //CGColorSpaceRelease(colorSpace);
+   // free(pixels);
+  
+    
+    ////Modification of this solution:
+    /// http://stackoverflow.com/questions/1281210/can-i-edit-the-pixels-of-the-uiimages-property-cgimage
+    ///Now we have a cgImage.
+    
+    
+    
+    //CGImageRef imageRef = cgImage;
+    
+/*
+    ///Check here for issues because ownership doesn't change
+    NSData *tdata        = (__bridge NSData *)CGDataProviderCopyData(CGImageGetDataProvider(cgImage));
+    char *pixels        = (char *)[tdata bytes];
+
+    // this is where you manipulate the individual pixels
+    // assumes a 4 byte pixel consisting of rgb and alpha
+    // for PNGs without transparency use i+=3 and remove int a
+    for(int i = 0; i < [tdata length]; i += 4)
+    {
+        int r = i;
+        int g = i+1;
+        int b = i+2;
+        int a = i+3;
+        
+        pixels[r]   = 0; // eg. remove red
+        pixels[g]   = pixels[g];
+        pixels[b]   = pixels[b];
+        pixels[a]   = pixels[a];
+    }
+    
+    // create a new image from the modified pixel data
+    ///Originally all of these had imageRef not cgImage
+    size_t twidth                    = CGImageGetWidth(cgImage);
+    size_t theight                   = CGImageGetHeight(cgImage);
+    size_t bitsPerComponent         = CGImageGetBitsPerComponent(cgImage);
+    size_t bitsPerPixel             = CGImageGetBitsPerPixel(cgImage);
+    size_t tbytesPerRow              = CGImageGetBytesPerRow(cgImage);
+    
+    CGColorSpaceRef colorspace      = CGColorSpaceCreateDeviceRGB();
+    CGBitmapInfo bitmapInfo         = CGImageGetBitmapInfo(cgImage);
+    CGDataProviderRef provider      = CGDataProviderCreateWithData(NULL, pixels, [tdata length], NULL);
+    
+    CGImageRef newImageRef = CGImageCreate (
+                                           twidth,
+                                            theight,
+                                            bitsPerComponent,
+                                            bitsPerPixel,
+                                            tbytesPerRow,
+                                            colorspace,
+                                            bitmapInfo,
+                                            provider,
+                                            NULL,
+                                            false,
+                                            kCGRenderingIntentDefault
+                                            );
+    // the modified image
+    UIImage *image   = [UIImage imageWithCGImage:newImageRef];
+    
+    // cleanup
+    free(pixels);
+   // CGImageRelease(imageRef);
+    CGColorSpaceRelease(colorspace);
+    CGDataProviderRelease(provider);
+    CGImageRelease(newImageRef);
+ 
+   */
+    // Create and return an image object to represent the Quartz image.
+    //  NSLog(@"About to create the image");
+    ///Our original output
+    
+   // UIImage *image   = [UIImage imageWithCGImage:newImageRef];
+    
+    
+    UIImage *image = [UIImage imageWithCGImage:cgOutputImage];
+    
+    //UIImage *image = [self tryWhiteBalancing:cgImage];
+    
+    ///My cleanup (By my cleanup I mean from the first half of this code)
+    CGImageRelease(cgOutputImage);
+   
+  //  CGImageRelease(newImageRef);
+    
+    
+    CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+
+    
+
+    
+    // CIFilter* filter  = [CIFilter filterWithName:@"CIWhitePointAdjust"]
+    //  print_free_memory();
+    //NSLog(@"RETURNING IMAGE");
+    return image;
+  
+    
+    
+}
+
+
+
+
+
 
 @end

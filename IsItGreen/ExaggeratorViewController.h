@@ -50,11 +50,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *IsItGreenButtonOutlet;
 @property (strong, nonatomic) IBOutlet UIButton *Whitebalance;
 
-///REDUDANT CODE
--(UIImage *)imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer;
--(UIImage *)imageWithCVMat:(const cv::Mat&)cvMat;
--(cv::Mat)cvMatFromUIImage:(UIImage *)image;
--(UIImage*)crop:(UIImage *)image :(CGRect)rect;
+-(UIImage*)processImage:(CMSampleBufferRef)imageref;
+
 
 -(void)TimerCallback;
 
@@ -62,10 +59,18 @@
 -(void)prepVidCapture;
 -(void)populateMaps;
 
--(UIImage*)tryWhiteBalancing:(UIImage*)sourceImage;
+//-(UIImage*)tryWhiteBalancing:(CGImage*)sourceImage;
+-(CGImage*)tryWhiteBalancing:(CGImage*)sourceImage;
 
 //-(void)updateThumbnail;
 -(IBAction)IsItGreenButton;
 
+
+
+///REDUDANT CODE
+-(UIImage *)imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer;
+-(UIImage *)imageWithCVMat:(const cv::Mat&)cvMat;
+-(cv::Mat)cvMatFromUIImage:(UIImage *)image;
+-(UIImage*)crop:(UIImage *)image :(CGRect)rect;
 
 @end
