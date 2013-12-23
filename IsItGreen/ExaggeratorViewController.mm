@@ -191,7 +191,7 @@
         });
 
     }
-    
+   
 }
 
 
@@ -451,7 +451,11 @@
         ///originally the color check is complete feedback stuff was right here.
         count++;
     }
-    else if(count > 1){
+    else if((count > 5)&& _shouldWhiteBalance){
+        count = 0;
+        processVideoFrame = true;
+    }
+    else if((count > 1)&& !_shouldWhiteBalance){
         count = 0;
         processVideoFrame = true;
     }
@@ -523,8 +527,8 @@
         //[hueFilter setValue:inputImage forKey:kCIInputImageKey];
         [hueFilter setValue:inputImage forKey:@"InputImage"];
 
-        [hueFilter setValue:[CIVector vectorWithX:6000.0 Y:0] forKey:@"inputNeutral"];
-        [hueFilter setValue:[CIVector vectorWithX:1000.0 Y:0] forKey:@"inputTargetNeutral"];
+       [hueFilter setValue:[CIVector vectorWithX:2000.0 Y:0] forKey:@"inputNeutral"];
+      [hueFilter setValue:[CIVector vectorWithX:100.0 Y:0] forKey:@"inputTargetNeutral"];
 
         CIImage *result = [hueFilter outputImage];
         CGImageRef cgImage = [context createCGImage:result fromRect:[result extent]];
