@@ -526,6 +526,11 @@
 }
 
 -(CGImage*)tryWhiteBalancing:(CGImage*)sourceImage{
+  
+    
+    
+    
+    
     /*
  
     if(_shouldWhiteBalance){
@@ -707,11 +712,14 @@ CIImage *inputImage = [CIImage imageWithCGImage:sourceImage];
     data = [NSData dataWithBytes:[data bytes] length:data.length];
     
     CGDataProviderRelease(dataProvider);
-    
+        CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
     
     dataProvider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
     
+    ///////////////////////////////////////////////////TURNING THIS OFF IN CASE ANYONE WANTS TO SEE APP
+    
    // void *baseAddress1 = (char *)[data bytes];
+    /*
     char *pixels        = (char *)[data bytes];
 
     for(int i = 0; i < [data length]; i += 4)
@@ -729,7 +737,7 @@ CIImage *inputImage = [CIImage imageWithCGImage:sourceImage];
     
     
     
-    
+    */
     CGBitmapInfo bitmapInfo  = CGImageGetBitmapInfo(cgWhiteBalanced);
   
 
@@ -822,7 +830,7 @@ CIImage *inputImage = [CIImage imageWithCGImage:sourceImage];
   //  CGImageRelease(newImageRef);
     
     
-    CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+
 
     
 
