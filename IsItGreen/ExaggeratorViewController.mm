@@ -303,6 +303,7 @@
     
 
     if(greenbuttonispressed){
+       
         processVideoFrame = false;
     unsigned char *pixel = (unsigned char *)CVPixelBufferGetBaseAddress(imageBuffer);
         colorcheckiscomplete = false;
@@ -470,7 +471,11 @@
         processVideoFrame = true;
     }
 */
-    
+    else if(count > 5){
+        count = 0;
+        processVideoFrame = true;
+    }
+  
 }
 
 ///TODO: Break this into functions
