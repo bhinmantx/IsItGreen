@@ -45,6 +45,7 @@
       ///And set up our timer
     _frameLimiterTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(TimerCallback) userInfo:nil repeats:YES];
     processVideoFrame = true;
+    _feedBackModeIsOn = false;
 
     
     [self prepVidCapture];
@@ -143,44 +144,16 @@
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
 	
-    ////Again, from APPLE
-    
-    /// They want you to implement this!
-    ////    https://developer.apple.com/library/ios/documentation/AudioVideo/Conceptual/AVFoundationPG/AVFoundationPG.pdf
+
     ///
     if(processVideoFrame){
-        //     NSLog(@"The process image system was called");
-        //  thumbNail = [self imageFromSampleBuffer:sampleBuffer];
 
-        
-        //////////////////////////REMEMBER TO CHANGE THIS BACK ////////////////////
         processVideoFrame =false;
         //thumbNail = [self imageFromSampleBuffer:sampleBuffer];
 
         ////Previous line
        UIImage * newThumbNail = [self imageFromSampleBuffer:sampleBuffer];
-        
-      //  UIImage * newThumbNail = [self processImage:sampleBuffer];
-        
-       // NSLog(@"Image Finished Being Created with width %f and height %f", newThumbNail.size.width, newThumbNail.size.height);
-        ///Crop the image to the center and 50 by 50
-        
-   ///Wait a minute this isn't right
-        ///eset352x288;
-      //  int overLayX = (newThumbNail.size.width / 2) - 160;
-     //   int overLayY = (newThumbNail.size.height /2) - 120;
-        
-        //   CGImageRef imageRef = CGImageCreateWithImageInRect([thumbNail CGImage], CGRectMake(thumbNail.size.width  , thumbNail.size.height / 2 , 320, 240));
-        
-        ///Original
-//        CGImageRef  imageRef = CGImageCreateWithImageInRect([newThumbNail CGImage], CGRectMake(overLayX  , overLayY , 320, 240));
-    //     CGImageRef  imageRef = CGImageCreateWithImageInRect([newThumbNail CGImage], CGRectMake(overLayX  , overLayY , 352, 288));
-        //  NSLog(@"JUST CROPPED");
-        
-    //    UIImage * smallImage = [UIImage imageWithCGImage:imageRef scale:newThumbNail.scale /2 orientation:newThumbNail.imageOrientation];
-    //    CGImageRelease(imageRef);
-     
-        ////In order to reliably update the UI I have to run such updates from the main thread
+
         dispatch_async(dispatch_get_main_queue(), ^{
 
             //                NSLog(@"block async dispatch");
@@ -194,7 +167,7 @@
             // [subImage setImage:thumbNail];
  
         });
-        processVideoFrame = true;
+       // processVideoFrame = true;
     }
     
 }
@@ -305,6 +278,7 @@
     if(greenbuttonispressed){
        
         processVideoFrame = false;
+        
     unsigned char *pixel = (unsigned char *)CVPixelBufferGetBaseAddress(imageBuffer);
         colorcheckiscomplete = false;
          NSLog(@"Checking for %@", _colorOfInterest);
@@ -349,7 +323,10 @@
     }
         NSLog(@"Check is complete");
        
+        _feedBackModeIsOn = true;
         colorcheckiscomplete = true;
+        
+        greenbuttonispressed = false;
     }
     
     
@@ -362,7 +339,7 @@
     //a solution to that bad access from
     //// http://stackoverflow.com/questions/10774392/cgcontextdrawimage-crashes
     
-    ///We have a memory leak somewhere. But we've got ARC!?
+
     NSData *data = [NSData dataWithBytes:baseAddress length:bufferSize];
     // NSLog(@"DATA CREATED");
     CGDataProviderRef dataProvider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
@@ -370,10 +347,7 @@
     CGImageRef cgImage = CGImageCreate(width, height, 8, 32, bytesPerRow, colorSpace, kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Little, dataProvider, NULL, true, kCGRenderingIntentDefault);
     
     CGDataProviderRelease(dataProvider);
-    
 
-    
-    
     // Create and return an image object to represent the Quartz image.
     //  NSLog(@"About to create the image");
     UIImage *image = [UIImage imageWithCGImage:cgImage];
@@ -386,10 +360,12 @@
     
   // CIFilter* filter  = [CIFilter filterWithName:@"CIWhitePointAdjust"]
   //  print_free_memory();
-    //NSLog(@"RETURNING IMAGE");
+
     return image;
     
 }
+
+
 -(UIImage*) crop:(UIImage *)image :(CGRect)rect {
     UIGraphicsBeginImageContextWithOptions([image size], false, [image scale]);
     //    [image drawAtPoint:CGPointMake(-rect.origin.x, -rect.origin.y))];
@@ -453,13 +429,12 @@
             count = 0;
         }
 
-        else if(count >300){
-            greenbuttonispressed = false;
-            count=0;
-            processVideoFrame = true;          
-        }
+      //  else if(count >300){
+        //    greenbuttonispressed = false;
+         //   count=0;
+          //  processVideoFrame = true;
+        //}
         ///originally the color check is complete feedback stuff was right here.
-        count++;
     }
     /*
     else if((count > 5)&& _shouldWhiteBalance){
@@ -471,7 +446,16 @@
         processVideoFrame = true;
     }
 */
-    else if(count > 5){
+    else if (_feedBackModeIsOn && (count > 300)){
+        count = 0;
+        greenbuttonispressed = false;
+        processVideoFrame = true;
+        _feedBackModeIsOn = 0;
+        
+    }
+    
+    
+    else if((count > 2) && !(greenbuttonispressed) && !(_feedBackModeIsOn)){
         count = 0;
         processVideoFrame = true;
     }

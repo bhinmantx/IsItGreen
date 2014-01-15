@@ -38,6 +38,7 @@
      bool greenbuttonispressed;
     bool colorcheckiscomplete;
     bool _shouldWhiteBalance;
+    bool _feedBackModeIsOn;
     std::map<NSString*,NSString*> friendlyNameToName;
     std::map<NSString*,NSString*> nameToFriendlyName;
     CIColor *whitebalancereference;
