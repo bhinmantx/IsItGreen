@@ -158,13 +158,26 @@
                                         <rect key="frame" x="0.0" y="0.0" width="288" height="352"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <button opaque="NO" alpha="0.40000000000000002" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nrt-v1-L83">
-                                        <rect key="frame" x="254" y="298" width="34" height="34"/>
+                                    <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nrt-v1-L83">
+                                        <rect key="frame" x="252" y="298" width="34" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" image="pause circle.png">
+                                        <state key="normal" image="pause_circle_w_back.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="pauseButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="v5d-hZ-Sl5"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YmT-41-4hq">
+                                        <rect key="frame" x="252" y="251" width="34" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="cam_circle_w_back.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="captureButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="OLx-m4-tJk"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -195,6 +208,10 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="9" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="B97-92-rHD">
+                                <rect key="frame" x="101" y="365" width="118" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -203,7 +220,10 @@
                         <outlet property="ColorNameLabel" destination="dMe-AO-rdt" id="Zud-vy-fjA"/>
                         <outlet property="TriggerButton" destination="Rid-vH-tlX" id="zhg-RO-KjX"/>
                         <outlet property="cameraFeed" destination="SaO-cc-YIB" id="aOb-vk-mFx"/>
+                        <outlet property="captureButton" destination="YmT-41-4hq" id="Nqx-2L-9Nb"/>
+                        <outlet property="pauseImageButton" destination="Nrt-v1-L83" id="7VJ-Zo-y8M"/>
                         <outlet property="subImage" destination="9Wx-Gd-bNr" id="jDA-T6-s3G"/>
+                        <outlet property="updateSpeedSlider" destination="B97-92-rHD" id="sba-R3-Jl1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -212,8 +232,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="cam_circle_w_back.png" width="57" height="57"/>
         <image name="crosshairs.png" width="25" height="25"/>
-        <image name="pause circle.png" width="57" height="57"/>
+        <image name="pause_circle_w_back.png" width="57" height="57"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

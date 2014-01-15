@@ -31,7 +31,13 @@
     NSArray *_json;
     NSTimer *_feedBackTimer;
 
-    NSString *_colorOfInterest; 
+    NSString *_colorOfInterest;
+    
+    bool isPaused;
+    
+    /////changing count from a static in the timer callback to
+    /////a global var. Nice and dangerous. 
+    int count;
     
     //bool greenbuttonispressed;
 }
@@ -56,10 +62,18 @@
 -(void)TimerCallback;
 
 
+///Setup funcs
 -(void)prepVidCapture;
 -(void)updateThumbnail;
 
+///Utility funcs
+-(bool)ShouldUpdateFeedback;
+
+@property (strong, nonatomic) IBOutlet UISlider *updateSpeedSlider;
+
 @property (strong, nonatomic) IBOutlet UILabel *ColorNameLabel;
+@property (strong, nonatomic) IBOutlet UIButton *pauseImageButton;
+@property (strong, nonatomic) IBOutlet UIButton *captureButton;
 
 @property (strong, nonatomic) IBOutlet UIButton *TriggerButton;
 

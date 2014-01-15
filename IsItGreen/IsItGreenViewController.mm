@@ -59,13 +59,18 @@ void print_free_memory ()
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-      processVideoFrame = false;
+      processVideoFrame = true;
+    isPaused = false;
+    
     [self prepVidCapture];
 	// Do any additional setup after loading the view, typically from a nib.
     ///make sure ui elements are in the right position
     subImage.layer.zPosition = 10;
     cameraFeed.layer.zPosition = 1;
     ColorNameLabel.layer.zPosition = 15;
+    [self pauseImageButton].layer.zPosition = 15;
+    [self captureButton].layer.zPosition = 15;
+    
     
     ///Setup our timer
       _timer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(TimerCallback) userInfo:nil repeats:YES];
@@ -74,6 +79,7 @@ void print_free_memory ()
     [self processJSON];
     ///create our matcher
     _matcher = [[ColorMatcher alloc]initWithJSON:_json];
+   // updateSpeedSlider.value
   
 }
 -(void)viewWillDisappear:(BOOL)animated{
@@ -185,7 +191,7 @@ void print_free_memory ()
                    [subImage setImage:newThumbNail];
                 
             });
-            processVideoFrame = true;
+          
         
     }
 
@@ -198,22 +204,69 @@ void print_free_memory ()
 
 - (IBAction)testTriggerButton:(id)sender {
     processVideoFrame = !processVideoFrame;
-   // NSLog(@"Button Press %x", processVideoFrame);
+    // NSLog(@"Button Press %x", processVideoFrame);
+    
+
 }
 
+
+- (IBAction)captureButton:(id)sender {
+
+    //probably a bad way to do this
+    processVideoFrame = false;
+    
+    UIImageWriteToSavedPhotosAlbum([self subImage].image, Nil, nil, nil);
+    
+    
+    
+    processVideoFrame = true;
+}
+
+
+
+- (IBAction)pauseButton:(id)sender {
+    
+
+    
+    
+    if(isPaused){
+        processVideoFrame = true;
+       // [self pauseImageButton].imageView.image = [UIImage imageNamed:@"pause circle.png"];
+        [[self pauseImageButton] setImage:[UIImage imageNamed:@"pause_circle_w_back.png"] forState:UIControlStateNormal];
+        isPaused = !isPaused;
+    }
+    else if(!isPaused)
+    {
+        processVideoFrame = false;
+//        [self pauseImageButton].imageView.image = [UIImage imageNamed:@"playicon.png"];
+        [[self pauseImageButton] setImage:[UIImage imageNamed:@"play_circle_w_back_no_circle.png"] forState:UIControlStateNormal];
+        isPaused = !isPaused;
+    }
+}
+
+
 -(void)TimerCallback{
-    static int count = 0;
+  //  static int count = 0;
     
     count++;
-    
+/*
     if(count>3){
         count = 0;
       	//processVideoFrame = true;
 //        [self subImage].hidden = true;
     }
+ */
 }
 
-
+-(bool)ShouldUpdateFeedback{
+    
+    if(count > ([self updateSpeedSlider].value)){
+        count = 0;
+        return true;
+    }
+    
+    return false;
+}
 
 
 -(UIImage*)imageFromSampleBuffer:(CMSampleBufferRef)sampleBuffer {
@@ -298,20 +351,20 @@ void print_free_memory ()
     int G = (g/100);
     int B = (b/100);
  //NSLog(@"R %i G %i B %i",R,G,B);
+    
+    if([self ShouldUpdateFeedback]){
     NSString* result = [_matcher getNameFromRGB:R:G:B];
    
     
 NSString *feedback = [NSString stringWithFormat:@"%@ R %i G %i B %i", result, R,G,B];
     
     ////In order to reliably update the UI I have to run such updates from the main thread
-    dispatch_async(dispatch_get_main_queue(), ^{
-    [self ColorNameLabel].text = feedback;
-      ///The following line was cute but let's just keep it white on a black background
-//        [self ColorNameLabel].textColor = [UIColor colorWithRed:R/255.0 green:G/255.0 blue:G/255.0 alpha:1.0];
-        
+        dispatch_async(dispatch_get_main_queue(), ^{
+        [self ColorNameLabel].text = feedback;
         [[self ColorNameLabel] setNeedsDisplay];
-    });
+        });
     
+    }
    // NSLog(@"Result is %@", result);
     //////Let's take half the height, half the width
     ////That gives us the center.
@@ -347,6 +400,7 @@ NSString *feedback = [NSString stringWithFormat:@"%@ R %i G %i B %i", result, R,
     
    // print_free_memory();
 //NSLog(@"RETURNING IMAGE");
+      processVideoFrame = true;
         return image;
 
 }

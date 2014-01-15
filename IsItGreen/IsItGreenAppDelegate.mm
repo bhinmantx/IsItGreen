@@ -33,7 +33,7 @@
     UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
     UITabBar *tabBar = tabBarController.tabBar;
     UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:0];
-    UITabBarItem *tabBarItem2 = [tabBar.items objectAtIndex:1];
+   // UITabBarItem *tabBarItem2 = [tabBar.items objectAtIndex:1];
     
     
    // tabBarItem1.title = @"Home";

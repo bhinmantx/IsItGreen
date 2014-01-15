@@ -15,7 +15,6 @@
 		C6500BEB184E7BEF00C42BAA /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6500BE9184E7BEF00C42BAA /* ImageIO.framework */; };
 		C6500BED184E7BFF00C42BAA /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6500BEC184E7BFF00C42BAA /* CoreVideo.framework */; };
 		C6500BEF184E7C2500C42BAA /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6500BEE184E7C2500C42BAA /* CoreMedia.framework */; };
-		C65B5397186DF00400DFB405 /* pause circle.png in Resources */ = {isa = PBXBuildFile; fileRef = C65B5396186DF00400DFB405 /* pause circle.png */; };
 		C66AE8251863D15C006AB9C6 /* ExaggeratorViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C66AE8241863D15C006AB9C6 /* ExaggeratorViewController.mm */; };
 		C6A63960184DD65A00C4241C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A6395F184DD65A00C4241C /* Foundation.framework */; };
 		C6A63962184DD65A00C4241C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A63961184DD65A00C4241C /* CoreGraphics.framework */; };
@@ -49,6 +48,10 @@
 		C6CAFC7818650E1B0057E69A /* IsItGreenColorSelectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6CAFC7718650E1B0057E69A /* IsItGreenColorSelectionViewController.mm */; };
 		C6F1B15B18861CE700534B10 /* eye icon active.png in Resources */ = {isa = PBXBuildFile; fileRef = C6F1B15918861CE700534B10 /* eye icon active.png */; };
 		C6F1B15C18861CE700534B10 /* eye icon inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = C6F1B15A18861CE700534B10 /* eye icon inactive.png */; };
+		C6F1B1661886322A00534B10 /* play_circle_w_back.png in Resources */ = {isa = PBXBuildFile; fileRef = C6F1B1631886322A00534B10 /* play_circle_w_back.png */; };
+		C6F1B1671886322A00534B10 /* cam_circle_w_back.png in Resources */ = {isa = PBXBuildFile; fileRef = C6F1B1641886322A00534B10 /* cam_circle_w_back.png */; };
+		C6F1B1681886322A00534B10 /* pause_circle_w_back.png in Resources */ = {isa = PBXBuildFile; fileRef = C6F1B1651886322A00534B10 /* pause_circle_w_back.png */; };
+		C6F1B16A1886333100534B10 /* play_circle_w_back_no_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = C6F1B1691886333100534B10 /* play_circle_w_back_no_circle.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,7 +73,6 @@
 		C6500BE9184E7BEF00C42BAA /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/ImageIO.framework; sourceTree = DEVELOPER_DIR; };
 		C6500BEC184E7BFF00C42BAA /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
 		C6500BEE184E7C2500C42BAA /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
-		C65B5396186DF00400DFB405 /* pause circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause circle.png"; sourceTree = "<group>"; };
 		C66AE8231863D15C006AB9C6 /* ExaggeratorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExaggeratorViewController.h; sourceTree = "<group>"; };
 		C66AE8241863D15C006AB9C6 /* ExaggeratorViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ExaggeratorViewController.mm; sourceTree = "<group>"; };
 		C6A6395C184DD65A00C4241C /* IsItGreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IsItGreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +114,10 @@
 		C6CAFC7718650E1B0057E69A /* IsItGreenColorSelectionViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IsItGreenColorSelectionViewController.mm; sourceTree = "<group>"; };
 		C6F1B15918861CE700534B10 /* eye icon active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eye icon active.png"; sourceTree = "<group>"; };
 		C6F1B15A18861CE700534B10 /* eye icon inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eye icon inactive.png"; sourceTree = "<group>"; };
+		C6F1B1631886322A00534B10 /* play_circle_w_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_circle_w_back.png; sourceTree = "<group>"; };
+		C6F1B1641886322A00534B10 /* cam_circle_w_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cam_circle_w_back.png; sourceTree = "<group>"; };
+		C6F1B1651886322A00534B10 /* pause_circle_w_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause_circle_w_back.png; sourceTree = "<group>"; };
+		C6F1B1691886333100534B10 /* play_circle_w_back_no_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_circle_w_back_no_circle.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,9 +222,12 @@
 		C6CAFC591864E0680057E69A /* icons and launch images */ = {
 			isa = PBXGroup;
 			children = (
+				C6F1B1631886322A00534B10 /* play_circle_w_back.png */,
+				C6F1B1641886322A00534B10 /* cam_circle_w_back.png */,
+				C6F1B1651886322A00534B10 /* pause_circle_w_back.png */,
+				C6F1B1691886333100534B10 /* play_circle_w_back_no_circle.png */,
 				C6F1B15918861CE700534B10 /* eye icon active.png */,
 				C6F1B15A18861CE700534B10 /* eye icon inactive.png */,
-				C65B5396186DF00400DFB405 /* pause circle.png */,
 				C6CAFC5A1864E1050057E69A /* IsItGreenIcon22.png */,
 				C6CAFC5B1864E1050057E69A /* IsItGreenIcon25.png */,
 				C6CAFC5C1864E1050057E69A /* IsItGreenIcon29.png */,
@@ -325,6 +334,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6F1B1671886322A00534B10 /* cam_circle_w_back.png in Resources */,
 				C6CAFC691864E1050057E69A /* IsItGreenIcon25.png in Resources */,
 				C6CAFC711864E1050057E69A /* IsItGreenIcon80.png in Resources */,
 				C6CAFC6B1864E1050057E69A /* IsItGreenIcon40.png in Resources */,
@@ -335,6 +345,7 @@
 				C6F1B15C18861CE700534B10 /* eye icon inactive.png in Resources */,
 				C6CAFC6E1864E1050057E69A /* IsItGreenIcon57.png in Resources */,
 				C6CAFC721864E1050057E69A /* IsItGreenIcon114.png in Resources */,
+				C6F1B1661886322A00534B10 /* play_circle_w_back.png in Resources */,
 				C6A63978184DD65A00C4241C /* Images.xcassets in Resources */,
 				C6F1B15B18861CE700534B10 /* eye icon active.png in Resources */,
 				C6CAFC681864E1050057E69A /* IsItGreenIcon22.png in Resources */,
@@ -344,9 +355,10 @@
 				C6CAFC6A1864E1050057E69A /* IsItGreenIcon29.png in Resources */,
 				C6CAFC6D1864E1050057E69A /* IsItGreenIcon50.png in Resources */,
 				C6A63973184DD65A00C4241C /* Main.storyboard in Resources */,
-				C65B5397186DF00400DFB405 /* pause circle.png in Resources */,
+				C6F1B1681886322A00534B10 /* pause_circle_w_back.png in Resources */,
 				C6CAFC731864E1050057E69A /* IsItGreenIcon120.png in Resources */,
 				C6CAFC751864E1050057E69A /* IsItGreenIcon1024.png in Resources */,
+				C6F1B16A1886333100534B10 /* play_circle_w_back_no_circle.png in Resources */,
 				C6CAFC741864E1050057E69A /* IsItGreenIcon152.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
