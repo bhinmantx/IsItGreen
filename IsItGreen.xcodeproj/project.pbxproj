@@ -47,6 +47,8 @@
 		C6CAFC741864E1050057E69A /* IsItGreenIcon152.png in Resources */ = {isa = PBXBuildFile; fileRef = C6CAFC661864E1050057E69A /* IsItGreenIcon152.png */; };
 		C6CAFC751864E1050057E69A /* IsItGreenIcon1024.png in Resources */ = {isa = PBXBuildFile; fileRef = C6CAFC671864E1050057E69A /* IsItGreenIcon1024.png */; };
 		C6CAFC7818650E1B0057E69A /* IsItGreenColorSelectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6CAFC7718650E1B0057E69A /* IsItGreenColorSelectionViewController.mm */; };
+		C6F1B15B18861CE700534B10 /* eye icon active.png in Resources */ = {isa = PBXBuildFile; fileRef = C6F1B15918861CE700534B10 /* eye icon active.png */; };
+		C6F1B15C18861CE700534B10 /* eye icon inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = C6F1B15A18861CE700534B10 /* eye icon inactive.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +110,8 @@
 		C6CAFC671864E1050057E69A /* IsItGreenIcon1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IsItGreenIcon1024.png; sourceTree = "<group>"; };
 		C6CAFC7618650E1B0057E69A /* IsItGreenColorSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IsItGreenColorSelectionViewController.h; sourceTree = "<group>"; };
 		C6CAFC7718650E1B0057E69A /* IsItGreenColorSelectionViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IsItGreenColorSelectionViewController.mm; sourceTree = "<group>"; };
+		C6F1B15918861CE700534B10 /* eye icon active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eye icon active.png"; sourceTree = "<group>"; };
+		C6F1B15A18861CE700534B10 /* eye icon inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eye icon inactive.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +216,8 @@
 		C6CAFC591864E0680057E69A /* icons and launch images */ = {
 			isa = PBXGroup;
 			children = (
+				C6F1B15918861CE700534B10 /* eye icon active.png */,
+				C6F1B15A18861CE700534B10 /* eye icon inactive.png */,
 				C65B5396186DF00400DFB405 /* pause circle.png */,
 				C6CAFC5A1864E1050057E69A /* IsItGreenIcon22.png */,
 				C6CAFC5B1864E1050057E69A /* IsItGreenIcon25.png */,
@@ -326,9 +332,11 @@
 				C6B487EB1856F7D400E5A0F9 /* colordata2.js in Resources */,
 				C6CAFC701864E1050057E69A /* IsItGreenIcon76.png in Resources */,
 				C6CAFC6C1864E1050057E69A /* IsItGreenIcon44.png in Resources */,
+				C6F1B15C18861CE700534B10 /* eye icon inactive.png in Resources */,
 				C6CAFC6E1864E1050057E69A /* IsItGreenIcon57.png in Resources */,
 				C6CAFC721864E1050057E69A /* IsItGreenIcon114.png in Resources */,
 				C6A63978184DD65A00C4241C /* Images.xcassets in Resources */,
+				C6F1B15B18861CE700534B10 /* eye icon active.png in Resources */,
 				C6CAFC681864E1050057E69A /* IsItGreenIcon22.png in Resources */,
 				C6500BE7184E616800C42BAA /* IsItGreen512.png in Resources */,
 				C6A6396A184DD65A00C4241C /* InfoPlist.strings in Resources */,

@@ -455,7 +455,7 @@
     }
     
     
-    else if((count > 2) && !(greenbuttonispressed) && !(_feedBackModeIsOn)){
+    else if((count > 1) && !(greenbuttonispressed) && !(_feedBackModeIsOn)){
         count = 0;
         processVideoFrame = true;
     }
