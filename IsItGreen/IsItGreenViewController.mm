@@ -260,7 +260,7 @@ void print_free_memory ()
 
 -(bool)ShouldUpdateFeedback{
     
-    if(count > ([self updateSpeedSlider].value)){
+    if(count > ((-1*[self updateSpeedSlider].value))){
         count = 0;
         return true;
     }
@@ -352,9 +352,11 @@ void print_free_memory ()
     int B = (b/100);
  //NSLog(@"R %i G %i B %i",R,G,B);
     
-    if([self ShouldUpdateFeedback]){
+    static bool firstTime = true;
+    
+    if([self ShouldUpdateFeedback] || firstTime){
     NSString* result = [_matcher getNameFromRGB:R:G:B];
-   
+        firstTime = false; 
     
 NSString *feedback = [NSString stringWithFormat:@"%@ R %i G %i B %i", result, R,G,B];
     

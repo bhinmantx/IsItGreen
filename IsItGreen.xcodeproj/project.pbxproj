@@ -28,6 +28,7 @@
 		C6A6397F184DD65A00C4241C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A6397E184DD65A00C4241C /* XCTest.framework */; };
 		C6A63980184DD65A00C4241C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A6395F184DD65A00C4241C /* Foundation.framework */; };
 		C6A63981184DD65A00C4241C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6A63963184DD65A00C4241C /* UIKit.framework */; };
+		C6AF90F2188A093300A2356F /* SmallGen1.js in Resources */ = {isa = PBXBuildFile; fileRef = C6AF90F0188A091400A2356F /* SmallGen1.js */; };
 		C6B487E51855D42500E5A0F9 /* UIImageResizing.m in Sources */ = {isa = PBXBuildFile; fileRef = C6B487E41855D42500E5A0F9 /* UIImageResizing.m */; };
 		C6B487E81856F09E00E5A0F9 /* ColorMatcher.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6B487E61856F09E00E5A0F9 /* ColorMatcher.mm */; };
 		C6B487EB1856F7D400E5A0F9 /* colordata2.js in Resources */ = {isa = PBXBuildFile; fileRef = C6B487E91856F7BB00E5A0F9 /* colordata2.js */; };
@@ -91,6 +92,7 @@
 		C6A63977184DD65A00C4241C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C6A6397D184DD65A00C4241C /* IsItGreenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IsItGreenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A6397E184DD65A00C4241C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		C6AF90F0188A091400A2356F /* SmallGen1.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = SmallGen1.js; sourceTree = "<group>"; };
 		C6B487E31855D3F500E5A0F9 /* UIImageResizing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageResizing.h; sourceTree = "<group>"; };
 		C6B487E41855D42500E5A0F9 /* UIImageResizing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageResizing.m; sourceTree = "<group>"; };
 		C6B487E61856F09E00E5A0F9 /* ColorMatcher.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ColorMatcher.mm; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 		C6A63966184DD65A00C4241C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C6AF90F0188A091400A2356F /* SmallGen1.js */,
 				C6CAFC591864E0680057E69A /* icons and launch images */,
 				C6B487E91856F7BB00E5A0F9 /* colordata2.js */,
 				C6500BE6184E616800C42BAA /* IsItGreen512.png */,
@@ -334,6 +337,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6AF90F2188A093300A2356F /* SmallGen1.js in Resources */,
 				C6F1B1671886322A00534B10 /* cam_circle_w_back.png in Resources */,
 				C6CAFC691864E1050057E69A /* IsItGreenIcon25.png in Resources */,
 				C6CAFC711864E1050057E69A /* IsItGreenIcon80.png in Resources */,

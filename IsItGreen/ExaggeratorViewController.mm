@@ -406,7 +406,7 @@
     
     NSError* noError;
     
-    NSData *jsFile = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"colordata2" ofType:@"js"]];
+    NSData *jsFile = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"SmallGen1" ofType:@"js"]];
     
     _json = [NSJSONSerialization JSONObjectWithData:jsFile options:0 error:&noError];
     
