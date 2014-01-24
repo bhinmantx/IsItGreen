@@ -162,7 +162,10 @@
     //probably a bad way to do this
     processVideoFrame = false;
     
-    UIImageWriteToSavedPhotosAlbum([self subImage].image, Nil, nil, nil);
+    
+    [self burnTextIntoImage:@"Test Feedback" :[self subImage].image];
+    
+  //  UIImageWriteToSavedPhotosAlbum([self subImage].image, Nil, nil, nil);
 
     processVideoFrame = true;
 }
@@ -334,6 +337,66 @@
 
 }
 
+////For labelling the image we're saving
+
+//- (UIImage *)burnTextIntoImage:(NSString *)text :(UIImage *)srcimg {
+- (void)burnTextIntoImage:(NSString *)text :(UIImage *)srcimg {
+    
+    UIImage * img = srcimg;
+    
+    
+    ///To support retina
+    if (UIGraphicsBeginImageContextWithOptions != NULL)
+        UIGraphicsBeginImageContextWithOptions(img.size,NO,0.0);
+    else
+        UIGraphicsBeginImageContext(img.size);
+    
+    CGRect aRectangle = CGRectMake(0,0, img.size.width, img.size.height);
+    CGRect fontRect = CGRectMake(0,((img.size.height/2) + 30), img.size.width, 50);
+    
+    ///Draw original image with our crosshair
+    [img drawInRect:aRectangle];
+    
+    [[UIColor colorWithWhite:0.0 alpha:0.2] setFill];
+//    [[UIColor blackColor] setFill];
+
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+   // CGContextSetFillColorWithColor(context, [UIColor blueColor].CGColor);
+     CGContextFillRect(context, fontRect);
+//    UIRectFillUsingBlendMode(fontRect, kCGBlendModeNormal);
+    ///////////
+    
+  
+    /////////////
+    
+//    [[UIColor blackColor] setFill];
+  //  UIRectFill(fontRect);
+    
+
+    
+    [[UIColor whiteColor] set];           // set text color
+    NSInteger fontSize = 14;
+    if ( [text length] > 200 ) {
+        fontSize = 10;
+    }
+    UIFont *font = [UIFont boldSystemFontOfSize: fontSize];     // set text font
+    
+    //[text drawInRect:fontRect withFont:font alignment:NSTextAlignmentCenter];
+  [text drawInRect:fontRect withFont:font lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentCenter];
+    /*
+    [text drawInRect:aRectangle                      // render the text
+             withFont : font
+        lineBreakMode : UILineBreakModeTailTruncation  // clip overflow from end of last line
+            alignment : UITextAlignmentCenter ];
+     */
+    ///
+     
+    UIImage *theImage=UIGraphicsGetImageFromCurrentImageContext();   // extract the image
+    UIGraphicsEndImageContext();     // clean  up the context.
+    UIImageWriteToSavedPhotosAlbum(theImage, Nil, nil, nil);
+    //return theImage;
+}
 
 
 /**

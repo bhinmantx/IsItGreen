@@ -60,6 +60,7 @@
 
 ///Utility funcs
 -(bool)ShouldUpdateFeedback;
+-(void)burnTextIntoImage:(NSString *)text :(UIImage *)srcimg;
 
 @property (strong, nonatomic) IBOutlet UISlider *updateSpeedSlider;
 
