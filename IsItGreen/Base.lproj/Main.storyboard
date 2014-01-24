@@ -213,12 +213,15 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VAN-4L-jgD">
-                                <rect key="frame" x="20" y="392" width="46" height="30"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lE9-33-mtI">
+                                <rect key="frame" x="269" y="232" width="28" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button">
+                                <state key="normal" image="flashlight-app-icon-tortured.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="switchTorch:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="kNe-CW-Y0m"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -230,6 +233,7 @@
                         <outlet property="pauseImageButton" destination="Nrt-v1-L83" id="7VJ-Zo-y8M"/>
                         <outlet property="savedLabel" destination="yV9-lb-dTb" id="Yew-La-Wzs"/>
                         <outlet property="subImage" destination="RA5-OJ-nFg" id="GJl-Vs-jlj"/>
+                        <outlet property="torchButton" destination="lE9-33-mtI" id="EOI-yu-NrM"/>
                         <outlet property="updateSpeedSlider" destination="B97-92-rHD" id="sba-R3-Jl1"/>
                     </connections>
                 </viewController>
@@ -240,6 +244,7 @@
     </scenes>
     <resources>
         <image name="cam_circle_w_back.png" width="57" height="57"/>
+        <image name="flashlight-app-icon-tortured.png" width="64" height="64"/>
         <image name="pause_circle_w_back.png" width="57" height="57"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

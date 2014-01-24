@@ -43,7 +43,8 @@
     [self pauseImageButton].layer.zPosition = 15;
     [self captureButton].layer.zPosition = 15;
     [self savedLabel].layer.zPosition = 15;
-    
+//    [self WhiteBalancer].layer.zPosition = 15;
+    [self torchButton].layer.zPosition = 15; 
     
     ///Setup our timer
       _timer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(TimerCallback) userInfo:nil repeats:YES];
@@ -53,10 +54,24 @@
     ///create our matcher
     _matcher = [[ColorMatcher alloc]initWithJSON:_json];
    // updateSpeedSlider.value
-  
+
+    ////Let's take care of the torch
+    if(camera.torchAvailable)
+    {
+        _torchButton.hidden = false;
+    }
 }
 -(void)viewWillDisappear:(BOOL)animated{
 
+    NSError * error = nil;
+    
+    ///make sure the lamp is off
+    if([camera lockForConfiguration:&error])
+    {
+        camera.torchMode = AVCaptureTorchModeOff;
+        [camera unlockForConfiguration];
+    }
+    
     [session stopRunning];
     
 }
@@ -64,8 +79,15 @@
 -(void)viewWillAppear:(BOOL)animated{
     
     ////Take care of the pause button sometimes not changing
-    [[self pauseImageButton] setImage:[UIImage imageNamed:@"play_circle_w_back_no_circle.png"] forState:UIControlStateNormal];
+    [[self pauseImageButton] setImage:[UIImage imageNamed:@"pause_circle_w_back.png"] forState:UIControlStateNormal];
     isPaused = false;
+    
+    
+    if(camera.torchAvailable)
+    {
+        _torchButton.hidden = false;
+    }
+    
     
     processVideoFrame = true;
     [session startRunning];
@@ -81,7 +103,7 @@
 
 
 	// Get the default camera device
-	AVCaptureDevice* camera = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+	camera = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
 	
 	// Create a AVCaptureInput with the camera device
 	NSError *error=nil;
@@ -149,9 +171,54 @@
 
 }
 
+/*
+- (IBAction)AttemptWhiteBalance:(id)sender {
+    NSLog(@"Attempting White Balance");
+    //NSError * error = [[NSError alloc]init];
+    NSError *error=nil;
+    if([camera lockForConfiguration:&error]){
+        camera.whiteBalanceMode = AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance;
+                NSLog(@"Is camera white balancing now? %hhd", camera.adjustingWhiteBalance);
+        NSLog(@"Is white balance locked mode supported %hhd", [camera isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeLocked]);
+        NSLog(@"Is white balance auto mode supported %hhd", [camera isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeAutoWhiteBalance]);
+        NSLog(@"Is white balance continuous mode supported %hhd", [camera isWhiteBalanceModeSupported:AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance]);
+//        camera.whiteBalanceMode = AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance;
+       // camera.whiteBalanceMode = AVCaptureWhiteBalanceModeAutoWhiteBalance;
+        camera.whiteBalanceMode = AVCaptureWhiteBalanceModeLocked;
+        
+        NSLog(@"Howabout now? %hhd", camera.adjustingWhiteBalance);
+        
+        [camera unlockForConfiguration];
+    }
+    else
+        NSLog(@"%@", error);
+    
+ 
+}
+*/
 
-
-
+- (IBAction)switchTorch:(id)sender {
+    
+    NSError * error;
+    if([camera lockForConfiguration:&error])
+    {
+        NSLog(@"Is torch auto mode supported? %hhd", [camera isTorchModeSupported:AVCaptureTorchModeAuto]);
+        NSLog(@"Is torch on supported? %hhd", [camera isTorchModeSupported:AVCaptureTorchModeOn]);
+        
+        if (camera.torchMode == AVCaptureTorchModeOff)
+        {
+            if([camera isTorchModeSupported:(AVCaptureTorchModeAuto)]){
+                camera.torchMode = AVCaptureTorchModeOn;
+            }
+        else
+            camera.torchMode = AVCaptureTorchModeOff;
+        
+            [camera unlockForConfiguration];
+        }
+        
+    }
+    
+}
 
 
 - (IBAction)captureButton:(id)sender {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C63B66F61892780A002F1E25 /* flashlight-app-icon-tortured.png in Resources */ = {isa = PBXBuildFile; fileRef = C63B66F51892780A002F1E25 /* flashlight-app-icon-tortured.png */; };
 		C64BAEB8184DD72E00902C8A /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64BAEB7184DD72E00902C8A /* opencv2.framework */; };
 		C64BAEBA184DDBB900902C8A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64BAEB9184DDBB900902C8A /* AVFoundation.framework */; };
 		C6500BE5184E5C7000C42BAA /* crosshairs.png in Resources */ = {isa = PBXBuildFile; fileRef = C6500BE4184E5C6F00C42BAA /* crosshairs.png */; };
@@ -66,6 +67,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C63B66F51892780A002F1E25 /* flashlight-app-icon-tortured.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "flashlight-app-icon-tortured.png"; path = "../../../Desktop/flashlight-app-icon-tortured.png"; sourceTree = "<group>"; };
 		C64BAEB7184DD72E00902C8A /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		C64BAEB9184DDBB900902C8A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C6500BE4184E5C6F00C42BAA /* crosshairs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crosshairs.png; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 		C6A63966184DD65A00C4241C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C63B66F51892780A002F1E25 /* flashlight-app-icon-tortured.png */,
 				C6AF90F0188A091400A2356F /* SmallGen1.js */,
 				C6CAFC591864E0680057E69A /* icons and launch images */,
 				C6B487E91856F7BB00E5A0F9 /* colordata2.js */,
@@ -375,6 +378,7 @@
 				C6CAFC6A1864E1050057E69A /* IsItGreenIcon29.png in Resources */,
 				C6CAFC6D1864E1050057E69A /* IsItGreenIcon50.png in Resources */,
 				C6A63973184DD65A00C4241C /* Main.storyboard in Resources */,
+				C63B66F61892780A002F1E25 /* flashlight-app-icon-tortured.png in Resources */,
 				C6F1B1681886322A00534B10 /* pause_circle_w_back.png in Resources */,
 				C6CAFC731864E1050057E69A /* IsItGreenIcon120.png in Resources */,
 				C6CAFC751864E1050057E69A /* IsItGreenIcon1024.png in Resources */,

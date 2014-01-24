@@ -22,6 +22,10 @@
     
     AVCaptureSession *session;
     
+    //Changing this from the one local to the video setup funcs so that
+    ///we can try white balancing
+    AVCaptureDevice* camera;
+    
     ///Has the previous video frame finished?
     BOOL processVideoFrame;
 
@@ -30,7 +34,7 @@
     NSArray *_json;
     NSTimer *_feedBackTimer;
 
-    NSString *_colorOfInterest;
+  //  NSString *_colorOfInterest;
     
     
     
@@ -78,6 +82,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *pauseImageButton;
 @property (strong, nonatomic) IBOutlet UIButton *captureButton;
 @property (strong, nonatomic) IBOutlet UILabel *savedLabel;
+//@property (strong, nonatomic) IBOutlet UIButton *WhiteBalancer;
+
+@property (strong, nonatomic) IBOutlet UIButton *torchButton;
 
 
 
