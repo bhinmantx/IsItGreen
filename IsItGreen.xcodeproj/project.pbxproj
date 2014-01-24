@@ -152,6 +152,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C63B66F31891F0B0002F1E25 /* Color Spotter */ = {
+			isa = PBXGroup;
+			children = (
+				C6A63974184DD65A00C4241C /* IsItGreenViewController.h */,
+				C6A63975184DD65A00C4241C /* IsItGreenViewController.mm */,
+			);
+			name = "Color Spotter";
+			sourceTree = "<group>";
+		};
+		C63B66F41891F0CB002F1E25 /* Color Exaggerator */ = {
+			isa = PBXGroup;
+			children = (
+				C66AE8231863D15C006AB9C6 /* ExaggeratorViewController.h */,
+				C66AE8241863D15C006AB9C6 /* ExaggeratorViewController.mm */,
+				C6CAFC7618650E1B0057E69A /* IsItGreenColorSelectionViewController.h */,
+				C6CAFC7718650E1B0057E69A /* IsItGreenColorSelectionViewController.mm */,
+			);
+			name = "Color Exaggerator";
+			sourceTree = "<group>";
+		};
 		C6A63953184DD65A00C4241C = {
 			isa = PBXGroup;
 			children = (
@@ -190,16 +210,12 @@
 		C6A63965184DD65A00C4241C /* IsItGreen */ = {
 			isa = PBXGroup;
 			children = (
+				C63B66F41891F0CB002F1E25 /* Color Exaggerator */,
+				C63B66F31891F0B0002F1E25 /* Color Spotter */,
 				C6CAFC7918650F550057E69A /* Utility Classes */,
-				C66AE8231863D15C006AB9C6 /* ExaggeratorViewController.h */,
-				C66AE8241863D15C006AB9C6 /* ExaggeratorViewController.mm */,
 				C6A6396E184DD65A00C4241C /* IsItGreenAppDelegate.h */,
 				C6A6396F184DD65A00C4241C /* IsItGreenAppDelegate.mm */,
 				C6A63971184DD65A00C4241C /* Main.storyboard */,
-				C6CAFC7618650E1B0057E69A /* IsItGreenColorSelectionViewController.h */,
-				C6CAFC7718650E1B0057E69A /* IsItGreenColorSelectionViewController.mm */,
-				C6A63974184DD65A00C4241C /* IsItGreenViewController.h */,
-				C6A63975184DD65A00C4241C /* IsItGreenViewController.mm */,
 				C6A63977184DD65A00C4241C /* Images.xcassets */,
 				C6A63966184DD65A00C4241C /* Supporting Files */,
 			);

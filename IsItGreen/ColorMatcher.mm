@@ -231,7 +231,7 @@ if(votes>threshold)
 }
 
 
-//There HAS to be a better way to do this
+//Exaggerate the level of  a color channel to the last 55 possible values
 -(int)exaggerateVal:(int)value{
     
     
@@ -416,7 +416,7 @@ if(votes>threshold)
     singleQuery.push_back(b);
     //singleQuery.push_back(alpha);
     
-    [self kdtree]->knnSearch(singleQuery, index, dist, 1, cv::flann::SearchParams(8));
+    [self kdtree]->knnSearch(singleQuery, index, dist, 1, cv::flann::SearchParams(4));
     
     //  NSLog(@"Index, %x ,  dist %f", index[0], dist[0]);
     int i = index[0];

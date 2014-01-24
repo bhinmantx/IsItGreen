@@ -37,7 +37,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self colorPicker].delegate = self;
-   [self colorPicker].dataSource = self;
+    [self colorPicker].dataSource = self;
     
     _colorOptions = [NSMutableArray arrayWithCapacity:9];
     /////We should iterate through the contents of name probably to get the right names
@@ -108,16 +108,5 @@
 }
 
 
-///NavBar items are apparently hooked up through
-///the storyboard more easily
-/*
-- (IBAction)didSelectDone:(UIButton *)sender
-{
-    NSLog(@"Did Select Done");
-    //here we return the so called "friendly" name. Right now we're still just passing color initials back and forth
-    NSString* selectedColor = [_colorOptions objectAtIndex:[_colorPicker selectedRowInComponent:0]];
-   [self.delegate didDismissPresentedViewController:selectedColor];
-}
- */
 
 @end

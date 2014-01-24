@@ -19,13 +19,12 @@
 
 @interface IsItGreenViewController : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate>
 {
-    IBOutlet UIView *cameraFeed;
     
     AVCaptureSession *session;
     
+    ///Has the previous video frame finished?
     BOOL processVideoFrame;
 
- //  UIImage *thumbNail;
     ColorMatcher *_matcher;
     
     NSArray *_json;
@@ -38,18 +37,11 @@
     /////changing count from a static in the timer callback to
     /////a global var. Nice and dangerous. 
     int count;
-    
-    //bool greenbuttonispressed;
+
 }
 
 
-@property(nonatomic, strong) IBOutlet UIView *cameraFeed;
-
-/////below is for still image capture
-
-
 @property (strong, atomic) IBOutlet UIImageView *subImage;
-//@property (strong, atomic) UIImage *thumbNail;
 @property (strong, atomic) ColorMatcher * matcher;
 @property (strong, atomic) NSTimer * timer;
 
@@ -75,6 +67,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *pauseImageButton;
 @property (strong, nonatomic) IBOutlet UIButton *captureButton;
 
-@property (strong, nonatomic) IBOutlet UIButton *TriggerButton;
+
 
 @end

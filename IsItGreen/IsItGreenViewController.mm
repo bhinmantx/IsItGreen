@@ -10,34 +10,7 @@
 #import "AVFoundation/AVCaptureOutput.h"
 #import "ColorMatcher.h"
 
-////Memory profiling code
-//#import <mach/mach.h>
-//#import <mach/mach_host.h>
-/*
-void print_free_memory ()
-{
-    mach_port_t host_port;
-    mach_msg_type_number_t host_size;
-    vm_size_t pagesize;
-    
-    host_port = mach_host_self();
-    host_size = sizeof(vm_statistics_data_t) / sizeof(integer_t);
-    host_page_size(host_port, &pagesize);
-    
-    vm_statistics_data_t vm_stat;
-    
-    if (host_statistics(host_port, HOST_VM_INFO, (host_info_t)&vm_stat, &host_size) != KERN_SUCCESS)
-        NSLog(@"Failed to fetch vm statistics");
-    
-    /// Stats in bytes
-    natural_t mem_used = (vm_stat.active_count +
-                          vm_stat.inactive_count +
-                          vm_stat.wire_count) * pagesize;
-    natural_t mem_free = vm_stat.free_count * pagesize;
-    natural_t mem_total = mem_used + mem_free;
-    NSLog(@"used: %u free: %u total: %u", mem_used, mem_free, mem_total);
-}
-*/
+
 
 @interface IsItGreenViewController ()
 
@@ -47,7 +20,7 @@ void print_free_memory ()
 
 //@synthesize cameraFeed, subImage, thumbNail;
 //////REMEMBER TO CHANGE THIS BACK
-@synthesize cameraFeed, subImage;
+@synthesize subImage;
 @synthesize matcher = _matcher;
 @synthesize timer = _timer;
 @synthesize ColorNameLabel;
@@ -59,14 +32,13 @@ void print_free_memory ()
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-      processVideoFrame = true;
+    processVideoFrame = true;
     isPaused = false;
     
     [self prepVidCapture];
 	// Do any additional setup after loading the view, typically from a nib.
     ///make sure ui elements are in the right position
     subImage.layer.zPosition = 10;
-    cameraFeed.layer.zPosition = 1;
     ColorNameLabel.layer.zPosition = 15;
     [self pauseImageButton].layer.zPosition = 15;
     [self captureButton].layer.zPosition = 15;
@@ -89,6 +61,11 @@ void print_free_memory ()
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    
+    ////Take care of the pause button sometimes not changing
+    [[self pauseImageButton] setImage:[UIImage imageNamed:@"play_circle_w_back_no_circle.png"] forState:UIControlStateNormal];
+    isPaused = false;
+    
     processVideoFrame = true;
     [session startRunning];
 }
@@ -100,24 +77,7 @@ void print_free_memory ()
     session = [[AVCaptureSession alloc] init];
 	//session.sessionPreset = AVCaptureSessionPreset640x480;
     session.sessionPreset = AVCaptureSessionPreset352x288;
-    
- //   CALayer *viewLayer = self.cameraFeed.layer;
- //   AVCaptureVideoPreviewLayer *captureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
 
-
-    ///This should properly size and fill the preview layer
-//    CGRect bounds=self.cameraFeed.layer.bounds;
-  //  captureVideoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    //    captureVideoPreviewLayer.videoGravity = AVLayerVideoGravityResize;
-  //  captureVideoPreviewLayer.bounds=bounds;
-   // captureVideoPreviewLayer.position=CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
-    
-    
-    //captureVideoPreviewLayer.frame = viewLayer.bounds;
-
-    
-    
-   // [self.cameraFeed.layer addSublayer:captureVideoPreviewLayer];
 
 	// Get the default camera device
 	AVCaptureDevice* camera = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
@@ -173,39 +133,26 @@ void print_free_memory ()
         ////    https://developer.apple.com/library/ios/documentation/AudioVideo/Conceptual/AVFoundationPG/AVFoundationPG.pdf
         ///
         if(processVideoFrame){
-
             //////////////////////////REMEMBER TO CHANGE THIS BACK ////////////////////
         processVideoFrame =false;
         //thumbNail = [self imageFromSampleBuffer:sampleBuffer];
           UIImage * newThumbNail = [self imageFromSampleBuffer:sampleBuffer];
-           //NSLog(@"Image Finished Being Created with width %f and height %f", newThumbNail.size.width, newThumbNail.size.height);
-            ///Crop the image to the center and 50 by 50
- 
             
             ////In order to reliably update the UI I have to run such updates from the main thread
                 dispatch_async(dispatch_get_main_queue(), ^{
-//                NSLog(@"block async dispatch");
-                   // [subImage setImage:smallImage];
-
-                    [self subImage].hidden = false;
-                   [subImage setImage:newThumbNail];
+                [self subImage].hidden = false;
+                [subImage setImage:newThumbNail];
                 
-            });
-          
-        
+        });
     }
 
 }
 
 
 
-
-
-
 - (IBAction)testTriggerButton:(id)sender {
     processVideoFrame = !processVideoFrame;
     // NSLog(@"Button Press %x", processVideoFrame);
-    
 
 }
 
@@ -216,19 +163,14 @@ void print_free_memory ()
     processVideoFrame = false;
     
     UIImageWriteToSavedPhotosAlbum([self subImage].image, Nil, nil, nil);
-    
-    
-    
+
     processVideoFrame = true;
 }
 
 
 
 - (IBAction)pauseButton:(id)sender {
-    
 
-    
-    
     if(isPaused){
         processVideoFrame = true;
        // [self pauseImageButton].imageView.image = [UIImage imageNamed:@"pause circle.png"];
@@ -277,17 +219,13 @@ void print_free_memory ()
         CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
         //Lock the base address of the pixel buffer.
         CVPixelBufferLockBaseAddress(imageBuffer,0);
-        
-        
         //Get the number of bytes per row for the pixel buffer.
         size_t bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
         //Get the pixel  buffer width and height.
-        
         size_t width = CVPixelBufferGetWidth(imageBuffer);
-        
         size_t height = CVPixelBufferGetHeight(imageBuffer);
         //Create a device-dependent RGB color space.
-//        NSLog(@"Height and width");
+
         static CGColorSpaceRef colorSpace = NULL;
         
         if (colorSpace == NULL) {
@@ -311,11 +249,7 @@ void print_free_memory ()
     ///Set our actual starting positions as the center with a 5 pixel offset
     int x = (originx/2) - 5;
     int y = (originy/2) - 5;
-   // NSLog(@"x %i  y %i", x, y);
-//    int x = ((width/2)) - 5;
-  // int y = ((height/2)) - 5 ;
-   // int x = 1;
-   // int y = 1;
+
     size_t r = 0;
     size_t g = 0;
     size_t b = 0;
@@ -355,10 +289,10 @@ void print_free_memory ()
     static bool firstTime = true;
     
     if([self ShouldUpdateFeedback] || firstTime){
-    NSString* result = [_matcher getNameFromRGB:R:G:B];
+        NSString* result = [_matcher getNameFromRGB:R:G:B];
         firstTime = false; 
     
-NSString *feedback = [NSString stringWithFormat:@"%@ R %i G %i B %i", result, R,G,B];
+        NSString *feedback = [NSString stringWithFormat:@"%@ R %i G %i B %i", result, R,G,B];
     
     ////In order to reliably update the UI I have to run such updates from the main thread
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -367,14 +301,7 @@ NSString *feedback = [NSString stringWithFormat:@"%@ R %i G %i B %i", result, R,
         });
     
     }
-   // NSLog(@"Result is %@", result);
-    //////Let's take half the height, half the width
-    ////That gives us the center.
-    ///subtract 5 from each and that gives us
-    
-    
-    
-        
+      
         // Get the base address of the pixel buffer.
         void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
         // Get the data size for contiguous planes of the pixel buffer.

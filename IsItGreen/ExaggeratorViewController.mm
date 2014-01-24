@@ -108,7 +108,7 @@
 	NSError *error=nil;
 	AVCaptureInput* cameraInput = [[AVCaptureDeviceInput alloc] initWithDevice:camera error:&error];
 	if (cameraInput == nil) {
-		NSLog(@"Error to create camera capture:%@",error);
+		NSLog(@"Error creating capture:%@",error);
 	}
 	
     ///We need to set the orientation:

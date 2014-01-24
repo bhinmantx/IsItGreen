@@ -22,10 +22,7 @@
     ///The camera session
     ///maps
     ////previous color of interest
-    
-    
-    
-    
+
     // Override point for customization after application launch.
     
     
@@ -34,10 +31,7 @@
     UITabBar *tabBar = tabBarController.tabBar;
     UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:0];
    // UITabBarItem *tabBarItem2 = [tabBar.items objectAtIndex:1];
-    
-    
-   // tabBarItem1.title = @"Home";
-  // tabBarItem2.title = @"Maps";
+
     [tabBarItem1 setFinishedSelectedImage:[UIImage imageNamed:@"eye icon active.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"eye icon inactive.png"]];
     
     
