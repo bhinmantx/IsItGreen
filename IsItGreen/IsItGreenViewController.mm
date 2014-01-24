@@ -101,23 +101,23 @@ void print_free_memory ()
 	//session.sessionPreset = AVCaptureSessionPreset640x480;
     session.sessionPreset = AVCaptureSessionPreset352x288;
     
-    CALayer *viewLayer = self.cameraFeed.layer;
-    AVCaptureVideoPreviewLayer *captureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
+ //   CALayer *viewLayer = self.cameraFeed.layer;
+ //   AVCaptureVideoPreviewLayer *captureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
 
 
     ///This should properly size and fill the preview layer
-    CGRect bounds=self.cameraFeed.layer.bounds;
-    captureVideoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+//    CGRect bounds=self.cameraFeed.layer.bounds;
+  //  captureVideoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     //    captureVideoPreviewLayer.videoGravity = AVLayerVideoGravityResize;
-    captureVideoPreviewLayer.bounds=bounds;
-    captureVideoPreviewLayer.position=CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
+  //  captureVideoPreviewLayer.bounds=bounds;
+   // captureVideoPreviewLayer.position=CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
     
     
-    captureVideoPreviewLayer.frame = viewLayer.bounds;
+    //captureVideoPreviewLayer.frame = viewLayer.bounds;
 
     
     
-    [self.cameraFeed.layer addSublayer:captureVideoPreviewLayer];
+   // [self.cameraFeed.layer addSublayer:captureVideoPreviewLayer];
 
 	// Get the default camera device
 	AVCaptureDevice* camera = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
