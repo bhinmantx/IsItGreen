@@ -32,12 +32,16 @@
 
     NSString *_colorOfInterest;
     
+    
+    
     bool isPaused;
     
     /////changing count from a static in the timer callback to
     /////a global var. Nice and dangerous. 
     int count;
-
+    ///same for labelfeedback
+    NSString *_FeedbackLabelString;
+    NSString *_FeedbackLabelString2;
 }
 
 
@@ -60,7 +64,7 @@
 
 ///Utility funcs
 -(bool)ShouldUpdateFeedback;
--(void)burnTextIntoImage:(NSString *)text :(UIImage *)srcimg;
+-(void)labelImage:(NSString *)text :(NSString *)text2 :(UIImage *)srcimg;
 
 @property (strong, nonatomic) IBOutlet UISlider *updateSpeedSlider;
 

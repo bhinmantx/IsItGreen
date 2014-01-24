@@ -163,7 +163,7 @@
     processVideoFrame = false;
     
     
-    [self burnTextIntoImage:@"Test Feedback" :[self subImage].image];
+    [self labelImage:_FeedbackLabelString :_FeedbackLabelString2 :[self subImage].image];
     
   //  UIImageWriteToSavedPhotosAlbum([self subImage].image, Nil, nil, nil);
 
@@ -263,10 +263,10 @@
             ///Get our position in the buffer
             int pixnumber = ((y+j)*(fwidth) + (x+i));
             
-            //pixnumber += (4 - (pixnumber % 4));
-       //     NSLog(@"Pixnumber %i", pixnumber);
+
+
             unsigned char* pixptr = (pixel + ((BYTES_PER_PIXEL)*(pixnumber)));
-           // unsigned char* pixptr = (pixel + ((BYTES_PER_PIXEL)*(j)));
+
             b += pixptr[0];
             g += pixptr[1];
             r += pixptr[2];
@@ -277,8 +277,7 @@
             pixptr[1] = 0;
             pixptr[2] = 0;
             }
-            
-          // NSLog(@"X is %i y is %i pixnumber is %zx", (x+j), (y+i), pixnumber);
+
             
         }
     
@@ -287,15 +286,17 @@
     int R = (r/100);
     int G = (g/100);
     int B = (b/100);
- //NSLog(@"R %i G %i B %i",R,G,B);
+
     
     static bool firstTime = true;
     
     if([self ShouldUpdateFeedback] || firstTime){
         NSString* result = [_matcher getNameFromRGB:R:G:B];
-        firstTime = false; 
-    
+        firstTime = false;
+        
         NSString *feedback = [NSString stringWithFormat:@"%@ R %i G %i B %i", result, R,G,B];
+        _FeedbackLabelString = result;
+        _FeedbackLabelString2 = [NSString stringWithFormat:@"Raw Values: Red %i Green %i Blue %i", R,G,B];
     
     ////In order to reliably update the UI I have to run such updates from the main thread
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -306,41 +307,39 @@
     }
       
         // Get the base address of the pixel buffer.
-        void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
+    void *baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
         // Get the data size for contiguous planes of the pixel buffer.
-        size_t bufferSize = CVPixelBufferGetDataSize(imageBuffer);
-        //  NSLog(@"Got Pixel Buffer Data");
+    size_t bufferSize = CVPixelBufferGetDataSize(imageBuffer);
+
         // Create a Quartz direct-access data provider that uses data we supply.
         //a solution to that bad access from
         //// http://stackoverflow.com/questions/10774392/cgcontextdrawimage-crashes
     
 
     NSData *data = [NSData dataWithBytes:baseAddress length:bufferSize];
-   // NSLog(@"DATA CREATED");
-        CGDataProviderRef dataProvider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
+
+    CGDataProviderRef dataProvider = CGDataProviderCreateWithCFData((__bridge CFDataRef)data);
         // Create a bitmap image from data supplied by the data provider.
-        CGImageRef cgImage = CGImageCreate(width, height, 8, 32, bytesPerRow, colorSpace, kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Little, dataProvider, NULL, true, kCGRenderingIntentDefault);
+    CGImageRef cgImage = CGImageCreate(width, height, 8, 32, bytesPerRow, colorSpace, kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Little, dataProvider, NULL, true, kCGRenderingIntentDefault);
         
-        CGDataProviderRelease(dataProvider);
+    CGDataProviderRelease(dataProvider);
         // Create and return an image object to represent the Quartz image.
   //  NSLog(@"About to create the image");
-        UIImage *image = [UIImage imageWithCGImage:cgImage];
+    UIImage *image = [UIImage imageWithCGImage:cgImage];
         
         
-        CGImageRelease(cgImage);
-        CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
-    
-   // print_free_memory();
-//NSLog(@"RETURNING IMAGE");
-      processVideoFrame = true;
-        return image;
+    CGImageRelease(cgImage);
+    CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+
+    processVideoFrame = true;
+    return image;
 
 }
 
 ////For labelling the image we're saving
 
 //- (UIImage *)burnTextIntoImage:(NSString *)text :(UIImage *)srcimg {
-- (void)burnTextIntoImage:(NSString *)text :(UIImage *)srcimg {
+- (void)labelImage:(NSString *)text :(NSString *)text2 :(UIImage *)srcimg {
     
     UIImage * img = srcimg;
     
@@ -352,7 +351,8 @@
         UIGraphicsBeginImageContext(img.size);
     
     CGRect aRectangle = CGRectMake(0,0, img.size.width, img.size.height);
-    CGRect fontRect = CGRectMake(0,((img.size.height/2) + 30), img.size.width, 50);
+    CGRect fontRect = CGRectMake(0,((img.size.height/2) + 30), img.size.width, 18);
+    CGRect fontRect2 = CGRectMake(0,((img.size.height/2) + 58), img.size.width, 14);
     
     ///Draw original image with our crosshair
     [img drawInRect:aRectangle];
@@ -365,32 +365,21 @@
    // CGContextSetFillColorWithColor(context, [UIColor blueColor].CGColor);
      CGContextFillRect(context, fontRect);
 //    UIRectFillUsingBlendMode(fontRect, kCGBlendModeNormal);
-    ///////////
-    
-  
-    /////////////
-    
-//    [[UIColor blackColor] setFill];
-  //  UIRectFill(fontRect);
-    
 
-    
+  
     [[UIColor whiteColor] set];           // set text color
     NSInteger fontSize = 14;
     if ( [text length] > 200 ) {
         fontSize = 10;
     }
     UIFont *font = [UIFont boldSystemFontOfSize: fontSize];     // set text font
+    UIFont *font2 = [UIFont boldSystemFontOfSize: 14];
     
     //[text drawInRect:fontRect withFont:font alignment:NSTextAlignmentCenter];
-  [text drawInRect:fontRect withFont:font lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentCenter];
-    /*
-    [text drawInRect:aRectangle                      // render the text
-             withFont : font
-        lineBreakMode : UILineBreakModeTailTruncation  // clip overflow from end of last line
-            alignment : UITextAlignmentCenter ];
-     */
-    ///
+    [text drawInRect:fontRect withFont:font lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentCenter];
+    ///We're trying to make a sub caption
+    [text2 drawInRect:fontRect2 withFont:font2 lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentCenter];
+
      
     UIImage *theImage=UIGraphicsGetImageFromCurrentImageContext();   // extract the image
     UIGraphicsEndImageContext();     // clean  up the context.
