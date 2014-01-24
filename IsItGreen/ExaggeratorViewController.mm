@@ -599,8 +599,8 @@ CIImage *inputImage = [CIImage imageWithCGImage:sourceImage];
 
     CIImage *result = [filter outputImage];
     CGImageRef cgImage = [context createCGImage:result fromRect:[result extent]];
-
-        return cgImage;
+    CGImageRelease(cgImage);
+    return cgImage;
    
     
 

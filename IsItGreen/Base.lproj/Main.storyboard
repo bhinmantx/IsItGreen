@@ -36,16 +36,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H69-yC-LHs">
-                                <rect key="frame" x="16" y="4" width="288" height="352"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H69-yC-LHs">
+                                <rect key="frame" x="16" y="5" width="288" height="352"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="288" id="fnK-JV-hiV"/>
+                                    <constraint firstAttribute="height" constant="352" id="gHz-6X-qAQ"/>
+                                </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qCz-p7-9Gp">
-                                <rect key="frame" x="164" y="364" width="140" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qCz-p7-9Gp">
+                                <rect key="frame" x="164" y="362" width="140" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="4Ci-NA-z2F"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Is it Green?">
-                                    <color key="titleColor" red="0.0078431377190000002" green="0.82352948189999997" blue="0.99607849120000003" alpha="1" colorSpace="deviceRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -53,41 +59,44 @@
                                 </connections>
                             </button>
                             <activityIndicatorView opaque="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="5Zq-mB-151">
-                                <rect key="frame" x="150" y="186" width="20" height="20"/>
+                                <rect key="frame" x="150" y="177" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9uZ-NT-rPh">
-                                <rect key="frame" x="16" y="364" width="140" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9uZ-NT-rPh">
+                                <rect key="frame" x="16" y="362" width="140" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="1" constant="64" id="Lx1-CE-i77"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Choose Color >">
-                                    <color key="titleColor" red="0.0078431377190000002" green="0.82352948189999997" blue="0.99607849120000003" alpha="1" colorSpace="deviceRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="hPc-Uk-0Ma" kind="modal" identifier="ColorOfInterestPicker" id="QPa-aO-2Fe"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pZW-Ww-xSS">
-                                <rect key="frame" x="140" y="388" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="WhiteBalanceTest:" destination="RWO-ZB-rxM" eventType="touchUpInside" id="jc0-Yg-NR1"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qCz-p7-9Gp" firstAttribute="top" secondItem="H69-yC-LHs" secondAttribute="bottom" constant="5" id="03J-6A-fLV"/>
+                            <constraint firstItem="H69-yC-LHs" firstAttribute="top" secondItem="eY0-Jn-8fu" secondAttribute="top" constant="5" id="5lI-d0-F82"/>
+                            <constraint firstItem="H69-yC-LHs" firstAttribute="trailing" secondItem="qCz-p7-9Gp" secondAttribute="trailing" id="IX6-1k-fMP"/>
+                            <constraint firstItem="yN1-qd-cks" firstAttribute="top" secondItem="9uZ-NT-rPh" secondAttribute="bottom" constant="5" id="Kae-Xc-wsg"/>
+                            <constraint firstItem="9uZ-NT-rPh" firstAttribute="top" secondItem="H69-yC-LHs" secondAttribute="bottom" constant="5" id="QJM-D6-F7m"/>
+                            <constraint firstItem="qCz-p7-9Gp" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H69-yC-LHs" secondAttribute="bottom" constant="5" id="S4J-yY-LyU"/>
+                            <constraint firstItem="qCz-p7-9Gp" firstAttribute="leading" secondItem="9uZ-NT-rPh" secondAttribute="trailing" constant="8" symbolic="YES" id="WLd-Gj-UWX"/>
+                            <constraint firstItem="9uZ-NT-rPh" firstAttribute="leading" secondItem="H69-yC-LHs" secondAttribute="leading" id="gxE-qI-GPp"/>
+                            <constraint firstItem="yN1-qd-cks" firstAttribute="top" secondItem="qCz-p7-9Gp" secondAttribute="bottom" constant="5" id="lHh-aY-Zd6"/>
+                            <constraint firstItem="H69-yC-LHs" firstAttribute="leading" secondItem="eY0-Jn-8fu" secondAttribute="leading" constant="16" id="vC9-GF-L1H"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Color Exaggerator" id="Qdt-uY-jCd"/>
                     <connections>
                         <outlet property="ExaggeratorImageView" destination="H69-yC-LHs" id="29K-kH-Fss"/>
                         <outlet property="IsItGreenButtonOutlet" destination="qCz-p7-9Gp" id="exp-Hc-Ej2"/>
-                        <outlet property="Whitebalance" destination="pZW-Ww-xSS" id="bEQ-2G-6GR"/>
                         <outlet property="imageProcessActivityIndicator" destination="5Zq-mB-151" id="WRo-6R-7OV"/>
                     </connections>
                 </viewController>
@@ -152,8 +161,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view autoresizesSubviews="NO" contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SaO-cc-YIB">
-                                <rect key="frame" x="16" y="4" width="288" height="352"/>
+                            <view autoresizesSubviews="NO" contentMode="scaleAspectFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SaO-cc-YIB">
+                                <rect key="frame" x="16" y="5" width="288" height="374"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nrt-v1-L83">
@@ -180,16 +189,6 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rid-vH-tlX">
-                                <rect key="frame" x="20" y="383" width="117" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="What Is Green?">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="testTriggerButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="t8O-Gf-lZU"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMe-AO-rdt">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -207,7 +206,7 @@
                                 </state>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="-10" minValue="-25" maxValue="-1" translatesAutoresizingMaskIntoConstraints="NO" id="B97-92-rHD">
-                                <rect key="frame" x="101" y="365" width="118" height="34"/>
+                                <rect key="frame" x="101" y="393" width="118" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </slider>
                         </subviews>
@@ -216,7 +215,6 @@
                     <tabBarItem key="tabBarItem" title="Color Spotter" id="43n-W7-MIU"/>
                     <connections>
                         <outlet property="ColorNameLabel" destination="dMe-AO-rdt" id="Zud-vy-fjA"/>
-                        <outlet property="TriggerButton" destination="Rid-vH-tlX" id="zhg-RO-KjX"/>
                         <outlet property="cameraFeed" destination="SaO-cc-YIB" id="aOb-vk-mFx"/>
                         <outlet property="captureButton" destination="YmT-41-4hq" id="Nqx-2L-9Nb"/>
                         <outlet property="pauseImageButton" destination="Nrt-v1-L83" id="7VJ-Zo-y8M"/>
