@@ -206,6 +206,20 @@
                                     <action selector="pauseButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="v5d-hZ-Sl5"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Saved" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yV9-lb-dTb">
+                                <rect key="frame" x="70" y="121" width="181" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VAN-4L-jgD">
+                                <rect key="frame" x="20" y="392" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -214,6 +228,7 @@
                         <outlet property="ColorNameLabel" destination="dMe-AO-rdt" id="Zud-vy-fjA"/>
                         <outlet property="captureButton" destination="YmT-41-4hq" id="Nqx-2L-9Nb"/>
                         <outlet property="pauseImageButton" destination="Nrt-v1-L83" id="7VJ-Zo-y8M"/>
+                        <outlet property="savedLabel" destination="yV9-lb-dTb" id="Yew-La-Wzs"/>
                         <outlet property="subImage" destination="RA5-OJ-nFg" id="GJl-Vs-jlj"/>
                         <outlet property="updateSpeedSlider" destination="B97-92-rHD" id="sba-R3-Jl1"/>
                     </connections>

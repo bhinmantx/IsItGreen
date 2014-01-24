@@ -42,6 +42,7 @@
     ColorNameLabel.layer.zPosition = 15;
     [self pauseImageButton].layer.zPosition = 15;
     [self captureButton].layer.zPosition = 15;
+    [self savedLabel].layer.zPosition = 15;
     
     
     ///Setup our timer
@@ -150,11 +151,7 @@
 
 
 
-- (IBAction)testTriggerButton:(id)sender {
-    processVideoFrame = !processVideoFrame;
-    // NSLog(@"Button Press %x", processVideoFrame);
 
-}
 
 
 - (IBAction)captureButton:(id)sender {
@@ -168,6 +165,14 @@
   //  UIImageWriteToSavedPhotosAlbum([self subImage].image, Nil, nil, nil);
 
     processVideoFrame = true;
+    
+    ////To get reliable UI updates I have to do this from the main thread.
+    
+
+    [self savedLabel].hidden = false;
+    [self fadeNotification:[self savedLabel]];
+
+
 }
 
 
@@ -296,7 +301,7 @@
         
         NSString *feedback = [NSString stringWithFormat:@"%@ R %i G %i B %i", result, R,G,B];
         _FeedbackLabelString = result;
-        _FeedbackLabelString2 = [NSString stringWithFormat:@"Raw Values: Red %i Green %i Blue %i", R,G,B];
+        _FeedbackLabelString2 = [NSString stringWithFormat:@"Raw Values: Red: %i Green: %i Blue: %i", R,G,B];
     
     ////In order to reliably update the UI I have to run such updates from the main thread
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -352,18 +357,19 @@
     
     CGRect aRectangle = CGRectMake(0,0, img.size.width, img.size.height);
     CGRect fontRect = CGRectMake(0,((img.size.height/2) + 30), img.size.width, 18);
-    CGRect fontRect2 = CGRectMake(0,((img.size.height/2) + 58), img.size.width, 14);
+    CGRect fontRect2 = CGRectMake(0,((img.size.height/2) + 48), img.size.width, 14);
     
     ///Draw original image with our crosshair
     [img drawInRect:aRectangle];
     
-    [[UIColor colorWithWhite:0.0 alpha:0.2] setFill];
+    [[UIColor colorWithWhite:0.0 alpha:0.4] setFill];
 //    [[UIColor blackColor] setFill];
 
     CGContextRef context = UIGraphicsGetCurrentContext();
     
    // CGContextSetFillColorWithColor(context, [UIColor blueColor].CGColor);
      CGContextFillRect(context, fontRect);
+         CGContextFillRect(context, fontRect2);
 //    UIRectFillUsingBlendMode(fontRect, kCGBlendModeNormal);
 
   
@@ -373,7 +379,7 @@
         fontSize = 10;
     }
     UIFont *font = [UIFont boldSystemFontOfSize: fontSize];     // set text font
-    UIFont *font2 = [UIFont boldSystemFontOfSize: 14];
+    UIFont *font2 = [UIFont boldSystemFontOfSize: 10];
     
     //[text drawInRect:fontRect withFont:font alignment:NSTextAlignmentCenter];
     [text drawInRect:fontRect withFont:font lineBreakMode:NSLineBreakByTruncatingTail alignment:NSTextAlignmentCenter];
@@ -481,6 +487,29 @@
       [self subImage].image = newImage;
    */
 }
+
+
+///Takes a label and then makes sure it's visible
+///then fades it out. 
+-(void)fadeNotification:(UILabel*)targetLabel
+{
+
+
+  
+    targetLabel.hidden = false;
+    targetLabel.alpha = 1.0;
+
+    [UIView animateWithDuration:0.5 delay:0.2 options:UIViewAnimationCurveEaseInOut animations:^{
+            targetLabel.alpha = 0.0;
+
+        }
+                     completion:^(BOOL finished){
+                            targetLabel.hidden = true;
+
+                     }];
+
+}
+
 
 -(UIImage*) crop:(UIImage *)image :(CGRect)rect {
     UIGraphicsBeginImageContextWithOptions([image size], false, [image scale]);

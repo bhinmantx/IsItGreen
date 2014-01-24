@@ -55,7 +55,6 @@
 -(UIImage *)imageWithCVMat:(const cv::Mat&)cvMat;
 -(cv::Mat)cvMatFromUIImage:(UIImage *)image;
 -(UIImage*)crop:(UIImage *)image :(CGRect)rect;
--(void)TimerCallback;
 
 
 ///Setup funcs
@@ -63,14 +62,22 @@
 -(void)updateThumbnail;
 
 ///Utility funcs
+
+///Called everytime our current timer iterates
+-(void)TimerCallback;
+
 -(bool)ShouldUpdateFeedback;
+//Saves the current image to the camera roll along with
+//feedback labelling
 -(void)labelImage:(NSString *)text :(NSString *)text2 :(UIImage *)srcimg;
+-(void)fadeNotification:(UILabel*)targetLabel;
 
 @property (strong, nonatomic) IBOutlet UISlider *updateSpeedSlider;
 
 @property (strong, nonatomic) IBOutlet UILabel *ColorNameLabel;
 @property (strong, nonatomic) IBOutlet UIButton *pauseImageButton;
 @property (strong, nonatomic) IBOutlet UIButton *captureButton;
+@property (strong, nonatomic) IBOutlet UILabel *savedLabel;
 
 
 
