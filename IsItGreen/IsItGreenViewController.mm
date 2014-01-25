@@ -202,19 +202,21 @@
     NSError * error;
     if([camera lockForConfiguration:&error])
     {
-        NSLog(@"Is torch auto mode supported? %hhd", [camera isTorchModeSupported:AVCaptureTorchModeAuto]);
-        NSLog(@"Is torch on supported? %hhd", [camera isTorchModeSupported:AVCaptureTorchModeOn]);
+       // NSLog(@"Is torch auto mode supported? %hhd", [camera isTorchModeSupported:AVCaptureTorchModeAuto]);
+       // NSLog(@"Is torch on supported? %hhd", [camera isTorchModeSupported:AVCaptureTorchModeOn]);
         
         if (camera.torchMode == AVCaptureTorchModeOff)
         {
             if([camera isTorchModeSupported:(AVCaptureTorchModeAuto)]){
                 camera.torchMode = AVCaptureTorchModeOn;
             }
+            
+        }
         else
             camera.torchMode = AVCaptureTorchModeOff;
         
             [camera unlockForConfiguration];
-        }
+        
         
     }
     

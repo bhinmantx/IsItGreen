@@ -97,8 +97,9 @@
 -(void)prepVidCapture{
     
     session = [[AVCaptureSession alloc] init];
-//	session.sessionPreset = AVCaptureSessionPreset640x480;
+	//session.sessionPreset = AVCaptureSessionPreset640x480;
     session.sessionPreset = AVCaptureSessionPreset352x288;
+    
     
     
 	// Get the default camera device
@@ -287,7 +288,7 @@
         for( int column = 0; column < width; column++ ) {
             
             ///HA HA. IT'S IN REVERSE ORDER
-            int r,g,b;
+            unsigned char r,g,b;
             b = pixel[0];
             g = pixel[1];
             r = pixel[2];
@@ -301,8 +302,10 @@
                        pixel[0] = 0;
                    }
                    else{
+
                 pixel[2] = 0; // Total-green (second pixel in BGRA is green)
-                pixel[0] = 0;
+                       pixel[1] = [self exaggerateVal:pixel[1]];
+                                      pixel[0] = 0;
                    }
             }
             ///if it's not green, it's grayscale
@@ -834,8 +837,18 @@ CIImage *inputImage = [CIImage imageWithCGImage:sourceImage];
     
 }
 
+////Exaggerate how whatever color it is
+-(unsigned char)exaggerateVal:(unsigned char)value{
+    float temp = value;
 
+    if(value == 0){
+        return 0;
+    }
+    else{
+                return ((temp/254 *190)+54);
 
+    }
+}
 
 
 

@@ -19,6 +19,11 @@ NSArray *_colors;
     cv::Mat _replacementColors;
     
   cv::flann::Index *_kdtree;
+    
+    ///We're going to try memo-ization
+  //  std::map<NSString*,NSString*> memoMap;
+      std::map<int,NSString*> memoMap;
+ //   NSMutableDictionary * memoDic;
 }
 
 @property (strong,nonatomic) NSArray * colors;
@@ -36,7 +41,8 @@ NSArray *_colors;
 -(cv::Mat)ColorReplacer2:(cv::Mat)sampleMat :(NSString*)color;
 -(int)exaggerateVal:(int)value;
 
--(bool)checkNearestFromRGB:(int)r :(int)g :(int)b :(NSString*)color;
+//-(bool)checkNearestFromRGB:(int)r :(int)g :(int)b :(NSString*)color;
+-(bool)checkNearestFromRGB:(unsigned char)r :(unsigned char)g :(unsigned char)b :(NSString*)color;
 
 -(NSString*)getNameFromRGB:(int)r :(int)g :(int)b;
 

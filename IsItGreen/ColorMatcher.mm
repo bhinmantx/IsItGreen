@@ -77,14 +77,25 @@
         _colorCoords = colorCoords.clone();
     }
     
+   
+cv::flann::AutotunedIndexParams indexParams(1.0,1.0,0.0,0.01);
+   
+  ///this one didn't work
+//cv::flann::KDTreeIndexParams indexParams();
+    
+ //   cv::flann::KMeansIndexParams indexParams(64, -1);
+    ////the following is what we used.
     ///Create the index with x number of trees ////The following line was original functional with 4
-    cv::flann::KMeansIndexParams indexParams(8);
+  // cv::flann::KMeansIndexParams indexParams(16);
 
-    //cv::flann::LinearIndexParams indexParams;
-
+  //  cv::flann::LinearIndexParams indexParams;
+  NSLog(@"Building Trees");
     _kdtree = new cv::flann::Index(_colorCoords, indexParams);
- 
+   NSLog(@"Trees Built");
     NSLog(@"Colors Count %i", _colors.count);
+    
+    ///for memoization
+   // memoDic = [[NSMutableDictionary alloc]init];
     return self;
 }
 
@@ -209,7 +220,7 @@ int threshold = (0.6 * sampleMat.rows * sampleMat.cols);
     singleQuery.push_back(g);
     singleQuery.push_back(b);
         ///changing to 16 from 8
-    [self kdtree]->knnSearch(singleQuery, index, dist, 1, cv::flann::SearchParams(16));
+    [self kdtree]->knnSearch(singleQuery, index, dist, 1, cv::flann::SearchParams(8));
     
   //  NSLog(@"Index, %x ,  dist %f", index[0], dist[0]);
     int i = index[0];
@@ -294,7 +305,7 @@ if(votes>threshold)
             singleQuery.push_back(b);
             //singleQuery.push_back(alpha);
             
-            [self kdtree]->knnSearch(singleQuery, index, dist, 1, cv::flann::SearchParams(8));
+            [self kdtree]->knnSearch(singleQuery, index, dist, 1, cv::flann::SearchParams(16));
             
             //  NSLog(@"Index, %x ,  dist %f", index[0], dist[0]);
             int i = index[0];
@@ -403,7 +414,7 @@ if(votes>threshold)
 }
 
 
-
+/*
 -(bool)checkNearestFromRGB:(int)r :(int)g :(int)b :(NSString*)color{
     
     cv::vector<Float32> singleQuery;
@@ -428,6 +439,117 @@ if(votes>threshold)
     else
     return false;
 }
+*/
+
+
+-(bool)checkNearestFromRGB:(unsigned char)r :(unsigned char)g :(unsigned char)b :(NSString*)color{
+
+     static long hits = 0;
+    
+//    NSString * queryString = [NSString stringWithFormat:@"%i-%i-%i",r,g,b];
+    int comparisonInt = 0;
+    ///Bit shifting r g and b into a single int for the query string
+    comparisonInt = 0 | (r<<16) | (g << 8) | b;
+    /*
+    comparisonInt = (comparisonInt | r);
+    comparisonInt =  comparisonInt << 8;
+    comparisonInt = (comparisonInt | g);
+    comparisonInt =  comparisonInt << 8;
+    comparisonInt = (comparisonInt | b);
+*/
+    
+    
+    if(memoMap.count(comparisonInt)){
+        hits++;
+        if(hits>3000)
+        return [memoMap[comparisonInt] isEqualToString:color];
+    }
+ 
+  // if(memoMap.count(comparisonInt)){
+     // return memoMap[comparisonInt] == color;
+   //    NSLog(@"memo result: %@ and size is %lu", memoMap[comparisonInt], memoMap.size());
+ //  }
+  //  else
+  // {
+      ///////////////
+   // NSLog(@"No match! %lu", memoMap.size());
+    //if(memoMap.count(queryString) == memoMap.count(queryString)){
+      //  NSLog(@"memo result: %@ and size is %lu", memoMap[queryString], memoMap.size());
+
+//    }
+    
+/*
+    if(!([memoDic valueForKey:queryString] == nil)){
+       
+        if([[memoDic valueForKey:queryString] isEqualToString:color])
+            return true;
+        else
+            return false;
+
+    }
+    else
+    {
+     //  NSLog(@"No Match! count is %lu",(unsigned long)[memoDic count]);
+  //  if([memoMap[queryString] isEqualToString:@"k"])
+    
+        
+   //        NSLog(@"memo result: %@ and size is %lu", memoMap[queryString], memoMap.size());
+    
+
+    
+    
+ 
+    NSLog(@"Starting Val %@ is %@", queryString, memoMap[queryString]);
+    
+    if(  !(memoMap.find(queryString) == memoMap.end())   ){
+        
+            NSLog(@"MemoMatch!");
+        
+            if (memoMap[queryString] == color){
+                return true;
+               }
+            else
+                return false;
+    }
+    else{
+    */
+    
+        cv::vector<Float32> singleQuery;
+        cv::vector<int> index(1);
+        cv::vector<Float32> dist(1);
+    
+    
+        singleQuery.push_back(r);
+        singleQuery.push_back(g);
+        singleQuery.push_back(b);
+        //singleQuery.push_back(alpha);
+    
+        [self kdtree]->knnSearch(singleQuery, index, dist, 1, cv::flann::SearchParams(32));
+    
+        //  NSLog(@"Index, %x ,  dist %f", index[0], dist[0]);
+        int i = index[0];
+    
+ //   if( !( (memoMap.find(queryString) == memoMap.end()) )  )
+     //   NSLog(@"Match!");
+    
+    ///Add it to the memoMap if it's under what we found to be the average distance on the misses.
+    if (dist[0] < 66500) {
+        memoMap[comparisonInt] = [[_colors objectAtIndex:i] objectForKey:@"FriendlyName"];
+    }
+
+  //  [memoDic setObject:[[_colors objectAtIndex:i] objectForKey:@"FriendlyName"] forKey:queryString];
+        
+   //   NSLog(@"map value for %@ is %@ and size of memomap is %lu", queryString, memoMap[queryString], memoMap.size());
+        
+        if (   [[[_colors objectAtIndex:i] objectForKey:@"FriendlyName"] isEqualToString:color]) {
+            return true;
+        }
+    
+        else
+            return false;
+     // }/////We don't need this because the if is gone.
+}
+
 
 
 

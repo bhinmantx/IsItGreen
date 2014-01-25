@@ -65,7 +65,7 @@
 
 //-(void)updateThumbnail;
 -(IBAction)IsItGreenButton;
-
+-(unsigned char)exaggerateVal:(unsigned char)value;
 
 
 ///REDUDANT CODE
