@@ -304,7 +304,7 @@
                    else{
 
                 pixel[2] = 0; // Total-green (second pixel in BGRA is green)
-                       pixel[1] = [self exaggerateVal:pixel[1]];
+                       //pixel[1] = [self exaggerateVal:pixel[1]];
                                       pixel[0] = 0;
                    }
             }

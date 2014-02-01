@@ -444,7 +444,7 @@ if(votes>threshold)
 
 -(bool)checkNearestFromRGB:(unsigned char)r :(unsigned char)g :(unsigned char)b :(NSString*)color{
 
-     static long hits = 0;
+     //static long hits = 0;
     
 //    NSString * queryString = [NSString stringWithFormat:@"%i-%i-%i",r,g,b];
     int comparisonInt = 0;
@@ -460,8 +460,8 @@ if(votes>threshold)
     
     
     if(memoMap.count(comparisonInt)){
-        hits++;
-        if(hits>3000)
+        //hits++;
+       // if(hits>3000)
         return [memoMap[comparisonInt] isEqualToString:color];
     }
  

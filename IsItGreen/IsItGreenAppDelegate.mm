@@ -30,10 +30,13 @@
     UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
     UITabBar *tabBar = tabBarController.tabBar;
     UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:0];
-   // UITabBarItem *tabBarItem2 = [tabBar.items objectAtIndex:1];
+    UITabBarItem *tabBarItem2 = [tabBar.items objectAtIndex:1];
 
-    [tabBarItem1 setFinishedSelectedImage:[UIImage imageNamed:@"eye icon active.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"eye icon inactive.png"]];
-    
+    //[tabBarItem1 setFinishedSelectedImage:[UIImage imageNamed:@"eye icon active.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"eye icon inactive.png"]];
+//    [tabBarItem1 setFinishedSelectedImage:[UIImage imageNamed:@"eye icon active.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"eye icon inactive.png"]];
+    [tabBarItem1 setFinishedSelectedImage:[UIImage imageNamed:@"blue_eye.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"grey_eye.png"]];
+    [tabBarItem2 setFinishedSelectedImage:[UIImage imageNamed:@"blue_rings.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"grey_rings.png"]];
+
     
     return YES;
 }
